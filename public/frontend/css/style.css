@@ -1,0 +1,947 @@
+
+/* ==== Login Page Style Here ==== */
+
+.login-section {
+    background-image: url('../images/login-banner.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center left;
+    min-height: 100vh;
+    padding: 115px 0 0;
+}
+
+.login-form-box form>div {
+    min-height: 190px;
+}
+
+.login-form-box {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+    max-width: 460px;
+    margin: 0 0 50px auto;
+    padding: 40px 50px;
+    width: 100%;
+}
+
+.login-form-box h1 img {
+    max-width: 185px;
+}
+
+.login-head {
+    padding: 30px 0;
+}
+
+.login-head h5 {
+    font-size: 15px;
+    line-height: 18px;
+    padding-bottom: 8px;
+}
+
+.login-head p {
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 18px;
+}
+
+.login-form-box .form-group {
+    margin-bottom: 20px;
+}
+
+.login-form-box label {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 18px;
+    padding: 0 0 10px;
+    margin: 0;
+}
+
+.login-form-box .form-control {
+    border: 0;
+    height: 40px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.form-link {
+    padding-bottom: 30px;
+}
+
+.form-link a {
+    font-size: 12px;
+    line-height: 14px;
+}
+
+.login-form-box .btn {
+    min-width: 100%;
+    line-height: 40px;
+}
+
+/* ==== Header Section Style Here ==== */
+
+.navbar-custom,
+.navbar-custom.affix {
+    background-color: transparent;
+    border: 0;
+    margin: 0;
+    padding: 23px 0;
+    position: absolute;
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    -ms-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    transition: all .5s ease;
+}
+
+.container>.navbar-header {
+    margin: 0;
+}
+
+.navbar-brand {
+    height: inherit;
+    padding: 0;
+    margin: 0;
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    -ms-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    transition: all .5s ease;
+}
+
+
+.navbar>.container .navbar-brand,
+.navbar>.container-fluid .navbar-brand {
+    margin: 0;
+    max-width: 76px;
+}
+
+.navbar-custom ul.nav.navbar-nav.navbar-right {
+    padding: 0;
+    margin: 20px 0 0;
+}
+
+.navbar-custom.affix.navbar-custom ul.nav.navbar-nav.navbar-right {
+    margin: 28px 0 0;
+}
+
+.navbar-custom .nav li {
+    padding-right: 30px;
+}
+
+.navbar-custom .nav li a {
+    border-radius: 0;
+    border: 0;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 17px;
+    padding: 0 0 12px;
+    position: relative;
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    -ms-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    transition: all .5s ease;
+}
+
+.navbar-custom .nav li a:after {
+    content: '';
+    background-color: transparent;
+    width: 30px;
+    height: 4px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    -ms-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    transition: all .5s ease;
+}
+
+.navbar-custom .nav li a:focus,
+.navbar-custom .nav li a:hover,
+.navbar-custom .navbar-nav>.active>a:focus,
+.navbar-custom .navbar-nav>.active>a:hover,
+.navbar-custom .navbar-nav>.active>a {
+    color: #ffffff;
+    background-color: transparent;
+    outline: 0
+}
+
+.navbar-custom .nav li a:focus:after,
+.navbar-custom .navbar-nav>.active>a:focus:after,
+.navbar-custom .navbar-nav>.active>a:hover:after,
+.navbar-custom .navbar-nav>.active>a:after {
+    background-color: #FD6F2A;
+}
+
+.navbar-custom .nav li a:hover:after {
+    width: 85%;
+    background-color: #FD6F2A;
+}
+
+.header-button {
+    margin-top: 10px;
+}
+
+.header-button .btn {
+    min-width: 100px;
+    margin-left: 10px;
+    line-height: 34px;
+}
+
+.header-section.static-header .navbar-custom, 
+.header-section.static-header .navbar-custom.affix {
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.12);
+    position: relative;
+    padding: 23px 0;
+}
+
+.static-header .navbar-custom .nav li a, 
+.static-header .navbar-custom .nav li a:focus, 
+.static-header .navbar-custom .nav li a:hover, 
+.static-header .navbar-custom .navbar-nav>.active>a:focus, 
+.static-header .navbar-custom .navbar-nav>.active>a:hover, 
+.static-header .navbar-custom .navbar-nav>.active>a {
+    color: #000000;
+}
+
+/* ==== Banner Section Style Here ==== */
+
+.banner-section {
+    background-image: url(../images/home-banner.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    min-height: 100vh;
+    position: relative;
+}
+
+.banner-section::after {
+    content: '';
+    background: linear-gradient(74deg, rgba(0, 255, 255, 0.05), rgba(255, 255, 255, 0.05));
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.banner-section .container {
+    position: relative;
+    z-index: 2;
+}
+
+.banner-content h1 {
+    color: #ffffff;
+    font-size: 42px;
+    line-height: 50px;
+    font-weight: 700;
+    text-shadow: 0px 3px 6px rgba(0, 0, 0, 0.12);
+}
+
+.banner-content p {
+    color: #ffffff;
+    font-size: 18px;
+    line-height: 24px;
+    max-width: 455px;
+    padding: 20px 0 30px;
+    text-shadow: 0px 3px 6px rgba(0, 0, 0, 0.12);
+}
+
+/* ==== Service Section Style Here ==== */
+
+.service-section {
+    padding: 80px 0;
+}
+
+.service-section .container,
+.about-section .container {
+    max-width: 1080px;
+}
+
+.heading-box {
+    padding-bottom: 30px;
+}
+
+.heading-box h4 {
+    color: #000000;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24px;
+}
+
+.listing-box {
+    position: relative;
+    height: 350px;
+    border-radius: 10px;
+}
+
+.listing-box::after {
+    content: '';
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8));
+    border-radius: 0 0 10px 10px;
+    position: absolute;
+    width: 100%;
+    height: 215px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+}
+
+.listing-box img {
+    border-radius: 10px;
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+}
+
+.listing-box .content {
+    position: absolute;
+    bottom: 0;
+    padding: 0 30px 20px;
+    z-index: 2;
+}
+
+.listing-box .content h4 {
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 22px;
+    padding-bottom: 12px;
+}
+
+.listing-box .content p {
+    color: #ffffff;
+    line-height: 18px;
+}
+
+/* ==== About Section Style Here ==== */
+
+.about-section {
+    background-color: #F7F7F7;
+    padding: 80px 0;
+}
+
+.about-image {
+    height: 440px;
+    padding: 20px 20px 20px 0;
+}
+
+.about-image span {
+    display: block;
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.about-image span::after {
+    content: '';
+    background-color: #EFEFEF;
+    border-radius: 10px;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 20px;
+    top: 20px;
+}
+
+.about-image span img {
+    max-height: 100%;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    position: relative;
+    z-index: 2;
+}
+
+.about-content {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.12);
+    padding: 60px 60px 60px 50px;
+    margin-left: -60px;
+    position: relative;
+    z-index: 3;
+}
+
+.about-content .heading-box {
+    padding-bottom: 14px;
+}
+
+.about-content .heading-box h2 {
+    font-size: 30px;
+    line-height: 34px;
+}
+
+.about-content p {
+    color: #898989;
+    line-height: 18px;
+    padding-bottom: 20px;
+    max-width: 370px;
+}
+
+/* ==== Contact Section Style ==== */
+
+.contact-section {
+    padding: 80px 0;
+}
+
+.contact-form-box {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.12);
+}
+
+.form-box {
+    padding: 50px 100px 50px 50px;
+    width: calc(100% - 470px);
+}
+
+.form-box .form-group {
+    margin-bottom: 30px;
+}
+
+.form-box label {
+    font-size: 15px;
+    line-height: 18px;
+    padding: 0 0 20px;
+    margin: 0;
+}
+
+.form-box .form-control {
+    background-color: #ffffff;
+    border-radius: 3px;
+    border-color: #CFCFCF;
+    box-shadow: none;
+    height: 44px;
+}
+
+.form-box textarea.form-control {
+    height: 200px;
+}
+
+.contact-address {
+    background-image: url('../images/contact-img01.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    border-radius: 0 10px 10px 0;
+    padding: 50px;
+    position: relative;
+    max-width: 470px;
+    width: 100%;
+}
+
+.contact-address::after {
+    content: '';
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 0 10px 10px 0;
+    position: absolute;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    top: 0;
+}
+
+.contact-address .heading-box {
+    position: relative;
+    z-index: 1;
+}
+
+.contact-address ul {
+    position: relative;
+    z-index: 1;
+}
+
+.contact-address ul li {
+    background-position: top left;
+    background-repeat: no-repeat;
+    background-size: 25px;
+    display: block;
+    padding-left: 37px;
+    position: relative;
+    padding-bottom: 30px;
+}
+
+.contact-address ul li p {
+    color: #ffffff;
+    font-size: 15px;
+    line-height: 20px;
+}
+
+
+/* ==== Footer Section Style ==== */
+
+.footer-section {
+    padding: 19px 0;
+}
+
+.footer-links {
+    line-height: 18px;
+    width: 70%;
+}
+
+.footer-links ul li {
+    display: inline-block;
+    padding-right: 30px;
+
+}
+
+.footer-links ul li a {
+    color: #ffffff;
+    display: block;
+    line-height: 18px;
+}
+
+.footer-section .list-inline-item:not(:last-child) {
+    margin-right: 20px;
+}
+
+.footer-links li a {
+    color: #000000;
+    font-size: 13px;
+    line-height: 20px;
+    text-transform: uppercase;
+}
+
+.social-links {
+     width: 30%;
+    text-align: right;
+}
+
+.social-links li {
+    font-size: 12px;
+    color: #696969;
+    line-height: 20px;
+    display: inline-block;
+}
+
+.social-links li:not(:last-child) {
+    padding-left: 8px;
+}
+
+.social-links li a {
+    width: 20px;
+    display: block;
+}
+
+.copyright-text p {
+    font-size: 12px;
+    color: #696969;
+    line-height: 20px;
+}
+
+/* ==== Our Boat Page Style Here ==== */
+
+.our-boat-section {
+    padding: 60px 0 80px;
+}
+
+.tabing-box .nav-tabs {
+    border-bottom: 0;
+    text-align: center;
+    margin: 0 0 40px;
+}
+
+.tabing-box .nav-tabs > li {
+    float: none;
+    margin: 0 38px;
+    display: inline-block;
+}
+
+.tabing-box .nav-tabs > li > a,
+.tabing-box .nav.nav-tabs > li > a:focus, 
+.tabing-box .nav.nav-tabs > li > a:hover {
+    background-color: #ffffff;
+    border-radius: 0;
+    border: 0;
+    border-bottom: 2px solid transparent;
+    color: #676767;
+    font-size: 20px;
+    margin-right: 0;
+    line-height: 24px;
+    padding: 0 10px 12px;
+}
+
+.tabing-box .nav-tabs>li.active>a, 
+.tabing-box .nav-tabs>li.active>a:focus, 
+.tabing-box .nav-tabs>li.active>a:hover {
+    color: #000000;
+    cursor: default;
+    background-color: #fff;
+    border: 0;
+    border-bottom: 2px solid #FD6F2A;
+}
+
+.tab-box {
+    border: 1px solid #DCDCDC;
+    border-radius: 10px;
+    padding: 30px;
+    max-width: 1050px;
+    margin: 0 auto;
+}
+
+.boat-image-box span img {
+    border-radius: 8px;
+}
+
+.boat-detail-box label {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 36px;
+    max-width: 94px;
+    width: 100%;
+}
+
+.boat-detail-box .form-group {
+    margin-bottom: 40px;
+}
+
+.boat-detail-box .custom-select {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    max-width: 203px;
+}
+
+.boat-detail-box .custom-select::after {
+    height: 94%;
+}
+
+.boat-detail-box .form-control {
+    height: 36px;
+    padding: 6px 12px;
+    font-size: 16px;
+    line-height: 36px;
+    color: #6E6E6E;
+    background-color: #ffffff;
+    border: 1px solid #DCDCDC;
+    border-radius: 4px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.boat-detail-box li {
+    position: relative;
+    padding: 0 0 20px;
+}
+
+.boat-detail-box li::after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.boat-detail-box li span {
+    font-size: 16px;
+    float: left;
+    line-height: 20px;
+    display: block;
+    width: 50%;
+}
+
+.boat-detail-box li span:first-child {
+    color: #000000;
+}
+
+.boat-detail-box li span:last-child {
+    color: #898989;
+}
+
+/* ==== Career With Us Page Style Here ==== */
+
+.static-content-header {
+    max-width: 720px;
+    margin: 10px auto 60px;
+    text-align: center;
+}
+
+.static-content-header h4 {
+    color: #000000;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24px;
+    padding: 0 0 30px;
+}
+
+.static-content-header h5 {
+    color: #000000;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 22px;
+    padding: 0 0 20px;
+}
+
+.static-content-header p {
+    color: #676767;
+    font-size: 18px;
+    line-height: 24px;
+}
+
+.career-with-us-section .tab-box {
+    border: 0;
+    padding-bottom: 0;
+}
+
+.career-with-us-content h4,
+.career-with-us-content h5 {
+    font-size: 18px;
+    font-weight: 700;
+    padding-bottom: 20px;
+}
+.career-with-us-content h5 {
+    padding-top: 30px;
+}
+
+.career-with-us-content p {
+    font-size: 18px;
+    line-height: 24px;
+}
+
+.career-with-us-content li {
+    padding-left: 26px;
+    line-height: 22px;
+    display: block;
+    position: relative;
+}
+
+.career-with-us-content li:not(:last-child) {
+    margin-bottom: 20px;
+}
+
+.career-with-us-content li:before {
+    content: '';
+    background-color: #898989;
+    border-radius: 50%;
+    height: 14px;
+    width: 14px;
+    position: absolute;
+    left: 0;
+    top: 4px;
+}
+
+.career-with-us-content li p {
+    line-height: 22px;
+}
+
+.footer-interview {
+    background-color: #F7F7F7;
+    padding: 40px 0;
+}
+
+.footer-interview .container {
+    max-width: 1050px;
+    padding: 0 30px;
+}
+
+.footer-interview h4 {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 22px;
+    padding: 0 0 30px;
+}
+
+.footer-interview ul li {
+    color: #000000;
+    font-size: 18px;
+    float: left;
+    width: 33.33%;
+    padding-left: 35px;
+    padding-right: 10px;
+    line-height: 25px;
+    background-repeat: no-repeat;
+    background-position: left center;
+    word-break: break-all;
+}
+
+.footer-interview .address-icon {
+    background-image: url('../images/address-grey-icon.svg');
+    background-position: left top 4px;
+}
+
+.footer-interview .mail-icon {
+    background-image: url('../images/mail-grey-icon.svg');
+    background-position: top 4px left;
+}
+
+.footer-interview .call-icon {
+    background-image: url('../images/call-grey-icon.svg')
+}
+
+/* ==== Our Services Page Style Here ==== */
+
+.our-services-section .tabing-box .nav-tabs > li {
+    margin: 0 4px;
+}
+
+.our-services-section .boat-detail-box h4 {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 22px;
+}
+
+.our-services-section .boat-detail-box p {
+    font-size: 18px;
+    line-height: 24px;
+    padding: 20px 0 0;
+}
+
+.service-slider {
+    margin-top: 42px;
+    position: relative;
+}
+
+.service-slider .owl-dots {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 20px;
+    text-align: center;
+    width: 100%;
+}
+
+.service-slider .owl-dots .owl-dot {
+    background: 0;
+    color: inherit;
+    border: none;
+    padding: 0!important;
+    font: inherit;
+    display: inline-block;
+    margin: 0 5px;
+}
+
+.service-slider .owl-dots .owl-dot span {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    display: block;
+    height: 12px;
+    width: 12px;
+}
+
+.service-slider .owl-dots .owl-dot.active span {
+    background-color: #ffffff;
+}
+
+/* ==== About Us Page Style Here ==== */
+
+.about-us-section .static-content-header,
+.faq-section .static-content-header {
+    max-width: 1050px;
+    margin: 10px auto 0px;
+    text-align: left;
+}
+
+.about-us-section .static-content-header p:not(:last-child) {
+    padding-bottom: 20px;
+}
+
+/* ==== Faq Page Style Here ==== */
+
+.faq-section {
+    min-height: 550px;
+}
+
+.faq-section .static-content-header h4 {
+    padding: 0 0 40px;
+}
+
+.faq-content-box .panel-group {
+    margin: 0;
+}
+
+.faq-content-box .panel-default>.panel-heading {
+    background-color: transparent;
+    padding: 0px;
+    border: 0;
+    border-radius: 0;
+}
+
+.faq-content-box .panel-group .panel {
+    border: 0;
+    border-radius: 4px;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.12);
+    padding: 10px 12px;
+    margin: 0 0 14px;
+    min-height: 44px;
+}
+
+.faq-content-box .panel-group .panel-heading h4 {
+    text-transform: initial;
+}
+
+.faq-content-box .panel-group .panel-heading h4 a {
+    display: block;
+    position: relative;
+    color: #000000;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    padding: 0 40px 0 34px;
+}
+
+.faq-content-box .panel-group .panel-heading h4 a::before {
+    content: '';
+    background-image: url('../images/question-icon.svg');
+    background-repeat: no-repeat;
+    background-size: 24px;
+    background-position: center center;
+    position: absolute;
+    height: 24px;
+    width: 24px;
+    left: 0;
+    top: 0;
+}
+
+.faq-content-box .panel-group .panel-heading h4 a::after {
+    content: '';
+    background-image: url('../images/minus-icon.svg');
+    background-repeat: no-repeat;
+    background-size: 20px;
+    background-position: center center;
+    position: absolute;
+    right: 0;
+    top: 0px;
+    height: 24px;
+    width: 24px;
+    -moz-transition: all 0.6s ease 0s;
+    -o-transition: all 0.6s ease 0s;
+    -webkit-transition: all 0.6s ease 0s;
+    transition: all 0.6s ease 0s;
+}
+
+.faq-content-box .panel-group .panel-heading h4 a.collapsed::after {
+    background-image: url('../images/add-icon.svg');
+    -moz-transition: all 0.6s ease 0s;
+    -o-transition: all 0.6s ease 0s;
+    -webkit-transition: all 0.6s ease 0s;
+    transition: all 0.6s ease 0s;
+}
+
+.faq-content-box .panel-group .panel+.panel {
+    margin: 0 0 14px;
+}
+
+.faq-content-box .panel-default>.panel-heading+.panel-collapse>.panel-body {
+    border-color: transparent;
+    padding: 14px 40px 0 0;
+    color: #000000;
+    font-size: 12pt;
+}
+
+.faq-content-box .panel-default>.panel-heading+.panel-collapse>.panel-body p {
+    color: #000000;
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 20px;
+    padding-left: 34px;
+}
+
+.faq-content-box .panel-default>.panel-heading+.panel-collapse>.panel-body p:not(:last-child) {
+    padding-bottom: 12px;
+}

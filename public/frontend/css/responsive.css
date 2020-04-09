@@ -1,0 +1,603 @@
+/*1. @media screen and (min-width:0\0)
+- IE
+
+2. @media screen and (-webkit-min-device-pixel-ratio:0)
+- Chrome/Safari
+
+3. @media screen and (min-width: 1780px) and (max-width: 1980px)
+- Larger Screens
+
+4. @media screen and (min-width: 1500px) and (max-width: 1600px)
+- Larger Screens
+
+5. @media screen and (max-width : 1280px)
+- Mac-book and other devices
+
+6. @media screen and (max-width : 1024px)
+- iPad devices Landscape
+
+7. @media screen and (max-width : 991px)
+- Tabs and Tablets Landscape
+
+8. @media screen and (max-width : 800px)
+- iPad Portrait and other devices
+
+9. @media screen and (max-width : 767px)
+- iPhone 6Plus/Nexus 6 Landscape
+
+10. @media screen and (max-width : 680px)
+- iPhone 6 Landscape
+
+11. @media screen and (max-width : 580px)
+- iPhone 5 Landscape
+
+12. @media screen and (max-width : 480px)
+- iPhone 4 Landscape and iPhone 6/6Plus Portrait
+
+13. @media screen and (max-width : 420px)
+- iPhone 6/6Plus Portrait/Nexus 5/Sam-sung Galaxy Portrait
+
+*/
+
+@media screen and (max-width: 1280px) {}
+
+@media screen and (max-width: 1180px) {
+
+	/* Career Page Responsive */
+
+	.tabing-box .nav-tabs {
+	    white-space: nowrap;
+	    overflow: auto;
+	}
+
+	.tabing-box .nav-tabs > li > a, 
+	.tabing-box .nav.nav-tabs > li > a:focus, 
+	.tabing-box .nav.nav-tabs > li > a:hover {
+	    font-size: 18px;
+	    line-height: 20px;
+	    padding: 0 6px 10px;
+	}
+}
+
+@media screen and (max-width: 1024px) {
+
+    .navbar-fixed-bottom,
+    .navbar-fixed-top,
+    .navbar-custom.affix,
+    .header-section.static-header .navbar-custom,
+    .header-section.static-header .navbar-custom.affix {
+        padding: 10px 0;
+        background-color: transparent;
+        box-shadow: none;
+        position: absolute;
+    }
+
+    .navbar>.container .navbar-brand,
+    .navbar>.container-fluid .navbar-brand,
+    .navbar-fixed-top.affix a.navbar-brand {
+        max-width: 110px;
+    }
+
+    .navbar-custom .nav li {
+        padding-right: 18px;
+    }
+
+    .navbar-custom.affix .nav li a {
+        color: #ffffff;
+    }
+
+    .header-button .btn {
+        min-width: 90px;
+        margin-left: 0;
+    }
+
+    .header-section.static-header .navbar-custom,
+    .header-section.static-header .navbar-custom.affix {
+        box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.12);
+    }
+
+    .login-form-box {
+        padding: 20px;
+    }
+
+    .login-form-box h1 img {
+        max-width: 120px;
+    }
+
+    .login-head {
+        padding: 20px 0 14px;
+    }
+
+    .login-head h5 {
+        font-size: 14px;
+        padding-bottom: 2px;
+    }
+
+    .login-head p {
+        font-size: 12px;
+    }
+
+    .login-form-box .form-group {
+        margin-bottom: 15px;
+    }
+
+    .login-form-box label {
+        font-size: 13px;
+        padding: 0 0 4px;
+    }
+
+    .login-form-box .form-control {
+        height: 34px;
+    }
+
+    .login-form-box .btn {
+        line-height: 30px;
+    }
+
+    .banner-section {
+        padding: 90px 0 30px;
+    }
+
+    .banner-content h1 {
+        font-size: 36px;
+    }
+
+    .service-section,
+    .about-section,
+    .contact-section {
+        padding: 60px 0;
+    }
+
+    /* Career Page Responsive */
+
+    .our-boat-section {
+	    padding: 120px 0 60px;
+	}
+
+	.tabing-box .nav-tabs > li {
+	    margin: 0 10px;
+	}
+}
+
+@media screen and (max-width: 991px) {
+    .listing-box {
+        margin-bottom: 20px;
+    }
+
+    .about-content .heading-box h2 {
+        font-size: 26px;
+        line-height: 30px;
+    }
+
+    .form-box {
+        padding: 30px;
+        width: calc(100% - 320px);
+    }
+
+    .contact-address {
+        padding: 30px 25px;
+        max-width: 320px;
+    }
+
+    .footer-links ul li {
+        padding-right: 16px;
+    }
+}
+
+@media screen and (max-width: 800px) {}
+
+@media screen and (max-width: 767px) {
+
+    body {
+        font-size: 12px;
+    }
+
+    .navbar>.container .navbar-brand,
+    .navbar>.container-fluid .navbar-brand,
+    .navbar-fixed-top.affix a.navbar-brand {
+        max-width: 100px;
+    }
+
+    .navbar-default .navbar-toggle,
+    .navbar-toggle,
+    .navbar-default .navbar-toggle:focus,
+    .navbar-default .navbar-toggle:hover {
+        padding: 8px 5px;
+        margin: 14px 0;
+        background-color: #ffffff;
+        background-image: none;
+        border: 1px solid #ffffff;
+        border-radius: 4px;
+    }
+
+    .navbar-toggle .icon-bar,
+    .navbar-default .navbar-toggle .icon-bar {
+        background-color: #ee2d25;
+    }
+
+    .header-button {
+        margin: -48px 46px 0 0;
+    }
+
+    .header-button .btn {
+        line-height: 30px;
+        font-size: 13px;
+    }
+
+    .navbar-collapse {
+	    background-color: #ffffff;
+	    border-top: 0;
+	    -webkit-box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
+	    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
+	    margin: 0 auto !important;
+	    position: absolute;
+	    left: 0;
+	    right: 0;
+	    width: 100%;
+	    top: 82px;
+	}
+
+    .navbar-custom ul.nav.navbar-nav.navbar-right,
+    .navbar-custom.affix.navbar-custom ul.nav.navbar-nav.navbar-right {
+        padding: 8px 0;
+        margin: 0;
+    }
+
+    .navbar-custom .nav li a,
+    .navbar-custom.affix .nav li a {
+        color: #000000;
+        font-size: 13px;
+        line-height: 16px;
+        padding: 0 0 4px;
+        margin-bottom: 12px;
+    }
+
+    .navbar-custom .nav li a:focus,
+    .navbar-custom .nav li a:hover,
+    .navbar-custom .navbar-nav>.active>a:focus,
+    .navbar-custom .navbar-nav>.active>a:hover,
+    .navbar-custom .navbar-nav>.active>a {
+        color: #000000;
+    }
+
+    .navbar-custom .nav li a:after {
+        width: 40px;
+        height: 2px;
+    }
+
+    .static-header .navbar-default .navbar-toggle,
+    .static-header .navbar-toggle,
+    .static-header .navbar-default .navbar-toggle:focus,
+    .static-header .navbar-default .navbar-toggle:hover {
+        background-color: #ee2d25;
+        border: 1px solid #ee2d25;
+    }
+
+    .static-header .navbar-toggle .icon-bar,
+    .static-header .navbar-default .navbar-toggle .icon-bar {
+        background-color: #ffffff;
+    }
+
+    .banner-content h1 {
+        font-size: 30px;
+        line-height: 36px;
+    }
+
+    .banner-content p {
+        font-size: 14px;
+        line-height: 20px;
+        padding: 10px 0 20px;
+    }
+
+    .btn {
+        font-size: 13px;
+        line-height: 34px;
+        min-width: 120px;
+    }
+
+    .heading-box {
+        padding-bottom: 16px;
+    }
+
+    .heading-box h4 {
+        font-size: 18px;
+        line-height: 22px;
+    }
+
+    .listing-box .content h4 {
+        font-size: 16px;
+        line-height: 20px;
+        padding-bottom: 6px;
+    }
+
+    .service-section,
+    .about-section,
+    .contact-section {
+        padding: 30px 0;
+    }
+
+    .about-content {
+        padding: 30px;
+    }
+
+    .about-content .heading-box h2 {
+        font-size: 22px;
+        line-height: 24px;
+    }
+
+    .form-box .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-box label {
+        font-size: 13px;
+        line-height: 14px;
+        padding: 0 0 12px;
+    }
+
+    .form-box .form-control {
+        height: 34px;
+    }
+
+    .form-box textarea.form-control {
+        height: 110px;
+    }
+
+    .contact-address ul li {
+        background-position: top 4px left;
+        background-size: 18px;
+        padding-left: 30px;
+        padding-bottom: 20px;
+    }
+
+    .contact-address ul li p {
+        font-size: 13px;
+        line-height: 20px;
+    }
+
+    .footer-links ul li {
+        padding-right: 14px;
+    }
+
+    .footer-links ul li a {
+        font-size: 12px;
+    }
+
+    /* Career Page Responsive */
+
+    .our-boat-section {
+	    padding: 110px 0 30px;
+	}
+
+	.static-content-header {
+	    margin: 0 auto 30px;
+	}
+
+	.static-content-header h4 {
+	    font-size: 18px;
+	    line-height: 18px;
+	    padding: 0 0 15px;
+	}
+
+	.static-content-header h5 {
+	    font-size: 15px;
+	    line-height: 18px;
+	    padding: 0 0 10px;
+	}
+
+	.static-content-header p {
+	    font-size: 13px;
+	    line-height: 20px;
+	}
+	.tabing-box .nav-tabs {
+	    margin: 0 0 10px;
+	}
+	.tabing-box .nav-tabs > li > a, .tabing-box .nav.nav-tabs > li > a:focus, .tabing-box .nav.nav-tabs > li > a:hover {
+	    font-size: 16px;
+	    line-height: 18px;
+	    padding: 0 4px 6px;
+	}
+
+	.tab-box {
+	    padding: 20px 0;
+	}
+
+	.career-with-us-content h4, .career-with-us-content h5 {
+	    font-size: 16px;
+	    padding-bottom: 10px;
+	}
+
+	.career-with-us-content p {
+	    font-size: 14px;
+	    line-height: 20px;
+	}
+
+	.career-with-us-content h5 {
+	    padding-top: 20px;
+	}
+
+	.career-with-us-content li {
+	    padding-left: 18px;
+	}
+
+	.career-with-us-content li:not(:last-child) {
+	    margin-bottom: 10px;
+	}
+	.career-with-us-content li::before {
+	    height: 10px;
+	    width: 10px;
+	}
+
+	.career-with-us-content li p {
+	    line-height: 20px;
+	    font-size: 13px;
+	}
+
+	.footer-interview {
+	    padding: 24px 0;
+	}
+
+	.footer-interview h4 {
+	    font-size: 16px;
+	    padding: 0 0 14px;
+	}
+
+	.footer-interview ul li {
+		float: none;
+	    font-size: 14px;
+	    padding-left: 25px;
+		width: 100%;
+	    line-height: 22px;
+	    background-size: 18px;
+	}
+
+	.footer-interview ul li:not(:last-child) {
+	    margin-bottom: 16px;
+	}
+
+	/* Service Page Responsive */
+
+	.our-services-section .tab-box {
+	    padding: 20px;
+	}
+
+	.our-services-section .boat-detail-box h4 {
+	    font-size: 16px;
+	}
+
+	.our-services-section .boat-detail-box p {
+	    font-size: 14px;
+	    line-height: 20px;
+	    padding: 10px 0 0;
+	}
+
+	/* Our Boat Page Responsive */
+
+	.our-boat-section .tab-box {
+	    padding: 20px;
+	}
+
+	.boat-detail-box .form-group {
+	    margin-bottom: 16px;
+	}
+
+	.boat-detail-box li {
+	    padding: 0 0 10px;
+	}
+
+	.boat-detail-box li span {
+	    font-size: 13px;
+	}
+
+	.boat-image-box {
+		margin-top: 14px;
+	}
+
+	/* Faq Page Responsive */
+
+	.faq-section .static-content-header h4 {
+		padding-bottom: 20px;
+	}
+}
+
+@media screen and (max-width: 680px) {
+
+    .footer-section {
+        padding: 14px 0;
+    }
+
+    .footer-section .container {
+        display: block
+    }
+
+    .footer-links {
+        width: 100%;
+        text-align: center;
+    }
+
+    .footer-links ul li {
+        padding: 0 6px 6px;
+    }
+
+    .social-links {
+        width: 100%;
+        text-align: center;
+    }
+
+    .social-links li,
+    .social-links li:not(:last-child) {
+        padding: 0 6px;
+    }
+
+    /* Faq Page Responsive */
+
+	.faq-section {
+	    min-height: inherit;
+	}
+}
+
+@media screen and (max-width: 580px) {
+    .contact-form-box {
+        display: block;
+    }
+
+    .form-box {
+        width: 100%;
+    }
+
+    .contact-address {
+        padding: 30px 25px;
+        max-width: 100%;
+        border-radius: 0 0 10px 10px;
+    }
+
+    .contact-address::after {
+        border-radius: 0px 0px 10px 10px;
+    }
+}
+
+@media screen and (max-width: 500px) {}
+
+@media screen and (max-width: 480px) {
+
+    .about-section .d-flex {
+        display: block;
+    }
+
+    .about-section .d-flex>div {
+        width: 100%;
+    }
+
+    .about-image {
+        height: 300px;
+        margin-bottom: 20px;
+    }
+
+    .about-content {
+        padding: 25px;
+        margin: 0;
+    }
+}
+
+@media screen and (max-width: 420px) {
+
+    .services-listing [class*=col-] {
+        width: 100%;
+    }
+
+    .listing-box {
+        height: inherit;
+    }
+
+    .listing-box::after {
+        height: 150px;
+    }
+}
+
+@media (max-device-width: 480px) and (orientation: landscape) {
+
+    .navbar-fixed-bottom .navbar-collapse,
+    .navbar-fixed-top .navbar-collapse {
+        max-height: inherit;
+    }
+}
