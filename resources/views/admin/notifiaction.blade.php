@@ -10,26 +10,30 @@
             <section class="notification-section bg-white global-shadow">
                 <div class="notification-listing">
                     <ul>
-                        @foreach ($notifications as $notification) 
-                        @if(!$notification->read_at)
-                            <li>
-                                <p>{{ $notification->data['message'] }}</p>
-                                <span>5 mins ago</span>
-                                <div class="notification-btn">
-                                    <a href="javascript:void(0);"><img src="{{ asset('/') }}public/dist/images/mail-blue-border-icon.svg" alt="Mail Icon" onclick="readNotification('{{$notification->id}}')" /></a>
-                                    <a href="javascript:void(0);"><img src="{{ asset('/') }}public/dist/images/delete-blue-icon.svg" alt="Delete Icon" onclick="deleteNotification('{{$notification->id}}')" /></a>
-                                </div>
-                            </li>
+                        @if(count($notifications) != 0)
+                            @foreach ($notifications as $notification) 
+                            @if(!$notification->read_at)
+                                <li>
+                                    <p>{{ $notification->data['message'] }}</p>
+                                    <span>5 mins ago</span>
+                                    <div class="notification-btn">
+                                        <a href="javascript:void(0);"><img src="{{ asset('/') }}public/dist/images/mail-blue-border-icon.svg" alt="Mail Icon" onclick="readNotification('{{$notification->id}}')" /></a>
+                                        <a href="javascript:void(0);"><img src="{{ asset('/') }}public/dist/images/delete-blue-icon.svg" alt="Delete Icon" onclick="deleteNotification('{{$notification->id}}')" /></a>
+                                    </div>
+                                </li>
+                            @else
+                                <li style="background-color: lightgray;">
+                                    <p>{{ $notification->data['message'] }}</p>
+                                    <span>5 mins ago</span>
+                                    <div class="notification-btn">
+                                        <a href="javascript:void(0);"><img src="{{ asset('/') }}public/dist/images/delete-blue-icon.svg" alt="Delete Icon" onclick="deleteNotification('{{$notification->id}}')" /></a>
+                                    </div>
+                                </li>
+                            @endif
+                            @endforeach
                         @else
-                            <li style="background-color: lightgray;">
-                                <p>{{ $notification->data['message'] }}</p>
-                                <span>5 mins ago</span>
-                                <div class="notification-btn">
-                                    <a href="javascript:void(0);"><img src="{{ asset('/') }}public/dist/images/delete-blue-icon.svg" alt="Delete Icon" onclick="deleteNotification('{{$notification->id}}')" /></a>
-                                </div>
-                            </li>
+                            <center><p>No data(s) found.</p></center>
                         @endif
-                        @endforeach
                     </ul>
                 </div>
                 <!-- Loader content -->
