@@ -35,7 +35,7 @@ class SupportCenterController extends Controller
     }
 
     public function querylistView() {
-    	return view('Admin.query');
+    	return view('admin.query');
     }
 
      /**

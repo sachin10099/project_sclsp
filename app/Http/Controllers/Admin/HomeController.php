@@ -390,10 +390,13 @@ class HomeController extends Controller
     public function testimonialAdd(Request $request) {
         $request->validate(
             [
-                'name'        => 'requied|max:100',
+                'desc'        => 'required',
+                'name'        => 'required|max:100',
                 'designation' => 'required|max:150',
-                'image'       => 'required|mimes:jpg,jpeg,png|max:512|dimensions:width=400,height=400',
-                'desc'        => 'required'
+                'image'       => 'required|mimes:jpg,jpeg,png|max:512|dimensions:width=400,height=400'
+            ],
+            [
+                'image.dimensions' => 'Image dimensions must be 400 * 400 pixels.'
             ]
         );
         $url = $this->filesUpload($request, null);
@@ -421,7 +424,7 @@ class HomeController extends Controller
     public function testimonialDelete(Request $request) {
         $testimonial = Testimonial::find($request->id);
         $testimonial->delete();
-        return redirect('admin/testimonial/list')->with('success', 'Testimonial deleted successfully.');
+        return 'Testimonial deleted successfully.';
     }
 
       /**
