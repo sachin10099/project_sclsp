@@ -280,6 +280,8 @@
     <!-- AdminLTE for demo purposes -->
     <script src="{{ asset('/') }}public/dist/js/demo.js"></script>
     <script src="{{ asset('/') }}public/frontend/js/custom.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{{ asset('/') }}public/frontend/js/bootstrap.min.js"></script>
     <!-- DataTables -->
     <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
     <!-- Bootstrap JavaScript -->
