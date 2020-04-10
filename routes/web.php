@@ -100,6 +100,8 @@ Route::group(['middleware' => ['auth', 'adminCheck']], function () {
 
 	// Admin Notification List
 	Route::get('admin/notification/list', 'Admin\NotificationController@index')->name('admin.linkList');	
+	Route::post('admin/notification/delete', 'Admin\NotificationController@deleteNotification')->name('admin.deleteNotification');	
+	Route::post('admin/notification/read', 'Admin\NotificationController@readNotification')->name('admin.readNotification');	
 });
 
 

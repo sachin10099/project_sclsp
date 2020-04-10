@@ -268,10 +268,10 @@
         </div>
       </div>
       <div class="social-links text-center text-lg-right pt-3 pt-lg-0">
-        <a href="{{ $data['twitter_link'] }}" class="twitter"><i class="bx bxl-twitter"></i></a>
-        <a href="{{ $data['facebook_link'] }}" class="facebook"><i class="bx bxl-facebook"></i></a>
-        <a href="{{ $data['insta_link'] }}" class="instagram"><i class="bx bxl-instagram"></i></a>
-        <a href="{{ $data['linkedin_link'] }}" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+        <a href="{{ $data['twitter_link']['link'] }}" class="twitter" target="_blank"><i class="bx bxl-twitter"></i></a>
+        <a href="{{ $data['facebook_link']['link'] }}" class="facebook" target="_blank"><i class="bx bxl-facebook"></i></a>
+        <a href="{{ $data['insta_link']['link'] }}" class="instagram" target="_blank"><i class="bx bxl-instagram"></i></a>
+        <a href="{{ $data['linkedin_link']['link'] }}" class="linkedin" target="_blank"><i class="bx bxl-linkedin"></i></a>
       </div>
     </div>
   </footer><!-- End Footer -->
