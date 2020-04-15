@@ -87,7 +87,11 @@
                    <p  id="btn-services" style="pointer:cursor;" 
                    onclick="openModel({{ $service }})" class="btn-get-started scrollto">View More</p>
               @endif
-              <button class="btn btn-primary service-btn">Explore</button>
+              @if($service->icon == 'icofont-edit')
+                <a href="{{ url('form-filler/index') }}"><button class="btn btn-primary service-btn">Explore</button></a>
+              @else
+                <button class="btn btn-primary service-btn">Explore</button>
+              @endif
             </div>
           </div>
           @endforeach

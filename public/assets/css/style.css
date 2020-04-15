@@ -1668,3 +1668,146 @@ section {
   color: #fff;
   text-decoration: none;
 }
+
+.btn-group button {
+  background-color: #4CAF50; /* Green background */
+  border: 1px solid green; /* Green border */
+  color: white; /* White text */
+  padding: 10px 24px; /* Some padding */
+  cursor: pointer; /* Pointer/hand icon */
+  float: left; /* Float the buttons side by side */
+}
+
+.btn-group button:not(:last-child) {
+  border-right: none; /* Prevent double borders */
+}
+
+/* Clear floats (clearfix hack) */
+.btn-group:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Add a background color on hover */
+.btn-group button:hover {
+  background-color: #3e8e41;
+}
+.box:hover {
+    -webkit-box-shadow: 3px 3px 5px 6px #ccc;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+    -moz-box-shadow:    3px 3px 5px 6px #ccc;  /* Firefox 3.5 - 3.6 */
+    box-shadow:         3px 3px 5px 6px #ccc;  /
+  }
+
+
+/*============================================================
+BACKGROUND COLORS
+============================================================*/
+.db-bk-color-one {
+    background-color: #f55039;
+}
+
+.db-bk-color-two {
+    background-color: #46A6F7;
+}
+
+.db-bk-color-three {
+    background-color: #47887E;
+}
+
+.db-bk-color-six {
+    background-color: #F59B24;
+}
+/*============================================================
+PRICING STYLES
+==========================================================*/
+.db-padding-btm {
+    padding-bottom: 50px;
+}
+.db-button-color-square {
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.50);
+    border: none;
+    border-radius: 0px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+}
+
+    .db-button-color-square:hover {
+        color: #fff;
+        background-color: rgba(0, 0, 0, 0.50);
+        border: none;
+    }
+
+
+.db-pricing-eleven {
+    margin-bottom: 30px;
+    margin-top: 50px;
+    text-align: center;
+    box-shadow: 0 0 5px rgba(0, 0, 0, .5);
+    color: #fff;
+    line-height: 30px;
+}
+
+    .db-pricing-eleven ul {
+        list-style: none;
+        margin: 0;
+        text-align: center;
+        padding-left: 0px;
+    }
+
+        .db-pricing-eleven ul li {
+            padding-top: 20px;
+            padding-bottom: 20px;
+            cursor: pointer;
+        }
+
+            .db-pricing-eleven ul li i {
+                margin-right: 5px;
+            }
+
+
+    .db-pricing-eleven .price {
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 40px 20px 20px 20px;
+        font-size: 60px;
+        font-weight: 900;
+        color: #FFFFFF;
+    }
+
+        .db-pricing-eleven .price small {
+            color: #B8B8B8;
+            display: block;
+            font-size: 12px;
+            margin-top: 22px;
+        }
+
+    .db-pricing-eleven .type {
+        background-color: #52E89E;
+        padding: 50px 20px;
+        font-weight: 900;
+        text-transform: uppercase;
+        font-size: 30px;
+    }
+
+    .db-pricing-eleven .pricing-footer {
+        padding: 20px;
+    }
+
+.db-attached > .col-lg-4,
+.db-attached > .col-lg-3,
+.db-attached > .col-md-4,
+.db-attached > .col-md-3,
+.db-attached > .col-sm-4,
+.db-attached > .col-sm-3 {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.db-pricing-eleven.popular {
+    margin-top: 10px;
+}
+
+    .db-pricing-eleven.popular .price {
+        padding-top: 80px;
+    }

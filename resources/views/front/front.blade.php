@@ -22,6 +22,8 @@
   <link href="{{ asset('/') }}public/assets/vendor/venobox/venobox.css" rel="stylesheet">
   <link href="{{ asset('/') }}public/assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
   <link href="{{ asset('/') }}public/assets/vendor/aos/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
   <!-- Template Main CSS File -->
   <link href="{{ asset('/') }}public/assets/css/style.css" rel="stylesheet">
@@ -174,7 +176,7 @@
             <i class="icofont-phone"></i><span style="color: white;"> {{ $data['contact_info']->contact_number }}</span>
           </li>
           <li>
-            <i class="icofont-clock-time icofont-flip-horizontal"></i><span style="color: white;"> Now :10:00 AM</span>
+            <i class="icofont-clock-time icofont-flip-horizontal"></i><span style="color: white;"> Now : {{ date("h:m a", time()) }}</span>
           </li>
         </ul>
 
@@ -192,7 +194,7 @@
       <div class="logo mr-auto">
       <!--   <h1 class="text-light"><a href="index.html"><span>S.C.L.S.P</span></a></h1> -->
         <!-- Uncomment below if you prefer to use an image logo -->
-         <a href="index.html"><img src="{{ asset('/') }}public/assets/img/logo/logo.png" alt="Logo" class="img-fluid"></a>
+         <a href="{{ asset('/') }}"><img src="{{ asset('/') }}public/assets/img/logo/logo.png" alt="Logo" class="img-fluid"></a>
       </div>
 
       <nav class="nav-menu d-none d-lg-block">
