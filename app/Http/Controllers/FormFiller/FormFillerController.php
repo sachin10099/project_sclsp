@@ -14,11 +14,14 @@ use App\Models\SocialLink;
 use App\Models\Testimonial;
 use Illuminate\Http\Request;
 use App\Models\SupportCenter;
+use App\Models\UserVerification;
 use App\Http\Controllers\Controller;
-use App\Notifications\SubscriptionNotification;
+use App\Http\Controllers\Concern\GlobalTrait;
+use App\Notifications\EmailVerificationNotification;
 
 class FormFillerController extends Controller
 {
+    use GlobalTrait;
      /**
      * View 
      *
@@ -87,12 +90,43 @@ class FormFillerController extends Controller
         $request->validate(
             [
                 'user_name'         => 'required|max:150',
-                'user_email'        => 'required|email|max:225|unique:users',
-                'user_password'     => ,
-                'user_confirm_pass' => ,
+                'email'             => 'required|email|max:225|unique:users',
+                'contact_number'    => 'required|digits:10',
+                'address'           => 'required|max:225',
+                'user_password'     => 'required',
+                'user_confirm_pass' => 'required|same:user_password',
+            ],
+            [
+                'user_confirm_pass.same' => 'Password does not matched.'
             ]
         );
-        dd($request->all()); 
-        return view('formfiller.login' ,compact('data'));
+        $user = User::create(
+            [
+                'name'           => $request->user_name,
+                'type'           => 'form_user',
+                'email'          => $request->email,
+                'contact_number' => $request->contact_number,
+                'address'        => $request->address,
+                'password'       => \Hash::make($request->user_password)
+            ]
+        ); 
+        $token = $this->userVerificationProcess($user);
+        $url   = url('/').'/verify/email/'.$token;
+        $user->notify(New EmailVerificationNotification($url));
+        return redirect('form-filler/login')->with('success', 'Your Account Created Successfully.');
     }
+
+    /**
+     *  Dashboard
+     * @category Form Filler Management
+     * @package  Form Filler Management
+     * @author   Sachiln Kumar <sachin679710@gmail.com>
+     * @license  PHP License 7.2.24
+     * @link
+     */
+
+    public function dashboard() {
+        return view('formfiller.dashboard');
+    }
+
 }

@@ -293,6 +293,11 @@
 
   <!-- Template Main JS File -->
   <script src="{{ asset('/') }}public/assets/js/main.js"></script>
+  <script type="text/javascript">
+      setTimeout(function(){ 
+          document.getElementById("hideAlert").style.display  = "none";
+      }, 5000);
+  </script>
 
 </body>
 

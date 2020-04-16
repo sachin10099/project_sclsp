@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Concern;
 use App\Models\User;
 use App\Models\SiteConfig;
 use App\Models\EmailTemplate;
+use App\Models\UserVerification;
 use App\Exceptions\RedirectException;
 
 Trait GlobalTrait 
@@ -85,5 +86,34 @@ Trait GlobalTrait
             $image_path = 'null';
         }
         return $image_path;
+    }
+
+    protected function userVerificationProcess($user) {
+        $token = \Str::random(8);
+        UserVerification::create(
+            [
+                'email'   => $user->email,
+                'token'   => $token,
+                'user_id' => $user->id
+            ]
+        );
+        return $token;
+    }
+
+
+    protected function verifyEmail($token) {
+      $now_reduce_mins =  \Carbon\Carbon::now()->addMinutes(-1440)->toDateTimeString();
+      $find = UserVerification::where('token', $token)
+          ->where('created_at', '>=', $now_reduce_mins)
+          ->first();
+      if(!$find) {
+          return 'expired';
+      }
+      User::where('id', $find->id)->update(
+        [
+          'email_verified_at' => 'Yes'
+        ]
+      );
+      return 'Yes';
     }
 }

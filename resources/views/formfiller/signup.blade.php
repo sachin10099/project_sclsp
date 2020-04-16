@@ -16,13 +16,41 @@
       <form method="post" action="{{ url('form-filler/user/signup') }}">
         @csrf
         <label><strong>Enter full name:</strong></label>
+        @if($errors->has('user_name'))
+            <span class="" style="color: red;">{{ $errors->first('user_name') }}</span>
+        @endif
         <input type="text" class="form-control" name="user_name" value="{{ old('user_name') }}" required=""><br>
+        
         <label><strong>Enter Email Id:</strong></label>
-        <input type="email" class="form-control" name="user_email" value="{{ old('user_email') }}" required=""><br>
-        <label><strong>Enter Your Password:</strong></label>
+        @if($errors->has('email'))
+            <span class="" style="color: red;">{{ $errors->first('email') }}</span>
+        @endif
+        <input type="email" class="form-control" name="email" value="{{ old('email') }}" required=""><br>
+
+        <label><strong>Enter Contact Number:</strong></label>
+        @if($errors->has('contact_number'))
+            <span class="" style="color: red;">{{ $errors->first('contact_number') }}</span>
+        @endif
+        <input type="number" class="form-control" name="contact_number" required=""><br>
+
+        <label><strong>Enter Address:</strong></label>
+        @if($errors->has('address'))
+            <span class="" style="color: red;">{{ $errors->first('address') }}</span>
+        @endif
+        <textarea class="form-control" name="address" row="4" required=""></textarea><br>
+       
+        <label><strong>Enter Password:</strong></label>
+        @if($errors->has('user_password'))
+            <span class="" style="color: red;">{{ $errors->first('user_password') }}</span>
+        @endif
         <input type="Password" class="form-control" name="user_password" required=""><br>
-        <label><strong>Confirm Your Password:</strong></label>
+        
+        <label><strong>Confirm Password:</strong></label>
+        @if($errors->has('user_confirm_pass'))
+            <span class="" style="color: red;">{{ $errors->first('user_confirm_pass') }}</span>
+        @endif
         <input type="password" class="form-control" name="user_confirm_pass" required=""><br>
+        
         <center>
           <input type="submit" class="btn btn-primary" name="Submit" style="margin-bottom: 20px;">
           <p>if your have already account goto <a href="{{ url('form-filler/login') }}">login</a></p>

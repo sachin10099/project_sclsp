@@ -22,11 +22,17 @@ Route::post('forgot/password', 'Admin\AuthController@sendRestLink')->name('reset
 Route::get('reset/password/{token}', 'Admin\AuthController@resetPassView')->name('resetPassView');
 Route::post('reset/password', 'Admin\AuthController@resetPass')->name('resetPass');
 
+Route::post('global/login', 'HomeController@userLogin')->name('userLogin');
+
+// Email Verify Route  
+Route::get('verify/email/{token}', 'HomeController@emailVerify')->name('emailVerify');
+
 // Form Filler Routes
 Route::get('form-filler/index', 'FormFiller\FormFillerController@index')->name('formfiller.index');
 Route::get('form-filler/signup', 'FormFiller\FormFillerController@signUpForm')->name('formfiller.signUpForm');
 Route::get('form-filler/login', 'FormFiller\FormFillerController@loginView')->name('formfiller.loginView');
 Route::post('form-filler/user/signup', 'FormFiller\FormFillerController@userSignUp')->name('formfiller.userSignUp');
+Route::get('form-filler/dashboard', 'FormFiller\FormFillerController@dashboard')->name('formfiller.dashboard');
 
 Route::post('user/send-query', 'Admin\SupportCenterController@sendQuery')->name('sendQuery');
 

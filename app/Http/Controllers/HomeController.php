@@ -14,10 +14,12 @@ use App\Models\SocialLink;
 use App\Models\Testimonial;
 use Illuminate\Http\Request;
 use App\Models\SupportCenter;
+use App\Http\Controllers\Concern\GlobalTrait;
 use App\Notifications\SubscriptionNotification;
 
 class HomeController extends Controller
 {
+    use GlobalTrait;
     /**
      * Create a new controller instance.
      *
@@ -72,5 +74,31 @@ class HomeController extends Controller
         $user = User::where('type', 'admin')->first();
         $user->notify(New SubscriptionNotification());
        return 'Subscribed Successfully.';
+    }
+
+    public function emailVerify($token) {
+        $data = $this->verifyEmail($token);
+        dd($data);
+    }
+
+    /**
+     * login Function
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+
+    public function userLogin(Request $request) {
+        $credentials = [
+            'email'    => $request['email'],
+            'password' => $request['password'],
+        ];
+        if(\Auth::attempt($credentials)) {
+            if(\Auth::user()->type == 'admin') {
+                return redirect()->back()->with('error', 'Unauthorized Access !');
+            } else if(\Auth::user()->type == 'form_user') {
+                return redirect('form-filler/dashboard');     
+            }
+        }
+        return redirect()->back()->with('error', 'Invalid login credentials.');
     }
 }
