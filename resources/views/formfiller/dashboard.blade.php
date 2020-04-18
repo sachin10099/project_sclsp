@@ -1,55 +1,42 @@
 @extends('front.formfiller_dashboard')
 @section('content')
       <!-- End Navbar -->
+      @if(session()->has('success'))
+        <div class="alert alert-success" id="hideAlert">
+            {{ session()->get('success') }}
+        </div>
+      @endif
       <div class="content">
         <div class="container-fluid">
           <div class="row">
             <div class="col-lg-3 col-md-6 col-sm-6">
               <div class="card card-stats">
-                <div class="card-header card-header-warning card-header-icon">
-                  <div class="card-icon">
-                    <i class="material-icons"></i>
-                  </div>
-                  <p class="card-category">Applied Jobs</p>
-                  <h3 class="card-title">0
-                    <small>GB</small>
-                  </h3>
-                </div>
-                <div class="card-footer">
-                  <div class="stats">
-                    <a href="javascript:;">Get More Space...</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-              <div class="card card-stats">
                 <div class="card-header card-header-success card-header-icon">
                   <div class="card-icon">
-                    <i class="material-icons">store</i>
+                    <i class="fa fa-arrow-right" aria-hidden="true"></i>
                   </div>
-                  <p class="card-category">New Jobs</p>
+                  <p class="card-category">Total Upcoming Jobs</p>
                   <h3 class="card-title">0</h3>
                 </div>
                 <div class="card-footer">
                   <div class="stats">
-                    <i class="material-icons">date_range</i> Last 24 Hours
+                    <a href="javascript:;">View More...</a>
                   </div>
                 </div>
               </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-6">
               <div class="card card-stats">
-                <div class="card-header card-header-danger card-header-icon">
+                <div class="card-header card-header-warning card-header-icon">
                   <div class="card-icon">
-                    <i class="material-icons"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
                   </div>
-                  <p class="card-category">Notifications</p>
-                  <h3 class="card-title">75</h3>
+                  <p class="card-category">Total Past<br> Jobs</p>
+                  <h3 class="card-title">0</h3>
                 </div>
                 <div class="card-footer">
                   <div class="stats">
-                    <i class="material-icons">local_offer</i> Tracked from Github
+                    <a href="javascript:;">View More...</a>
                   </div>
                 </div>
               </div>
@@ -58,20 +45,36 @@
               <div class="card card-stats">
                 <div class="card-header card-header-info card-header-icon">
                   <div class="card-icon">
-                    <i class="fa fa-twitter"></i>
+                    <i class="fa fa-clock-o" aria-hidden="true"></i>
                   </div>
-                  <p class="card-category">Status</p>
-                  <h3 class="card-title"></h3>
+                  <p class="card-category">Total Pending Jobs</p>
+                  <h3 class="card-title">0</h3>
                 </div>
                 <div class="card-footer">
                   <div class="stats">
-                    <i class="material-icons">update</i> Just Updated
+                    <a href="javascript:;">View More...</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                <div class="card-header card-header-danger card-header-icon">
+                  <div class="card-icon">
+                    <i class="fa fa-ban" aria-hidden="true"></i>
+                  </div>
+                  <p class="card-category">Total Rejected Jobs</p>
+                  <h3 class="card-title">0</h3>
+                </div>
+                <div class="card-footer">
+                  <div class="stats">
+                    <a href="javascript:;">View More...</a>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="row">
+<!--           <div class="row">
             <div class="col-md-4">
               <div class="card card-chart">
                 <div class="card-header card-header-success">
@@ -121,7 +124,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>

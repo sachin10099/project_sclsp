@@ -88,7 +88,7 @@ Trait GlobalTrait
         return $image_path;
     }
 
-     protected function formFillerUserDocumentUpload($data, $key) {
+    protected function formFillerUserDocumentUpload($data, $key) {
         if($data->$key) {
             $filename      = $data->$key->getClientOriginalName();
             $fileExtension = $data->$key->getClientOriginalExtension();
@@ -99,6 +99,27 @@ Trait GlobalTrait
             $image_path =asset('/public/assets3/img/documents/'. $imageName);
         } else {
             $image_path = 'null';
+        }
+        return $image_path;
+    }
+
+    protected function formFillerUserDocumentUpdate($data, $key, $old_file) {
+        if($data->$key) {
+            $file = basename($old_file);
+            if($file) {
+              if(file_exists(public_path('/public/assets3/img/documents/').$file)){
+                unlink(public_path("/public/assets3/img/documents/").$file);
+              }
+            }
+            $filename      = $data->$key->getClientOriginalName();
+            $fileExtension = $data->$key->getClientOriginalExtension();
+            $imageName     = base64_encode(str_replace(' ', '', $filename)).date('ymdhis').'.'.$fileExtension;
+            $return        = $data->file($key)->move(
+            base_path() . '/public/assets3/img/documents/', $imageName
+            );
+            $image_path =asset('/public/assets3/img/documents/'. $imageName);
+        } else {
+            $image_path = $old_file;
         }
         return $image_path;
     }

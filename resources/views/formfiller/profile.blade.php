@@ -1,5 +1,10 @@
 @extends('front.formfiller_dashboard')
 @section('content')
+      @if(session()->has('success'))
+          <div class="alert alert-success" id="hideAlert" style="margin-top: 50px;">
+              {{ session()->get('success') }}
+          </div>
+      @endif
       <div class="content">
         <div class="container-fluid">
           <div class="row">
@@ -266,7 +271,7 @@
                       <div class="col-md-6">
                         <div class="form-group">
                           <label class="bmd-label-floating">Email</label>
-                          <input type="text" class="form-control" name="email" value="{{ \Auth::user()->email }}" autocomplete="off" required="" readonly="">
+                          <input type="text" class="form-control" name="email" value="{{ \Auth::user()->email }}" autocomplete="off" required="">
                           @if($errors->has('email'))
                               <span style="color: red;">{{ $errors->first('email') }}</span>
                           @endif
@@ -402,7 +407,7 @@
                       <div class="col-md-6">
                         <div class="form-group">
                           <label>Upload Aadhaar (Front Side)</label>
-                          <input type='file' name="aadhaar_front" onchange="readURL(this);" required="">
+                          <input type='file' name="aadhaar_front" onchange="readURL(this);">
                           <img id="aadhaar1"  src="{{ $user_infos->userInfo['aadhaar_img_front'] }}" alt="your image" style="margin-top: 10px;max-width: 200px;max-height: 150px;" />
                           @if($errors->has('aadhaar_front'))
                               <span style="color: red;">{{ $errors->first('aadhaar_front') }}</span>
@@ -413,7 +418,7 @@
                         <div class="form-group">
                           <div class="form-group">
                           <label>Upload Aadhaar (Back Side)</label>
-                          <input type='file' name="aadhaar_back" onchange="readURLNew(this);" required="">
+                          <input type='file' name="aadhaar_back" onchange="readURLNew(this);">
                           <img id="aadhaar2"  src="{{ $user_infos->userInfo['aadhaar_img_back'] }}" alt="your image" style="margin-top: 10px;max-width: 200px;max-height: 150px;" />
                           @if($errors->has('aadhaar_back'))
                               <span style="color: red;">{{ $errors->first('aadhaar_back') }}</span>
@@ -426,7 +431,7 @@
                       <div class="col-md-6">
                         <div class="form-group">
                           <label>Upload 10th Marksheet</label>
-                          <input type='file' name="tenth" onchange="tenthLoad(this);" required="">
+                          <input type='file' name="tenth" onchange="tenthLoad(this);">
                           <img id="tenth"  src="{{ $user_infos->userQualification['tenth_doc_image'] }}" alt="your image" style="margin-top: 10px;max-width: 200px;max-height: 150px;" />
                           @if($errors->has('tenth'))
                               <span style="color: red;">{{ $errors->first('tenth') }}</span>
@@ -437,7 +442,7 @@
                         <div class="form-group">
                           <div class="form-group">
                           <label>Upload 12th Marksheet</label>
-                          <input type='file' name="tweleth" onchange="twelethLoad(this);" required="">
+                          <input type='file' name="tweleth" onchange="twelethLoad(this);">
                           <img id="tweleth"  src="{{ $user_infos->userQualification['tweleth_doc_image'] }}" alt="your image" style="margin-top: 10px;max-width: 200px;max-height: 150px;" />
                           @if($errors->has('tweleth'))
                               <span style="color: red;">{{ $errors->first('tweleth') }}</span>
@@ -466,7 +471,7 @@
                         <div class="form-group">
                           <div class="form-group">
                           <label>Upload Caste Certificate</label>
-                          <input type='file' name="caste" onchange="casteLoad(this);" required="">
+                          <input type='file' name="caste" onchange="casteLoad(this);">
                           <img id="caste"  src="{{ $user_infos->userQualification['caste_certificate'] }}" alt="your image" style="margin-top: 10px;max-width: 200px;max-height: 150px;" />
                           @if($errors->has('caste'))
                               <span style="color: red;">{{ $errors->first('caste') }}</span>
@@ -479,7 +484,7 @@
                       <div class="col-md-6">
                         <div class="form-group">
                           <label>Upload Graguation Document</label>
-                          <input type='file' name="graguation" onchange="graguationLoad(this);" required="">
+                          <input type='file' name="graguation" onchange="graguationLoad(this);">
                           <img id="graguation"  src="{{ $user_infos->userQualification['graguation'] }}" alt="your image" style="margin-top: 10px;max-width: 200px;max-height: 150px;" />
                           @if($errors->has('graguation'))
                               <span style="color: red;">{{ $errors->first('graguation') }}</span>
@@ -490,7 +495,7 @@
                         <div class="form-group">
                           <div class="form-group">
                           <label>Upload Post Graguation Document (optional)</label>
-                          <input type='file' name="postgraguation" onchange="postgraguationLoad(this);" required="">
+                          <input type='file' name="postgraguation" onchange="postgraguationLoad(this);">
                           @if($user_infos->userQualification['post_graguation'])
                             <img id="postgraguation"  src="{{ $user_infos->userQualification['post_graguation'] }}" alt="your image" style="margin-top: 10px;max-width: 200px;max-height: 150px;" />
                           @else
@@ -508,7 +513,7 @@
                       <div class="col-md-6">
                         <div class="form-group">
                           <label>Upload Others Document (Optional)</label>
-                          <input type='file' name="others" onchange="othersLoad(this);" required="">
+                          <input type='file' name="others" onchange="othersLoad(this);">
                           @if($user_infos->userQualification['others'])
                             <img id="others"  src="{{ $user_infos->userQualification['others'] }}" alt="your image" style="margin-top: 10px;max-width: 200px;max-height: 150px;" />
                           @else
@@ -534,10 +539,11 @@
                     @if(\Auth::user()->profile_pic)
                       <img src="{{ \Auth::user()->profile_pic }}" class="user-image" alt="User Image">
                     @else
-                        <img src="{{ asset('/') }}public/assets/img/default.png" class="user-image" alt="User Image">
+                        <img type='file' src="{{ asset('/') }}public/assets/img/default.png" class="user-image" alt="User Image">
                     @endif
                   </a>
                 </div>
+                
                 <div class="card-body">
                   <h4 class="card-title">{{ \Auth::user()->name }}</h4><br>
                   <p class="card-description">
@@ -547,6 +553,7 @@
                       {{ \Auth::user()->email }}
                   </p>
                   @if(\Auth::user()->profile_completed == 'Yes')
+                    <input id="pic" name="image" class='pis' style="margin-left: 100px;" onchange="readURL(this);" type="file">
                     <a href="javascript:;" class="btn btn-info btn-round">Update Profile Photo</a>
                   @endif
                 </div>

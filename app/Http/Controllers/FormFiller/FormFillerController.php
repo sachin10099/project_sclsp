@@ -240,7 +240,7 @@ class FormFillerController extends Controller
                 'caste_certificate' => $caste_url
             ]
         );
-        return redirect('form-filler/dashboard')->with('success', 'Your Profile Updated Successfully.');
+        return redirect('form-filler/dashboard')->with('success', 'Your Profile Completed Successfully.');
     }
 
 
@@ -257,6 +257,7 @@ class FormFillerController extends Controller
         $request->validate(
             [
                 'name'              => 'required|max:150',
+                'email'             => 'required|email|max:255|unique:users,email,'.\Auth::user()->id.',id',
                 'f_name'            => 'required|max:150',
                 'm_name'            => 'required|max:150',
                 'contact_number'    => 'required|digits:10',
@@ -264,14 +265,14 @@ class FormFillerController extends Controller
                 'postal_code'       => 'required|digits:6|integer',
                 'l_v_id'            => 'required|integer',
                 'aadhaar'           => 'required|digits:12|integer',
-                'aadhaar_front'     => 'required|mimes:jpeg,jpg,png|max:10000',
-                'aadhaar_back'      => 'required|mimes:jpeg,jpg,png|max:10000',
-                'tenth'             => 'required|mimes:jpeg,jpg,png|max:10000',
-                'tweleth'           => 'required|mimes:jpeg,jpg,png|max:10000',
-                'tweleth'           => 'required|mimes:jpeg,jpg,png|max:10000',
+                'aadhaar_front'     => 'mimes:jpeg,jpg,png|max:10000',
+                'aadhaar_back'      => 'mimes:jpeg,jpg,png|max:10000',
+                'tenth'             => 'mimes:jpeg,jpg,png|max:10000',
+                'tweleth'           => 'mimes:jpeg,jpg,png|max:10000',
+                'tweleth'           => 'mimes:jpeg,jpg,png|max:10000',
                 'diploma'           => 'mimes:jpeg,jpg,png|max:10000',
-                'caste'             => 'required|mimes:jpeg,jpg,png|max:10000',
-                'graguation'        => 'required|mimes:jpeg,jpg,png|max:10000',
+                'caste'             => 'mimes:jpeg,jpg,png|max:10000',
+                'graguation'        => 'mimes:jpeg,jpg,png|max:10000',
                 'postgraguation'    => 'mimes:jpeg,jpg,png|max:10000',
                 'others'            => 'mimes:jpeg,jpg,png|max:10000'
             ] 
@@ -279,6 +280,7 @@ class FormFillerController extends Controller
         $user = \Auth::user()->update(
             [
                 'name'              => $request->name,
+                'email'             => $request->email,
                 'contact_number'    => $request->contact_number,
                 'address'           => $request->address,
                 'profile_completed' => 'Yes',
@@ -287,10 +289,11 @@ class FormFillerController extends Controller
             ]
         );
 
-        $url_front = $this->formFillerUserDocumentUpload($request, 'aadhaar_front');
-        $url_back = $this->formFillerUserDocumentUpload($request, 'aadhaar_back');
+        $more_info = FormUserInfo::where('user_id', \Auth::id())->first();
+        $url_front = $this->formFillerUserDocumentUpdate($request, 'aadhaar_front', $more_info->aadhaar_img_front ? $more_info->aadhaar_img_front : null);
+        $url_back = $this->formFillerUserDocumentUpdate($request, 'aadhaar_back', $more_info->aadhaar_img_back ? $more_info->aadhaar_img_back : null);
 
-        $more_info = FormUserInfo::create(
+        $more_info->update(
             [
                 'user_id'                    => \Auth::id(),
                 'father_name'                => $request->f_name,
@@ -303,15 +306,16 @@ class FormFillerController extends Controller
             ]
         );
 
-        $tenth_url           = $this->formFillerUserDocumentUpload($request, 'tenth');
-        $twelth_url          = $this->formFillerUserDocumentUpload($request, 'tweleth');
-        $diploma_url         = $this->formFillerUserDocumentUpload($request, 'diploma');
-        $graguation_url      = $this->formFillerUserDocumentUpload($request, 'graguation');
-        $post_graguation_url = $this->formFillerUserDocumentUpload($request, 'postgraguation');
-        $caste_url           = $this->formFillerUserDocumentUpload($request, 'caste');
-        $others_url          = $this->formFillerUserDocumentUpload($request, 'others');
+        $qualification = FormUserQualification::where('user_id', \Auth::id())->first();
+        $tenth_url           = $this->formFillerUserDocumentUpdate($request, 'tenth', $qualification->tenth_doc_image ? $qualification->tenth_doc_image : null);
+        $twelth_url          = $this->formFillerUserDocumentUpdate($request, 'tweleth', $qualification->tweleth_doc_image ? $qualification->tweleth_doc_image : null);
+        $diploma_url         = $this->formFillerUserDocumentUpdate($request, 'diploma', $qualification->diploma_doc_image ? $qualification->diploma_doc_image : null);
+        $graguation_url      = $this->formFillerUserDocumentUpdate($request, 'graguation', $qualification->graguation ? $qualification->graguation : null);
+        $post_graguation_url = $this->formFillerUserDocumentUpdate($request, 'postgraguation', $qualification->post_graguation ? $qualification->post_graguation : null);
+        $caste_url           = $this->formFillerUserDocumentUpdate($request, 'caste', $qualification->caste_certificate ? $qualification->caste_certificate : null);
+        $others_url          = $this->formFillerUserDocumentUpdate($request, 'others', $qualification->others ? $qualification->others : null);
 
-        $qualification = FormUserQualification::create(
+        $qualification->update(
             [
                 'user_id'           => \Auth::id(),
                 'tenth_doc_image'   => $tenth_url,
@@ -323,7 +327,7 @@ class FormFillerController extends Controller
                 'caste_certificate' => $caste_url
             ]
         );
-        return redirect('form-filler/dashboard')->with('success', 'Your Profile Updated Successfully.');
+        return redirect()->back()->with('success', 'Your Profile Updated Successfully.');
     }
 
 

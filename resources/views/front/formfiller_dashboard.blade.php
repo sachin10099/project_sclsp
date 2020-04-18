@@ -17,6 +17,7 @@
   <link href="{{ asset('/') }}public/assets3/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="{{ asset('/') }}public/assets3/demo/demo.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body class="">
@@ -157,6 +158,11 @@
       md.initDashboardPageCharts();
 
     });
+  </script>
+  <script type="text/javascript">
+      setTimeout(function(){ 
+          document.getElementById("hideAlert").style.display  = "none";
+      }, 5000);
   </script>
 </body>
 
