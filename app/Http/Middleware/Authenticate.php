@@ -17,7 +17,7 @@ class Authenticate extends Middleware
         if (! $request->expectsJson()) { 
             \Auth::logout();
             \Session::flush();
-            return url('admin/login');
+            return url('/');
         }
     }
 }

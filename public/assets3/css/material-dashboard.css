@@ -13635,7 +13635,7 @@ textarea {
   line-height: 1.428571 !important;
 }
 
-.form-group input[type=file] {
+/*.form-group input[type=file] {
   opacity: 0;
   position: absolute;
   top: 0;
@@ -13645,7 +13645,7 @@ textarea {
   width: 100%;
   height: 100%;
   z-index: -1;
-}
+}*/
 
 .form-newsletter .input-group,
 .form-newsletter .form-group {
@@ -15460,7 +15460,7 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
 }
 
 .sidebar[data-color="purple"] li.active>a {
-  background-color: #9c27b0;
+  background: linear-gradient(60deg, red, gray);
   box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(156, 39, 176, 0.4);
 }
 
@@ -17517,7 +17517,7 @@ html[dir="rtl"] .form-check .form-check-sign .check:before {
 .card.bg-primary,
 .card.card-rotate.bg-primary .front,
 .card.card-rotate.bg-primary .back {
-  background: linear-gradient(60deg, #ab47bc, #8e24aa);
+  background: linear-gradient(60deg, red, gray);
 }
 
 .card .card-header-info .card-icon,

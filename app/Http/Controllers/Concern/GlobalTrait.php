@@ -88,6 +88,21 @@ Trait GlobalTrait
         return $image_path;
     }
 
+     protected function formFillerUserDocumentUpload($data, $key) {
+        if($data->$key) {
+            $filename      = $data->$key->getClientOriginalName();
+            $fileExtension = $data->$key->getClientOriginalExtension();
+            $imageName     = base64_encode(str_replace(' ', '', $filename)).date('ymdhis').'.'.$fileExtension;
+            $return        = $data->file($key)->move(
+            base_path() . '/public/assets3/img/documents/', $imageName
+            );
+            $image_path =asset('/public/assets3/img/documents/'. $imageName);
+        } else {
+            $image_path = 'null';
+        }
+        return $image_path;
+    }
+
     protected function userVerificationProcess($user) {
         $token = \Str::random(8);
         UserVerification::create(
@@ -109,11 +124,12 @@ Trait GlobalTrait
       if(!$find) {
           return 'expired';
       }
-      User::where('id', $find->id)->update(
+      User::where('id', $find->user_id)->update(
         [
-          'email_verified_at' => 'Yes'
+          'email_verify' => 'Yes'
         ]
       );
+      $find->delete();
       return 'Yes';
     }
 }

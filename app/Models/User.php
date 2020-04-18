@@ -16,7 +16,18 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'profile_pic','contact_number','address','type', 'email', 'password',
+        'name', 
+        'profile_pic',
+        'contact_number',
+        'address',
+        'type', 
+        'email',
+        'password', 
+        'postal_code', 
+        'city_id', 
+        'profile_completed', 
+        'email_verify',  
+        'mobile_verified_at'
     ];
 
     /**
@@ -36,4 +47,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function userInfo() {
+        return $this->hasOne(FormUserInfo::class);
+    }
+
+    public function userQualification() {
+        return $this->hasOne(FormUserQualification::class);
+    }
 }

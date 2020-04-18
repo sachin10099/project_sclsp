@@ -15,6 +15,10 @@ class FormFiller
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
+        if(\Auth::user()->type == 'form_user') {
+            return $next($request);    
+        }
+        return redirect('form-filler/login')->with('error', 'Unauthorized Access!');
+        
     }
 }

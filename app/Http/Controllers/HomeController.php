@@ -78,7 +78,12 @@ class HomeController extends Controller
 
     public function emailVerify($token) {
         $data = $this->verifyEmail($token);
-        dd($data);
+        $msg  = 'Your Email Successfully Verified.';
+        if($data == 'expired') {
+            $msg  = 'Your email verification link must be expired.';
+            return view('thankyou', compact('msg', 'data'));
+        }
+        return view('thankyou', compact('msg'));
     }
 
     /**
@@ -93,12 +98,30 @@ class HomeController extends Controller
             'password' => $request['password'],
         ];
         if(\Auth::attempt($credentials)) {
-            if(\Auth::user()->type == 'admin') {
-                return redirect()->back()->with('error', 'Unauthorized Access !');
-            } else if(\Auth::user()->type == 'form_user') {
-                return redirect('form-filler/dashboard');     
+            if(\Auth::user()->email_verify == 'Yes') {
+                if(\Auth::user()->type == 'admin') {
+                    return redirect()->back()->with('error', 'Unauthorized Access!');
+                } else if(\Auth::user()->type == 'form_user') {
+                    return redirect('form-filler/dashboard');     
+                }
             }
+            else {
+                 return redirect()->back()->with('error', 'Your email is not verified, please verify your email.');
+            }
+            
         }
         return redirect()->back()->with('error', 'Invalid login credentials.');
+    }
+
+
+    /**
+     * Logout Function
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function logout(Request $request) {
+        \Auth::logout();
+        \Session::flush();
+        return redirect('global/login');
     }
 }

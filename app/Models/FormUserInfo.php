@@ -14,6 +14,6 @@ class FormUserInfo extends Model
     	'aadhaar_number',
     	'aadhaar_img_front',
     	'aadhaar_img_back',
-    	'licence_or_voter_id_number',
+    	'licence_or_voter_id_number'
     ];
 }

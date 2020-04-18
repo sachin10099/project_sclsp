@@ -31,13 +31,13 @@
         @if($errors->has('contact_number'))
             <span class="" style="color: red;">{{ $errors->first('contact_number') }}</span>
         @endif
-        <input type="number" class="form-control" name="contact_number" required=""><br>
+        <input type="number" class="form-control" name="contact_number" value="{{ old('contact_number') }}" required=""><br>
 
         <label><strong>Enter Address:</strong></label>
         @if($errors->has('address'))
             <span class="" style="color: red;">{{ $errors->first('address') }}</span>
         @endif
-        <textarea class="form-control" name="address" row="4" required=""></textarea><br>
+        <textarea class="form-control" name="address" row="4" value="{{ old('address') }}" required=""></textarea><br>
        
         <label><strong>Enter Password:</strong></label>
         @if($errors->has('user_password'))

@@ -32,7 +32,6 @@ Route::get('form-filler/index', 'FormFiller\FormFillerController@index')->name('
 Route::get('form-filler/signup', 'FormFiller\FormFillerController@signUpForm')->name('formfiller.signUpForm');
 Route::get('form-filler/login', 'FormFiller\FormFillerController@loginView')->name('formfiller.loginView');
 Route::post('form-filler/user/signup', 'FormFiller\FormFillerController@userSignUp')->name('formfiller.userSignUp');
-Route::get('form-filler/dashboard', 'FormFiller\FormFillerController@dashboard')->name('formfiller.dashboard');
 
 Route::post('user/send-query', 'Admin\SupportCenterController@sendQuery')->name('sendQuery');
 
@@ -114,6 +113,15 @@ Route::group(['middleware' => ['auth', 'adminCheck']], function () {
 	Route::get('admin/notification/list', 'Admin\NotificationController@index')->name('admin.linkList');	
 	Route::post('admin/notification/delete', 'Admin\NotificationController@deleteNotification')->name('admin.deleteNotification');	
 	Route::post('admin/notification/read', 'Admin\NotificationController@readNotification')->name('admin.readNotification');	
+});
+
+
+Route::group(['middleware' => ['auth', 'formFiller']], function () {
+	Route::get('global/logout', 'HomeController@logout')->name('logout');
+	Route::get('form-filler/dashboard', 'FormFiller\FormFillerController@dashboard')->name('formfiller.dashboard');
+	Route::get('form-filler/profile', 'FormFiller\FormFillerController@profile')->name('formfiller.profile');
+	Route::post('form-filler/profile/update', 'FormFiller\FormFillerController@completeProfile')->name('formfiller.completeProfile');
+	Route::post('form-filler/profile/update-info', 'FormFiller\FormFillerController@updateProfile')->name('formfiller.updateProfile');
 });
 
 
