@@ -122,7 +122,11 @@ Route::group(['middleware' => ['auth', 'formFiller']], function () {
 	Route::get('form-filler/profile', 'FormFiller\FormFillerController@profile')->name('formfiller.profile');
 	Route::post('form-filler/profile/update', 'FormFiller\FormFillerController@completeProfile')->name('formfiller.completeProfile');
 	Route::post('form-filler/profile/update-info', 'FormFiller\FormFillerController@updateProfile')->name('formfiller.updateProfile');
+	Route::post('form-filler/profile/profile-pic', 'FormFiller\FormFillerController@profilePic')->name('formfiller.profilePic');
 });
+
+// Operator User Routes
+Route::post('operator/signup', 'Operator\OperatorController@signup')->name('operator.signup');
 
 
 

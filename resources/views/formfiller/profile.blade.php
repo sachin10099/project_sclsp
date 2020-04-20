@@ -533,18 +533,23 @@
               </div>
             </div>
             <div class="col-md-4">
+              <form method="post" action="{{ url('form-filler/profile/profile-pic') }}" enctype="multipart/form-data">
+              @csrf
               <div class="card card-profile">
                 <div class="card-avatar">
                   <a href="javascript:;">
                     @if(\Auth::user()->profile_pic)
-                      <img src="{{ \Auth::user()->profile_pic }}" class="user-image" alt="User Image">
+                      <img id="profile" src="{{ \Auth::user()->profile_pic }}" class="user-image" alt="User Image">
                     @else
-                        <img type='file' src="{{ asset('/') }}public/assets/img/default.png" class="user-image" alt="User Image">
+                        <img id="profile" type='file' src="{{ asset('/') }}public/assets/img/default.png" class="user-image" alt="User Image">
                     @endif
                   </a>
                 </div>
                 
                 <div class="card-body">
+                  @if($errors->has('image'))
+                      <span style="color: red;">{{ $errors->first('image') }}</span>
+                  @endif
                   <h4 class="card-title">{{ \Auth::user()->name }}</h4><br>
                   <p class="card-description">
                       {{ \Auth::user()->contact_number }}
@@ -553,11 +558,12 @@
                       {{ \Auth::user()->email }}
                   </p>
                   @if(\Auth::user()->profile_completed == 'Yes')
-                    <input id="pic" name="image" class='pis' style="margin-left: 100px;" onchange="readURL(this);" type="file">
-                    <a href="javascript:;" class="btn btn-info btn-round">Update Profile Photo</a>
+                    <input  name="image" class='pis' style="margin-left: 50px;" onchange="profileUpdate(this);" type="file" required="">
+                    <input type="submit" class="btn btn-info btn-round" value="Update Profile Photo">
                   @endif
                 </div>
               </div>
+            </form>
             </div>
            
           </div>
@@ -738,6 +744,20 @@
             var reader = new FileReader();
             reader.onload = function (e) {
                 $('#others')
+                    .attr('src', e.target.result)
+                    .width(200)
+                    .height(150);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    function profileUpdate(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#profile')
                     .attr('src', e.target.result)
                     .width(200)
                     .height(150);

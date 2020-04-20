@@ -5,7 +5,7 @@
     <div class="btn-group">
       <button onclick="changeViewSignUp('user', 'operator')">Sign Up as a User</button>
       <button onclick="changeViewSignUp('operator', 'user')">Sign Up as a Operator</button>
-      <button>If your have already account goto login, click here</button>
+      <a href="{{ url('form-filler/login') }}"><button>If your have already account goto login, click here</button></a>
     </div>
   </center>
   <div class="container">
@@ -60,7 +60,8 @@
 
     <div class="panel panel-default col-sm-8 box" id="operator" style="margin-top:50px;margin-bottom:50px;">
       <center><h2>Sign Up as a Operator</h2></center>
-      <form>
+      <form method="post" action="{{ url('operator/signup') }}">
+        @csrf
         <label><strong>Enter full name:</strong></label>
         <input type="text" class="form-control" name="name" required=""><br>
 
@@ -102,7 +103,7 @@
         </div>
 
         <label><strong>Enter Your Area Pincode:</strong></label>
-        <input type="Password" class="form-control" name="pincode" required=""><br>
+        <input type="number" class="form-control" name="pincode" required=""><br>
 
         <label><strong>Enter Your Complete Address:</strong></label>
         <input type="text" class="form-control" name="address" required=""><br>

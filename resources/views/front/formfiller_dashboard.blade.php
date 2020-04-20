@@ -95,7 +95,6 @@
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
                   @if(\Auth::user()->profile_completed == 'Yes')
                   <a class="dropdown-item" href="{{ url('form-filler/profile') }}">Profile</a>
-                  <a class="dropdown-item" href="#">Settings</a>
                   <div class="dropdown-divider"></div>
                   @endif
                   <a class="dropdown-item" href="{{ url('form-filler/login') }}">Log out</a>

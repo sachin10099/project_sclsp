@@ -329,6 +329,22 @@ class FormFillerController extends Controller
         );
         return redirect()->back()->with('success', 'Your Profile Updated Successfully.');
     }
+ 
+    public function profilePic(Request $request) {
+        $request->validate(
+            [
+                'image' => 'mimes:jpeg,jpg,png|max:10000'
+            ]
+        );
+        $url = $this->imageUpload($request);
+        \Auth::user()->update(
+            [
+                'profile_pic' => $url
+            ]
+        );
+        return redirect()->back()->with('success', 'Your Profile Photo Updated Successfully.');
+
+    }
 
 
 

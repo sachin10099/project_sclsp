@@ -20,6 +20,7 @@ class AddColumsToUser extends Migration
             $table->foreign('city_id')
               ->references('id')->on('cities')
               ->onDelete('cascade');
+            $table->enum('accept_terms', ['Yes', 'No'])->default('No');
         });
     }
 
@@ -34,6 +35,7 @@ class AddColumsToUser extends Migration
             $table->dropColumn('profile_completed');
             $table->dropColumn('postal_code');
             $table->dropColumn('city_id');
+            $table->dropColumn('accept_terms');
         });
     }
 }
