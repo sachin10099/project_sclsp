@@ -9,8 +9,8 @@
 </style>
 
 	<div class="container">
-		<div class="col-sm-2">&nbsp;</div>
-		<div class="panel panel-default col-sm-8 box" id="user" style="margin-top:50px;margin-bottom:50px;">
+		<div class="col-sm-4">&nbsp;</div>
+		<div class="panel panel-default col-sm-4 box" id="user" style="margin-top:50px;margin-bottom:50px;">
 			@if(session()->has('success'))
 	        <div class="alert alert-success" id="hideAlert">
 	            {{ session()->get('success') }}
@@ -43,7 +43,7 @@
 				</form>
 			</center>
 		</div>
-			<div class="col-sm-2">&nbsp;</div>
+			<div class="col-sm-4">&nbsp;</div>
 		</div>
 	</div>
 	<script type="text/javascript">

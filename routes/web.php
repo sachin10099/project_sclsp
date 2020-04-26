@@ -38,6 +38,7 @@ Route::post('user/send-query', 'Admin\SupportCenterController@sendQuery')->name(
 Route::post('subscribe', 'HomeController@subscribe')->name('subscribe');
 
 Route::group(['middleware' => ['auth', 'adminCheck']], function () {
+	Route::get('admin/logout', 'Admin\AuthController@logout')->name('admin.logout');
 	Route::get('admin/dashboard', 'Admin\AuthController@dashboard')->name('admin.dashboard');
 	Route::get('admin/profile', 'Admin\AuthController@profile')->name('admin.profile');
 	Route::get('admin/profile/edit', 'Admin\AuthController@editProfile')->name('admin.editProfile');
@@ -113,8 +114,18 @@ Route::group(['middleware' => ['auth', 'adminCheck']], function () {
 	Route::get('admin/notification/list', 'Admin\NotificationController@index')->name('admin.linkList');	
 	Route::post('admin/notification/delete', 'Admin\NotificationController@deleteNotification')->name('admin.deleteNotification');	
 	Route::post('admin/notification/read', 'Admin\NotificationController@readNotification')->name('admin.readNotification');	
-});
 
+	// Manage Jobs
+	Route::get('admin/jobs/list', 'Jobs\JobsController@index')->name('admin.jobs-list');
+	Route::post('admin/jobs/list', 'Jobs\JobsController@jobList')->name('admin.jobList');
+	Route::get('admin/jobs/edit/{id}', 'Jobs\JobsController@jobEdit')->name('admin.jobEdit');
+	Route::get('admin/jobs/list-view', 'Jobs\JobsController@listView')->name('admin.listView');
+	Route::get('admin/jobs/post', 'Jobs\JobsController@postJobView')->name('admin.postJobView');
+	Route::post('admin/jobs/post', 'Jobs\JobsController@postJob')->name('admin.postJob');
+	Route::post('admin/jobs/update', 'Jobs\JobsController@jobUpdate')->name('admin.jobUpdate');
+	Route::post('admin/jobs/change-status', 'Jobs\JobsController@changeStatus')->name('admin.changeStatus');
+	Route::post('admin/jobs/delete', 'Jobs\JobsController@deleteJob')->name('admin.deleteJob');
+});
 
 Route::group(['middleware' => ['auth', 'formFiller']], function () {
 	Route::get('global/logout', 'HomeController@logout')->name('logout');
@@ -123,6 +134,17 @@ Route::group(['middleware' => ['auth', 'formFiller']], function () {
 	Route::post('form-filler/profile/update', 'FormFiller\FormFillerController@completeProfile')->name('formfiller.completeProfile');
 	Route::post('form-filler/profile/update-info', 'FormFiller\FormFillerController@updateProfile')->name('formfiller.updateProfile');
 	Route::post('form-filler/profile/profile-pic', 'FormFiller\FormFillerController@profilePic')->name('formfiller.profilePic');
+	Route::get('form-filler/notifications', 'FormFiller\FormFillerController@notifications')->name('formfiller.notifications');
+	Route::post('form-filler/delete/notification', 'FormFiller\FormFillerController@deleteNotification')->name('formfiller.deleteNotification');
+	Route::get('form-filler/job/list', 'FormFiller\FormFillerController@jobList')->name('formfiller.jobList');
+	Route::get('form-filler/job/list-view', 'FormFiller\FormFillerController@listView')->name('formfiller.listView');
+	Route::post('form-filler/jobs/data-more', 'Jobs\JobsController@jobList')->name('admin.data-more');
+	Route::get('form-filler/job/profile/{id}', 'FormFiller\FormFillerController@jobProfile')->name('admin.jobProfile');
+
+	// Job Management
+	Route::post('form-filler/job/apply', 'FormFiller\JobController@apply')->name('job.apply');
+	Route::get('form-filler/job/checkout/{amount}', 'FormFiller\JobController@checkout')->name('job.checkout');
+	Route::post('form-filler/job/proceedToPay', 'FormFiller\JobController@proceedToPay')->name('job.proceedToPay');
 });
 
 // Operator User Routes

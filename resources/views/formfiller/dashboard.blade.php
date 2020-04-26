@@ -20,7 +20,7 @@
                 </div>
                 <div class="card-footer">
                   <div class="stats">
-                    <a href="javascript:;">View More...</a>
+                    <a href="{{ url('form-filler/job/list-view') }}">View More...</a>
                   </div>
                 </div>
               </div>
@@ -36,7 +36,7 @@
                 </div>
                 <div class="card-footer">
                   <div class="stats">
-                    <a href="javascript:;">View More...</a>
+                    <a href="{{ url('form-filler/job/list-view') }}/past">View More...</a>
                   </div>
                 </div>
               </div>
@@ -52,7 +52,7 @@
                 </div>
                 <div class="card-footer">
                   <div class="stats">
-                    <a href="javascript:;">View More...</a>
+                    <a href="{{ url('form-filler/job/list-view') }}">View More...</a>
                   </div>
                 </div>
               </div>
@@ -68,7 +68,7 @@
                 </div>
                 <div class="card-footer">
                   <div class="stats">
-                    <a href="javascript:;">View More...</a>
+                    <a href="{{ url('form-filler/job/list-view') }}">View More...</a>
                   </div>
                 </div>
               </div>

@@ -11,6 +11,7 @@
                 <!-- Small boxes (Stat box) -->
                 <div class="dashboard-small-box">
                     <div class="row">
+                        @can('check-admin')
                         <div class="col-lg-3 col-xs-6">
                             <!-- small box -->
                             <div class="small-box bg-white global-shadow">
@@ -36,6 +37,7 @@
                                 </div>
                             </div>
                         </div>
+                        @endcan
                         <!-- ./col -->
                         <div class="col-lg-3 col-xs-6">
                             <!-- small box -->

@@ -15,7 +15,7 @@ class AdminCheck
      */
     public function handle($request, Closure $next)
     {
-        if(\Auth::user()->type === 'admin') {
+        if(\Auth::user()->type === 'admin' || \Auth::user()->type === 'operator') {
             return $next($request); 
         }
         return redirect('admin/login')->with('error', 'Unauthorized Access !');

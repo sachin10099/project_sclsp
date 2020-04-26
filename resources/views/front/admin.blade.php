@@ -31,6 +31,7 @@
     <link href="{{ asset('/') }}public/dist/css/admin-style.css" rel="stylesheet">
     <link href="{{ asset('/') }}public/dist/css/admin-responsive.css" rel="stylesheet">
     <script src="https://cdn.ckeditor.com/4.11.1/standard/ckeditor.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <style type="text/css">
@@ -155,6 +156,12 @@
             transform: rotate(360deg);
           }
         }
+        #users-table{
+          width: auto !important;
+        }
+        #users-table_wrapper {
+          background-color: #F1F1F1 !important;
+        }
   </style>
 </head>
 
@@ -162,7 +169,7 @@
     <div class="wrapper">
         <header class="main-header">
             <!-- Logo -->
-            <a href="{{ url('admin/login') }}" class="logo bg-white">
+            <a href="{{ url('admin/dashboard') }}" class="logo bg-white">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><img src="{{ asset('/') }}public/assets/img/logo/logo.png" alt="Logo" /></span>
                 <!-- logo for regular state and mobile devices -->
@@ -170,11 +177,10 @@
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top">
-                <!-- Sidebar toggle button-->
-                <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-                    <span class="sr-only">Toggle navigation</span>
-                </a>
-                
+              <!-- Sidebar toggle button-->
+              <a href="#" data-toggle="push-menu" role="button">
+                  <i class="fa fa-bars" aria-hidden="true" style="font-size:25px;margin-top: 3px;margin-left: 11px;"></i>
+              </a>      
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
                         <!-- Notifications: style can be found in dropdown.less -->
@@ -198,15 +204,9 @@
                                 <!-- User image -->
                                 <li><a href="{{ url('admin/profile') }}">Profile</a></li>
                                 <li>
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                    <a class="dropdown-item" href="{{ url('admin/logout') }}">
                                         Sign out
                                     </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
                                 </li>
                             </ul>
                         </li>
@@ -223,6 +223,7 @@
                     <li class="{{ (request()->is('admin/dashboard')) ? 'active' : '' }}">
                         <a href="{{ url('admin/dashboard') }}"><span>Dashboard</span></a>
                     </li>
+                    @can('check-admin')
                     <li class="{{ (request()->is('admin/banner/list')) || (request()->is('admin/why-choose/list')) || (request()->is('admin/service/list')) || (request()->is('admin/about/list')) || (request()->is('admin/scopes/list')) ||  (request()->is('admin/testimonial/list')) || (request()->is('admin/testimonial/list')) || (request()->is('admin/team/list')) || (request()->is('admin/faq/list')) || (request()->is('admin/contact/list')) || (request()->is('admin/social/link')) ? 'active' : '' }}">
                         <a  class="dropdown-btn" data-toggle="collapse" data-target="#demo2"><span >Home Management &nbsp;<i class="fa fa-angle-down"></i></span></a>
                         <div class="dropdown-container collapse" id="demo2">
@@ -263,6 +264,12 @@
                     <li class="{{ (request()->is('admin/query/list')) ? 'active' : '' }}">
                         <a href="{{ url('admin/query/list') }}"><span>Support Section</span></a>
                     </li>
+                    @endcan
+                    @can('check-operator')
+                    <li class="{{ (request()->is('admin/jobs/list-view')) ? 'active' : '' }}">
+                        <a href="{{ url('admin/jobs/list-view') }}"><span>Manage Jobs</span></a>
+                    </li>
+                    @endcan
                 </ul>
             </section>
             <!-- /.sidebar -->
@@ -286,6 +293,7 @@
     <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
     <!-- Bootstrap JavaScript -->
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
     <script type="text/javascript">
         setTimeout(function(){ 
             document.getElementById("hideAlert").style.display  = "none";

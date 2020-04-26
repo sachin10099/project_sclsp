@@ -256,5 +256,21 @@ class AuthController extends Controller
         return redirect('admin/profile')->with('success', 'Password Updated Successfully!');
     }
 
+    /**
+     * Logout Function
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function logout(Request $request) {
+        if(\Auth::user()->type == 'admin') {
+            $url = 'admin/login';
+        } else {
+             $url = 'form-filler/login';
+        }
+        \Auth::logout();
+        \Session::flush();
+        return redirect($url);
+    }
+
    
 }

@@ -83,7 +83,7 @@ Trait GlobalTrait
             );
             $image_path =asset('/public/assets/img/uploaded/'. $imageName);
         } else {
-            $image_path = 'null';
+            $image_path = $old_file;
         }
         return $image_path;
     }

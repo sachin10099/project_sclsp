@@ -83,7 +83,7 @@ class HomeController extends Controller
             $msg  = 'Your email verification link must be expired.';
             return view('thankyou', compact('msg', 'data'));
         }
-        return view('thankyou', compact('msg'));
+        return view('thankyou', compact('msg', 'data'));
     }
 
     /**
@@ -103,6 +103,8 @@ class HomeController extends Controller
                     return redirect()->back()->with('error', 'Unauthorized Access!');
                 } else if(\Auth::user()->type == 'form_user') {
                     return redirect('form-filler/dashboard');     
+                } else if(\Auth::user()->type == 'operator') {
+                    return redirect('admin/dashboard');   
                 }
             }
             else {

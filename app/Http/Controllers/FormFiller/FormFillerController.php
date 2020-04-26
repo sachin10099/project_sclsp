@@ -9,6 +9,8 @@ use App\Models\About;
 use App\Models\Scope;
 use App\Models\Service;
 use App\Models\City;
+use App\Models\State;
+use App\Models\Job;
 use App\Models\Category;
 use App\Models\ContactUs;
 use App\Models\Subscribe;
@@ -18,6 +20,7 @@ use App\Models\FormUserInfo;
 use Illuminate\Http\Request;
 use App\Models\SupportCenter;
 use App\Models\UserVerification;
+use Yajra\Datatables\Datatables;
 use App\Http\Controllers\Controller;
 use App\Models\FormUserQualification;
 use App\Http\Controllers\Concern\GlobalTrait;
@@ -51,12 +54,14 @@ class FormFillerController extends Controller
      */
     public function signUpForm()
     {
-        $data['contacts']      = ContactUs::where('slug', 'contact')->get();
-        $data['contact_info']  = User::where('type', 'admin')->first();
+        $data['contacts']       = ContactUs::where('slug', 'contact')->get();
+        $data['contact_info']   = User::where('type', 'admin')->first();
         $data['facebook_link']  = SocialLink::where('slug', 'facebook')->first();
         $data['twitter_link']   = SocialLink::where('slug', 'twitter')->first();
         $data['insta_link']     = SocialLink::where('slug', 'insta')->first();
         $data['linkedin_link']  = SocialLink::where('slug', 'linkedin')->first();
+        $data['states']         = State::get();
+        $data['cities']         = City::get();
         return view('formfiller.signup' ,compact('data'));
     }
 
@@ -329,7 +334,16 @@ class FormFillerController extends Controller
         );
         return redirect()->back()->with('success', 'Your Profile Updated Successfully.');
     }
- 
+
+
+    /**
+    * Update User Profile Photo
+    * @category Form Filler Management
+    * @package  Form Filler Management
+    * @author   Sachiln Kumar <sachin679710@gmail.com>
+    * @license  PHP License 7.2.24
+    * @link
+    */
     public function profilePic(Request $request) {
         $request->validate(
             [
@@ -346,6 +360,91 @@ class FormFillerController extends Controller
 
     }
 
+     /**
+    * Notifications
+    * @category Form Filler Management
+    * @package  Form Filler Management
+    * @author   Sachiln Kumar <sachin679710@gmail.com>
+    * @license  PHP License 7.2.24
+    * @link
+    */
+    public function notifications() {
+        $notifications = \Auth::user()->notifications()->paginate(10);
+        return view('formfiller.notification', compact('notifications'));
+    }
+
+    /**
+    * Notifications
+    * @category Form Filler Management
+    * @package  Form Filler Management
+    * @author   Sachiln Kumar <sachin679710@gmail.com>
+    * @license  PHP License 7.2.24
+    * @link
+    */
+    public function deleteNotification(Request $request) {
+        \Auth::user()->notifications()
+        ->where('id', $request->id)->delete();
+        return 'Deleted Successfully.';
+    }
+
+    /**
+    * Job List
+    * @category Form Filler Management
+    * @package  Form Filler Management
+    * @author   Sachiln Kumar <sachin679710@gmail.com>
+    * @license  PHP License 7.2.24
+    * @link
+    */
+    public function jobList(Request $request) {
+        $date = date("Y-m-d");
+        if($request->status == 'today') {
+            $data = Job::with('getState')->whereDate('job_published', $date)->where('status', 'active')->get();
+        } else if($request->status == 'upcomening') {
+            $data = Job::with('getState')->whereDate('job_published','>', $date)->where('status', 'active')->get();
+        } else if($request->status == 'past') {
+            $data = Job::with('getState')->whereDate('job_published','<', $date)->where('status', 'active')->get();
+        }
+        return Datatables::of($data)
+            ->addColumn('state_name', function ($data) {
+                return $data->getState['name'];
+            })
+            
+            ->addColumn('assign_price', function ($data) {
+
+                return '<input type="text" id="price'.$data->id.'" class="form-control" value="'.$data->price.'">';
+            })
+            ->addColumn('publish', function ($data) {
+                $publish = date('d-m-Y', strtotime($data->job_published));
+                return $publish;
+            })
+            ->addColumn('end', function ($data) {
+                $end = date('d-m-Y', strtotime($data->job_deadline));
+                return $end;
+            })
+            ->addColumn('image', function ($data) {
+                return '<img src="'.$data->feature_image.'" style="max-width:100px;max-height:100spx;">';
+            })
+            ->addColumn('action', function ($data) {
+                return '
+                        <a href="profile/'.$data->id.'"><i class="fa fa-eye" aria-hidden="true" style="color:#00bfff;font-size:20px;" data-toggle="tooltip" title="More info"></i></a>
+                        ';
+               
+            })
+            ->rawColumns([
+                'image',
+                'action'
+            ])
+            ->make(true);
+    }
+
+    public function listView() {
+        return view('formfiller.jobs');
+    }
+
+    public function jobProfile($id) {
+        $data = Job::find($id);
+        return view('formfiller.job_profile', compact('data'));
+    }
 
 
 }
