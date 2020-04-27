@@ -179,6 +179,8 @@ class FormFillerController extends Controller
         $request->validate(
             [
                 'name'              => 'required|max:150',
+                'gender'            => 'required',
+                'dob'               => 'required',
                 'f_name'            => 'required|max:150',
                 'm_name'            => 'required|max:150',
                 'contact_number'    => 'required|digits:10',
@@ -221,7 +223,9 @@ class FormFillerController extends Controller
                 'aadhaar_number'             => $request->aadhaar,
                 'aadhaar_img_front'          => $url_front,
                 'aadhaar_img_back'           => $url_back,
-                'licence_or_voter_id_number' => $request->l_v_id
+                'licence_or_voter_id_number' => $request->l_v_id,
+                'gender'                     => $request->gender,
+                'dob'                        => $request->dob
             ]
         );
 
@@ -307,7 +311,9 @@ class FormFillerController extends Controller
                 'aadhaar_number'             => $request->aadhaar,
                 'aadhaar_img_front'          => $url_front,
                 'aadhaar_img_back'           => $url_back,
-                'licence_or_voter_id_number' => $request->l_v_id
+                'licence_or_voter_id_number' => $request->l_v_id,
+                'gender'                     => $request->gender,
+                'dob'                        => $request->dob
             ]
         );
 

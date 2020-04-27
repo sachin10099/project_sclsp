@@ -101,219 +101,95 @@
         </div>
         <div class="row pb-0 block__19738 section-counter">
 
-          <div class="col-6 col-md-6 col-lg-3 mb-5 mb-lg-0">
+          <div class="col-sm-4">
             <div class="d-flex align-items-center justify-content-center mb-2">
               <strong class="number" data-number="1930" style="color:black;">0</strong>
             </div>
             <span class="caption" style="color:black;">Our Candidates</span>
           </div>
 
-          <div class="col-6 col-md-6 col-lg-3 mb-5 mb-lg-0">
+          <div class="col-sm-4">
             <div class="d-flex align-items-center justify-content-center mb-2">
               <strong class="number" data-number="54" style="color:black;">0</strong>
             </div>
             <span class="caption" style="color:black;">Jobs Posted</span>
           </div>
 
-          <div class="col-6 col-md-6 col-lg-3 mb-5 mb-lg-0">
+          <div class="col-sm-4">
             <div class="d-flex align-items-center justify-content-center mb-2">
               <strong class="number" data-number="120" style="color:black;">0</strong>
             </div>
             <span class="caption" style="color:black;">Jobs Filled</span>
           </div>
-
-          <div class="col-6 col-md-6 col-lg-3 mb-5 mb-lg-0">
-            <div class="d-flex align-items-center justify-content-center mb-2">
-              <strong class="number" data-number="550" style="color:black;">0</strong>
-            </div>
-            <span class="caption" style="color:black;">Companies</span>
-          </div>
-
             
         </div>
       </div>
     </section>
 	
-	<center>
-		<div class="btn-group">
-		  <button onclick="manageTabs('jobs', 'results')">View Jobs</button>
-		  <button onclick="manageTabs('results', 'jobs')">Results</button>
-		</div>
-	</center>
-    <section class="site-section" id="jobs">
-      <div class="container">
-        <ul class="job-listings mb-5">
-          <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
-            <a href="job-single.html"></a>
-            <div class="job-listing-logo">
-              <img src="{{ asset('/') }}public/asset2/images/job_logo_1.jpg" alt="Free Website Template by Free-Template.co" class="img-fluid">
-            </div>
+    <section class="site-section">
+        <div class="row">
+          <div class="col-sm-4">
+              <div class="w3-container" style="margin-top: 20px;">
+                <div class="w3-card-4" style="width:100%;">
+                  <header class="w3-container w3-red">
+                    <h3 style="color: white;">Latest Jobs</h3>
+                  </header>
+                  <div class="">
+                    <ul class="w3-ul">
+                      <li>Bihar City Manager Online Form 2020</li>
+                      <li>BPSC Project Manager Online Form 2020 (Re Open)</li>
+                      <li>UPPSC Pre 2020 / ACF/ RFO Online Form</li>
+                    </ul>
+                  </div>
+                  <footer class="w3-container w3-red">
+                    <a href="">View All</a>
+                  </footer>
+                </div>
+              </div>
+          </div>
+          <div class="col-sm-4">
+              <div class="w3-container" style="margin-top: 20px;">
+              <div class="w3-card-4" style="width:100%;">
+                <header class="w3-container w3-red">
+                  <h3 style="color: white;">Admin Cards / Answer Keys</h3>
+                </header>
 
-            <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
-              <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
-                <h2>Product Designer</h2>
-                <strong>Adidas</strong>
-              </div>
-              <div class="job-listing-location mb-3 mb-sm-0 custom-width w-25">
-                <span class="icon-room"></span> New York, New York
-              </div>
-              <div class="job-listing-meta">
-                <span class="badge badge-danger">Part Time</span>
-              </div>
-            </div>
-            
-          </li>
-          <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
-            <a href="job-single.html"></a>
-            <div class="job-listing-logo">
-              <img src="{{ asset('/') }}public/asset2/images/job_logo_2.jpg" alt="Free Website Template by Free-Template.co" class="img-fluid">
-            </div>
+                <div class="">
+                  <ul class="w3-ul">
+                      <li>Bihar City Manager Online Form 2020</li>
+                      <li>BPSC Project Manager Online Form 2020 (Re Open)</li>
+                      <li>UPPSC Pre 2020 / ACF/ RFO Online Form</li>
+                  </ul>
+                </div>
 
-            <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
-              <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
-                <h2>Digital Marketing Director</h2>
-                <strong>Sprint</strong>
-              </div>
-              <div class="job-listing-location mb-3 mb-sm-0 custom-width w-25">
-                <span class="icon-room"></span> Overland Park, Kansas 
-              </div>
-              <div class="job-listing-meta">
-                <span class="badge badge-success">Full Time</span>
+                <footer class="w3-container w3-red">
+                  <a href="">View All</a>
+                </footer>
               </div>
             </div>
-          </li>
+          </div>
+          <div class="col-sm-4">
+              <div class="w3-container" style="margin-top: 20px;">
+                <div class="w3-card-4" style="width:100%;">
+                  <header class="w3-container w3-red">
+                    <h3 style="color: white;">Results</h3>
+                  </header>
+                  <div class="">
+                    <ul class="w3-ul">
+                      <li>Bihar City Manager Online Form 2020</li>
+                      <li>BPSC Project Manager Online Form 2020 (Re Open)</li>
+                      <li>UPPSC Pre 2020 / ACF/ RFO Online Form</li>
+                    </ul>
+                  </div>
 
-          <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
-            <a href="job-single.html"></a>
-            <div class="job-listing-logo">
-              <img src="{{ asset('/') }}public/asset2/images/job_logo_3.jpg" alt="Free Website Template by Free-Template.co" class="img-fluid">
-            </div>
-
-            <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
-              <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
-                <h2>Back-end Engineer (Python)</h2>
-                <strong>Amazon</strong>
+                  <footer class="w3-container w3-red">
+                    <a href="">View All</a>
+                  </footer>
+                </div>
               </div>
-              <div class="job-listing-location mb-3 mb-sm-0 custom-width w-25">
-                <span class="icon-room"></span> Overland Park, Kansas 
-              </div>
-              <div class="job-listing-meta">
-                <span class="badge badge-success">Full Time</span>
-              </div>
-            </div>
-          </li>
-
-          <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
-            <a href="job-single.html"></a>
-            <div class="job-listing-logo">
-              <img src="{{ asset('/') }}public/asset2/images/job_logo_4.jpg" alt="Free Website Template by Free-Template.co" class="img-fluid">
-            </div>
-
-            <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
-              <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
-                <h2>Senior Art Director</h2>
-                <strong>Microsoft</strong>
-              </div>
-              <div class="job-listing-location mb-3 mb-sm-0 custom-width w-25">
-                <span class="icon-room"></span> Anywhere 
-              </div>
-              <div class="job-listing-meta">
-                <span class="badge badge-success">Full Time</span>
-              </div>
-            </div>
-          </li>
-
-          <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
-            <a href="job-single.html"></a>
-            <div class="job-listing-logo">
-              <img src="{{ asset('/') }}public/asset2/images/job_logo_5.jpg" alt="Free Website Template by Free-Template.co" class="img-fluid">
-            </div>
-
-            <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
-              <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
-                <h2>Product Designer</h2>
-                <strong>Puma</strong>
-              </div>
-              <div class="job-listing-location mb-3 mb-sm-0 custom-width w-25">
-                <span class="icon-room"></span> San Mateo, CA 
-              </div>
-              <div class="job-listing-meta">
-                <span class="badge badge-success">Full Time</span>
-              </div>
-            </div>
-          </li>
-          <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
-            <a href="job-single.html"></a>
-            <div class="job-listing-logo">
-              <img src="{{ asset('/') }}public/asset2/images/job_logo_1.jpg" alt="Free Website Template by Free-Template.co" class="img-fluid">
-            </div>
-
-            <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
-              <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
-                <h2>Product Designer</h2>
-                <strong>Adidas</strong>
-              </div>
-              <div class="job-listing-location mb-3 mb-sm-0 custom-width w-25">
-                <span class="icon-room"></span> New York, New York
-              </div>
-              <div class="job-listing-meta">
-                <span class="badge badge-danger">Part Time</span>
-              </div>
-            </div>
-            
-          </li>
-          <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
-            <a href="job-single.html"></a>
-            <div class="job-listing-logo">
-              <img src="{{ asset('/') }}public/asset2/images/job_logo_2.jpg" alt="Free Website Template by Free-Template.co" class="img-fluid">
-            </div>
-
-            <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
-              <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
-                <h2>Digital Marketing Director</h2>
-                <strong>Sprint</strong>
-              </div>
-              <div class="job-listing-location mb-3 mb-sm-0 custom-width w-25">
-                <span class="icon-room"></span> Overland Park, Kansas 
-              </div>
-              <div class="job-listing-meta">
-                <span class="badge badge-success">Full Time</span>
-              </div>
-            </div>
-          </li>   
-        </ul>
-		    <center><h3><a href="" style="color:red;">View All Jobs</a></h3></center>
-      </div>
-    </section>
-    <section id="results" style="margin-top: 10px;">
-      <center>
-        <table class="table" style="width:80%;">
-            <thead>
-              <tr>
-                <th>Firstname</th>
-                <th>Lastname</th>
-                <th>Email</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>john@example.com</td>
-              </tr>
-              <tr>
-                <td>Mary</td>
-                <td>Moe</td>
-                <td>mary@example.com</td>
-              </tr>
-              <tr>
-                <td>July</td>
-                <td>Dooley</td>
-                <td>july@example.com</td>
-              </tr>
-            </tbody>
-        </table>
-      </center>
+          </div>
+          
+        </div>
     </section>
 
 

@@ -182,7 +182,7 @@
 
       </div>
       <div class="cta">
-        <a href="#services" class="scrollto">Get Started</a>
+        <a href="{{ url('form-filler/login') }}" class="scrollto">Get Started</a>
       </div>
     </div>
   </section>

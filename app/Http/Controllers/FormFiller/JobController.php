@@ -51,9 +51,10 @@ class JobController extends Controller
      * @license  PHP License 7.2.24
      * @link
      */
-    public function checkout($amount)
+    public function checkout($id)
     {
-       	return view('formfiller.checkout', compact('amount'));
+        $data = AppliedJob::where('job_id', $id)->first();
+       	return view('formfiller.checkout', compact('data'));
     }
 
     /**

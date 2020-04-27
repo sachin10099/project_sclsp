@@ -52,6 +52,32 @@
                     <div class="row">
                       <div class="col-md-12">
                         <div class="form-group">
+                          <label class="bmd-label-floating">Gender</label><br>
+                          @if(old('gender') == 'Male')
+                            <input class="w3-radio" type="radio" name="gender" value="Male" checked="">
+                            <label>Male</label>
+                            <input class="w3-radio" type="radio" name="gender" value="Female">
+                            <label>Female</label>
+                          @elseif(old('gender') == 'Female')
+                            <input class="w3-radio" type="radio" name="gender" value="Male">
+                            <label>Male</label>
+                            <input class="w3-radio" type="radio" name="gender" value="Female" checked="">
+                            <label>Female</label>
+                          @else 
+                            <input class="w3-radio" type="radio" name="gender" value="Male">
+                            <label>Male</label>
+                            <input class="w3-radio" type="radio" name="gender" value="Female">
+                            <label>Female</label>
+                          @endif
+                          @if($errors->has('gender'))
+                              <span style="color: red;">{{ $errors->first('gender') }}</span>
+                          @endif
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
                           <label class="bmd-label-floating">Address</label>
                           <input type="text" class="form-control" name="address"  value="{{ \Auth::user()->address }}" autocomplete="off" required="">
                           @if($errors->has('address'))
@@ -82,23 +108,27 @@
                     </div>
                     
                     <div class="row">
-                      <div class="col-md-12">
+                      <div class="col-md-6">
                         <div class="form-group">
-                          <label class="bmd-label-floating">Select Category</label>
-                          <select type="text" class="form-control" name="category" required="">
-                              <option></option>
-                              @foreach($data['categories'] as $category)
-                                <option value="{{ $category->id }}">{{ $category->name }}</option>
-                              @endforeach
-                          </select>
-                          @if($errors->has('category'))
-                              <span style="color: red;">{{ $errors->first('category') }}</span>
+                          <label class="">Date Of Birth</label>
+                          <input type="date" class="form-control" name="dob" value="{{ old('dob') }}"  required="">
+                          @if($errors->has('dob'))
+                              <span style="color: red;">{{ $errors->first('dob') }}</span>
+                          @endif
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Postal Code</label>
+                          <input type="number" class="form-control" name="postal_code" value="{{ old('postal_code') }}" autocomplete="off" required="">
+                          @if($errors->has('postal_code'))
+                              <span style="color: red;">{{ $errors->first('postal_code') }}</span>
                           @endif
                         </div>
                       </div>
                     </div>
                     <div class="row">
-                      <div class="col-md-8">
+                      <div class="col-md-6">
                         <div class="form-group">
                           <label class="bmd-label-floating">City</label>
                           <select type="text" class="form-control" name="city" required="">
@@ -112,12 +142,18 @@
                           @endif
                         </div>
                       </div>
-                      <div class="col-md-4">
+                      <div class="col-md-6">
+
                         <div class="form-group">
-                          <label class="bmd-label-floating">Postal Code</label>
-                          <input type="number" class="form-control" name="postal_code" value="{{ old('postal_code') }}" autocomplete="off" required="">
-                          @if($errors->has('postal_code'))
-                              <span style="color: red;">{{ $errors->first('postal_code') }}</span>
+                          <label class="bmd-label-floating">Select Category</label>
+                          <select type="text" class="form-control" name="category" required="">
+                              <option></option>
+                              @foreach($data['categories'] as $category)
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                              @endforeach
+                          </select>
+                          @if($errors->has('category'))
+                              <span style="color: red;">{{ $errors->first('category') }}</span>
                           @endif
                         </div>
                       </div>
@@ -301,6 +337,27 @@
                     <div class="row">
                       <div class="col-md-12">
                         <div class="form-group">
+                          <label class="bmd-label-floating">Gender</label><br>
+                          @if($user_infos->userInfo['gender'] == 'Male')
+                            <input class="w3-radio" type="radio" name="gender" value="Male" checked="">
+                            <label>Male</label>
+                            <input class="w3-radio" type="radio" name="gender" value="Female">
+                            <label>Female</label>
+                          @else($user_infos->userInfo['gender'] == 'Female')
+                            <input class="w3-radio" type="radio" name="gender" value="Male">
+                            <label>Male</label>
+                            <input class="w3-radio" type="radio" name="gender" value="Female" checked="">
+                            <label>Female</label>
+                          @endif
+                          @if($errors->has('gender'))
+                              <span style="color: red;">{{ $errors->first('gender') }}</span>
+                          @endif
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
                           <label class="bmd-label-floating">Address</label>
                           <input type="text" class="form-control" name="address"  value="{{ \Auth::user()->address }}" autocomplete="off" required="">
                           @if($errors->has('address'))
@@ -331,27 +388,27 @@
                     </div>
                     
                     <div class="row">
-                      <div class="col-md-12">
+                      <div class="col-md-6">
                         <div class="form-group">
-                          <label class="bmd-label-floating">Select Category</label>
-                          <select type="text" class="form-control" name="category" required="">
-                              <option></option>
-                              @foreach($data['categories'] as $category)
-                                @if($user_infos->userInfo['category_id'] == $category->id)
-                                  <option value="{{ $category->id }}" selected="">{{ $category->name }}</option>
-                                @else
-                                   <option value="{{ $category->id }}" >{{ $category->name }}</option>
-                                @endif
-                              @endforeach
-                          </select>
-                          @if($errors->has('category'))
-                              <span style="color: red;">{{ $errors->first('category') }}</span>
+                          <label class="">Date Of Birth</label>
+                          <input type="date" class="form-control" name="dob" value="{{ $user_infos->userInfo['dob'] }}" autocomplete="off" required="">
+                          @if($errors->has('dob'))
+                              <span style="color: red;">{{ $errors->first('dob') }}</span>
+                          @endif
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Postal Code</label>
+                          <input type="number" class="form-control" name="postal_code" value="{{ $user_infos->postal_code }}" autocomplete="off" required="">
+                          @if($errors->has('postal_code'))
+                              <span style="color: red;">{{ $errors->first('postal_code') }}</span>
                           @endif
                         </div>
                       </div>
                     </div>
                     <div class="row">
-                      <div class="col-md-8">
+                      <div class="col-md-6">
                         <div class="form-group">
                           <label class="bmd-label-floating">City</label>
                           <select type="text" class="form-control" name="city" required="">
@@ -369,12 +426,21 @@
                           @endif
                         </div>
                       </div>
-                      <div class="col-md-4">
+                      <div class="col-md-6">
                         <div class="form-group">
-                          <label class="bmd-label-floating">Postal Code</label>
-                          <input type="number" class="form-control" name="postal_code" value="{{ $user_infos->postal_code }}" autocomplete="off" required="">
-                          @if($errors->has('postal_code'))
-                              <span style="color: red;">{{ $errors->first('postal_code') }}</span>
+                          <label class="bmd-label-floating">Select Category</label>
+                          <select type="text" class="form-control" name="category" required="">
+                              <option></option>
+                              @foreach($data['categories'] as $category)
+                                @if($user_infos->userInfo['category_id'] == $category->id)
+                                  <option value="{{ $category->id }}" selected="">{{ $category->name }}</option>
+                                @else
+                                   <option value="{{ $category->id }}" >{{ $category->name }}</option>
+                                @endif
+                              @endforeach
+                          </select>
+                          @if($errors->has('category'))
+                              <span style="color: red;">{{ $errors->first('category') }}</span>
                           @endif
                         </div>
                       </div>

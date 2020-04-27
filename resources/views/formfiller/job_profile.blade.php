@@ -94,7 +94,7 @@
                     swal("You Already Applied on This job", "", "warning");
                     return false
                   }
-                  window.location = '{{ url('form-filler/job/checkout') }}'+'/'+amount; 
+                  window.location = '{{ url('form-filler/job/checkout') }}'+'/'+id; 
                     
                 }
             });

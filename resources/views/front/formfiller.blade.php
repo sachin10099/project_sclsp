@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="{{ asset('/') }}public/asset2/css/animate.min.css">
     <link href="{{ asset('/') }}public/assets/img/logo/logo.png" rel="icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="{{ asset('/') }}public/asset2/css/style.css">    
   </head>
