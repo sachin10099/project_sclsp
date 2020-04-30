@@ -11,6 +11,19 @@ class AppliedJob extends Model
     	'job_id',
     	'status',
     	'amount',
-    	'amount_status'
+    	'amount_status',
+        'transaction_id'
     ];
+
+    public function jobReleatedUser() {
+    	return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function getJobDetail() {
+        return $this->belongsTo(Job::class, 'job_id', 'id');
+    }
+
+    public function documents() {
+        return $this->hasOne(JobRelatedDocument::class, 'id', 'applied_job_id');
+    }
 }

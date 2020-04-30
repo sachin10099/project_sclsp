@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class JobDocument extends Model
+class JobRelatedDocument extends Model
 {
     protected $fillable = [
     	'applied_job_id',
-    	'documents'
+    	'document_name',
+    	'document_file',
     ];
 }

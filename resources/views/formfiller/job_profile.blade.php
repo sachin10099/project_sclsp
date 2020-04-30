@@ -52,10 +52,13 @@
         <li class="mb-2"><strong class="text-black">Employment Status:</strong> {{ $data->job_type }}</li>
         <li class="mb-2"><strong class="text-black">State:</strong> {{ $data->getState['name'] }}</li>
         <li class="mb-2"><strong class="text-black">Job Location:</strong> {{ $data->job_location }}</li>
-        <li class="mb-2"><strong class="text-black">Salary:</strong> Not Disclosed</li>
         <li class="mb-2"><strong class="text-black">Gender:</strong> Any</li>
         <li class="mb-2"><strong class="text-black">Application Deadline:</strong> {{ date('d-m-Y', strtotime($data->job_deadline)) }}</li>
-        <li class="mb-2"><strong class="text-black">Application Fees:</strong> <strong>Rs {{ $data->price }} /-</strong></li>
+        <li class="mb-2"><strong class="text-primary">Application Fees</strong> 
+        <br><b>General: </b><strong>Rs {{ $data->price }} + {{ $fees }}, Total = Rs {{ $data->price+$fees }} /-</strong>
+        <br><b>OBC: </b><strong>Rs {{ $data->obc_fees }} + {{ $fees }}, Total = Rs {{ $data->obc_fees+$fees }} /-</strong>
+        <br><b>SC/ST: </b><strong>Rs {{ $data->sc_st_fees }} + {{ $fees }}, Total = Rs {{ $data->sc_st_fees+$fees }} /-</strong>
+      </li>
       </ul>
     </div>
     <div class="">

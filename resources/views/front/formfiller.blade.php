@@ -12,11 +12,15 @@
     <link rel="stylesheet" href="{{ asset('/') }}public/asset2/fonts/line-icons/style.css">
     <link rel="stylesheet" href="{{ asset('/') }}public/asset2/css/owl.carousel.min.css">
     <link rel="stylesheet" href="{{ asset('/') }}public/asset2/css/animate.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link href="{{ asset('/') }}public/assets/img/logo/logo.png" rel="icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <!-- MAIN CSS -->
-    <link rel="stylesheet" href="{{ asset('/') }}public/asset2/css/style.css">    
+    <link rel="stylesheet" href="{{ asset('/') }}public/asset2/css/style.css">   
+   <!--  Owl Carosual Links  -->
+    <link rel="stylesheet" href="{{ asset('public/owl/assets/owl.carousel.min.css') }}/">
+    <link rel="stylesheet" href="{{ asset('public/owl/assets/owl.theme.default.min.css') }}">
   </head>
   <body id="top">
 
@@ -39,6 +43,7 @@
     <script src="{{ asset('/') }}public/asset2/js/jquery.waypoints.min.js"></script>
     <script src="{{ asset('/') }}public/asset2/js/jquery.animateNumber.min.js"></script>
     <script src="{{ asset('/') }}public/asset2/js/owl.carousel.min.js"></script>
+    <script src="{{ asset('/') }}public/owl/owl.carousel.min.js"></script>
     
     <script src="{{ asset('/') }}public/asset2/js/bootstrap-select.min.js"></script>
     

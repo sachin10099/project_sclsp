@@ -18,4 +18,9 @@ class FormUserInfo extends Model
         'gender',
         'dob'
     ];
+
+    public function getCaterory() {
+        return $this->belongsTo(Category::class, 'category_id', 'id');
+    }
+    
 }

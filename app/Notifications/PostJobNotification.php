@@ -47,7 +47,8 @@ class PostJobNotification extends Notification
         return [
             'title'   => $this->data->job_title,
             'message' => $msg,
-            'data'    => $this->data
+            'data'    => $this->data,
+            'job_id'  => $this->data->id
         ];
     }
 }

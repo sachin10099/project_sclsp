@@ -18,7 +18,9 @@ class Job extends Model
     	'vacancy',
     	'feature_image',
         'status',
-        'price'
+        'price',
+        'obc_fees',
+        'sc_st_fees'
     ];
 
     public function getState() {

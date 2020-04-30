@@ -179,6 +179,12 @@
               <p>Jobs</p>
             </a>
           </li>
+          <li class="nav-item {{ (request()->is('form-filler/user/jobs-view')) || (request()->is('form-filler/job/profile')) ? 'active' : '' }}">
+            <a class="nav-link" href="{{ url('form-filler/user/jobs-view') }}">
+              <i class="material-icons">content_paste</i>
+              <p>Manage Jobs</p>
+            </a>
+          </li>
         </ul>
       </div>
       @endif

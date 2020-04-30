@@ -11,10 +11,12 @@ use App\Models\Service;
 use App\Models\City;
 use App\Models\State;
 use App\Models\Job;
+use App\Models\Plan;
 use App\Models\Category;
 use App\Models\ContactUs;
 use App\Models\Subscribe;
 use App\Models\SocialLink;
+use App\Models\AppliedJob;
 use App\Models\Testimonial;
 use App\Models\FormUserInfo;
 use Illuminate\Http\Request;
@@ -40,6 +42,11 @@ class FormFillerController extends Controller
      */
     public function index()
     {
+        $data['plans'] = Plan::get();
+        $data['form_user_count'] = User::where('type', 'form_user')->count();
+        $data['jobs'] = Job::where('status', 'active')->count();
+        $data['applied_job'] = AppliedJob::count();
+        $data['admin_info'] = User::where('type', 'admin')->first();
         return view('formfiller.index' ,compact('data'));
     }
 
@@ -394,6 +401,25 @@ class FormFillerController extends Controller
     }
 
     /**
+    * Notifications Read
+    * @category Form Filler Management
+    * @package  Form Filler Management
+    * @author   Sachiln Kumar <sachin679710@gmail.com>
+    * @license  PHP License 7.2.24
+    * @link
+    */
+    public function readNotification($notification_id, $job_id) {
+        \Auth::user()->notifications()
+        ->where('id', $notification_id)->update(
+            [
+                'read_at' => \Carbon\Carbon::now()->toDateTimeString()
+            ]
+        );
+        $url = 'form-filler/job/profile/'.$job_id;
+        return redirect($url);
+    }
+
+    /**
     * Job List
     * @category Form Filler Management
     * @package  Form Filler Management
@@ -431,9 +457,21 @@ class FormFillerController extends Controller
                 return '<img src="'.$data->feature_image.'" style="max-width:100px;max-height:100spx;">';
             })
             ->addColumn('action', function ($data) {
-                return '
+                 $date = date("Y-m-d");
+                if($data->job_published > $date) {
+                    return '
+                        <p>Not Required</p>
+                        ';
+                } elseif ($data->job_published && $data->job_deadline < $date) {
+                    return '
+                       <p>Not Required</p>
+                        ';
+                } else {
+                    return '
                         <a href="profile/'.$data->id.'"><i class="fa fa-eye" aria-hidden="true" style="color:#00bfff;font-size:20px;" data-toggle="tooltip" title="More info"></i></a>
                         ';
+                }
+                
                
             })
             ->rawColumns([
@@ -449,7 +487,8 @@ class FormFillerController extends Controller
 
     public function jobProfile($id) {
         $data = Job::find($id);
-        return view('formfiller.job_profile', compact('data'));
+        $fees = $this->siteConfig('FEES');
+        return view('formfiller.job_profile', compact('data', 'fees'));
     }
 
 

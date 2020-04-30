@@ -10,15 +10,29 @@
       <div class="row">
         <div class="col-md-12">
         	@foreach($notifications as $notification)
-			<div class="alert alert-default alert-with-icon" style="background-color: gray;" data-notify="container">
-			<i class="material-icons" data-notify="icon">add_alert</i>
-				<div class="pull-right">
-					<i class="fa fa-envelope-open-o" aria-hidden="true" style="color: white; font-size: 15px;" data-toggle="tooltip" title="View"></i>
-			  		<i class="fa fa-trash" aria-hidden="true" style="color: white; font-size: 20px;" data-toggle="tooltip" title="Delete" onclick="deleteNotification('{{ $notification->id }}')"></i>
+        	@if($notification->read_at)
+        	<a href="{{ url('form-filler/notifications/read/') }}/{{ $notification->id}}/{{$notification->data['job_id']}}">
+				<div class="alert alert-default alert-with-icon" style="background-color: lightgray;" data-notify="container">
+				<i class="material-icons" data-notify="icon" style="color: black;">add_alert</i>
+					<div class="pull-right">
+				  		<i class="fa fa-trash" aria-hidden="true" style="color: black; font-size: 20px;" data-toggle="tooltip" title="Delete" onclick="deleteNotification('{{ $notification->id }}')"></i>
+					</div>
+					
+				<span data-notify="message" style="color: black;" >{{ $notification->data['message'] }}</span>
 				</div>
-				
-			<span data-notify="message" style="color: white;">{{ $notification->data['message'] }}</span>
-			</div>
+			</a>
+			@else
+				<a href="{{ url('form-filler/notifications/read/') }}/{{ $notification->id}}/{{$notification->data['job_id']}}">
+				<div class="alert alert-default alert-with-icon" style="background-color: gray;" data-notify="container">
+				<i class="material-icons" data-notify="icon">add_alert</i>
+					<div class="pull-right">
+				  		<i class="fa fa-trash" aria-hidden="true" style="color: white; font-size: 20px;" data-toggle="tooltip" title="Delete" onclick="deleteNotification('{{ $notification->id }}')"></i>
+					</div>
+					
+				<span data-notify="message" style="color: white;">{{ $notification->data['message'] }}</span>
+				</div>
+			</a>
+			@endif
 			@endforeach
 			{{ $notifications->links() }}
         </div>

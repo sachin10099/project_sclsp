@@ -38,12 +38,28 @@ class JobsController extends Controller
 
                 return '<input type="text" id="price'.$data->id.'" class="form-control" value="'.$data->price.'">';
             })
+            ->addColumn('assign_obc_price', function ($data) {
+
+                return '<input type="text" id="obc'.$data->id.'" class="form-control" value="'.$data->obc_fees.'">';
+            })
+            ->addColumn('assign_scst_price', function ($data) {
+
+                return '<input type="text" id="sc'.$data->id.'" class="form-control" value="'.$data->sc_st_fees.'">';
+            })
+            ->addColumn('publish', function ($data) {
+                $publish = date('d-m-Y', strtotime($data->job_published));
+                return $publish;
+            })
+            ->addColumn('end', function ($data) {
+                $end = date('d-m-Y', strtotime($data->job_deadline));
+                return $end;
+            })
             ->addColumn('action', function ($data) {
             	if($data->status == 'active') {
             		return '
 		                <i class="fa fa-eye" aria-hidden="true" style="color:#00bfff;font-size:20px;" data-toggle="tooltip" title="More info" onclick="showMore('.$data->id.')"></i>
 		                <a href="edit/'.$data->id.'"><i class="fa fa-pencil-square-o" aria-hidden="true" style="color:blue;font-size:20px;" data-toggle="tooltip" title="Edit"></i></a>
-		                <i class="fa fa-times" aria-hidden="true" style="color:red;font-size:20px;" data-toggle="tooltip" title="Publish" onclick="changeStatus('.$data->id.')"></i>
+		                <i class="fa fa-times" aria-hidden="true" style="color:red;font-size:20px;" data-toggle="tooltip" title="Un Publish" onclick="unPublish('.$data->id.')"></i>
 		                <i class="fa fa-trash" aria-hidden="true" style="color:red;font-size:20px;" data-toggle="tooltip" title="Delete" onclick="deleteJob('.$data->id.')"></i>
 		                ';
             	} else {
@@ -58,6 +74,8 @@ class JobsController extends Controller
             })
             ->rawColumns([
                 'assign_price',
+                'assign_obc_price',
+                'assign_scst_price',
                 'action'
             ])
             ->make(true);
@@ -228,25 +246,39 @@ class JobsController extends Controller
 	*/
     public function changeStatus(Request $request) {
     	$picked = Job::find($request->id);
-    	if($picked->status == 'active') {
-    		$picked->update(
-	    		[
-	    			'status' => 'inactive'
-	    		]
-	    	);
-    		return 'Job Un Published Successfully.';
-    	}else {
-    		$picked->update(
-	    		[
-	    			'price'  => $request->price,
-	    			'status' => 'active'
-	    		]
-	    	);
-	    	$users = User::where('type', 'form_user')->get();
-	    	Notification::send($users, new PostJobNotification($picked));
-	    	return 'Job Published Successfully.';
-    	}
-    	
+        $check = $picked->price;
+        $picked->update(
+            [
+                'price'       => $request->price,
+                'obc_fees'    => $request->obc,
+                'sc_st_fees'  => $request->sc,
+                'status'      => 'active'
+            ]
+        );
+        $users = User::where('type', 'form_user')->get();
+        if(is_null($check)) {
+            Notification::send($users, new PostJobNotification($picked));
+        }
+        return 'Job Published Successfully.';
+    }
+
+    /**
+    * Change Status of Job Like Unpublish
+    *
+    * @category Job Management
+    * @package  Job Management
+    * @author   Sachiln Kumar <sachin679710@gmail.com>
+    * @license  PHP License 7.2.24
+    * @link
+    */
+    public function unPublish(Request $request) {
+        $picked = Job::find($request->id);
+        $picked->update(
+            [
+                'status' => 'inactive'
+            ]
+        );
+        return 'Job Un Published Successfully.';
     }
 
     /**

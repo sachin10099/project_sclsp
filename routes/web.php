@@ -124,6 +124,7 @@ Route::group(['middleware' => ['auth', 'adminCheck']], function () {
 	Route::post('admin/jobs/post', 'Jobs\JobsController@postJob')->name('admin.postJob');
 	Route::post('admin/jobs/update', 'Jobs\JobsController@jobUpdate')->name('admin.jobUpdate');
 	Route::post('admin/jobs/change-status', 'Jobs\JobsController@changeStatus')->name('admin.changeStatus');
+	Route::post('admin/jobs/unpublish-job', 'Jobs\JobsController@unPublish')->name('admin.unPublish');
 	Route::post('admin/jobs/delete', 'Jobs\JobsController@deleteJob')->name('admin.deleteJob');
 });
 
@@ -135,7 +136,8 @@ Route::group(['middleware' => ['auth', 'formFiller']], function () {
 	Route::post('form-filler/profile/update-info', 'FormFiller\FormFillerController@updateProfile')->name('formfiller.updateProfile');
 	Route::post('form-filler/profile/profile-pic', 'FormFiller\FormFillerController@profilePic')->name('formfiller.profilePic');
 	Route::get('form-filler/notifications', 'FormFiller\FormFillerController@notifications')->name('formfiller.notifications');
-	Route::post('form-filler/delete/notification', 'FormFiller\FormFillerController@deleteNotification')->name('formfiller.deleteNotification');
+	Route::get('form-filler/notifications', 'FormFiller\FormFillerController@notifications')->name('formfiller.notifications');
+	Route::get('form-filler/notifications/read/{id}/{job_id}', 'FormFiller\FormFillerController@readNotification')->name('formfiller.readNotification');
 	Route::get('form-filler/job/list', 'FormFiller\FormFillerController@jobList')->name('formfiller.jobList');
 	Route::get('form-filler/job/list-view', 'FormFiller\FormFillerController@listView')->name('formfiller.listView');
 	Route::post('form-filler/jobs/data-more', 'Jobs\JobsController@jobList')->name('admin.data-more');
@@ -144,7 +146,10 @@ Route::group(['middleware' => ['auth', 'formFiller']], function () {
 	// Job Management
 	Route::post('form-filler/job/apply', 'FormFiller\JobController@apply')->name('job.apply');
 	Route::get('form-filler/job/checkout/{amount}', 'FormFiller\JobController@checkout')->name('job.checkout');
-	Route::post('form-filler/job/proceedToPay', 'FormFiller\JobController@proceedToPay')->name('job.proceedToPay');
+	Route::post('form-filler/job/checkout/success', 'FormFiller\JobController@success')->name('job.success');
+	Route::get('form-filler/user/jobs-view', 'FormFiller\JobController@listView')->name('job.listView');
+	Route::get('form-filler/user/jobs', 'FormFiller\JobController@jobList')->name('job.jobList');
+	Route::get('form-filler/user/details/{id}', 'FormFiller\JobController@jobDetails')->name('job.jobDetails');
 });
 
 // Operator User Routes

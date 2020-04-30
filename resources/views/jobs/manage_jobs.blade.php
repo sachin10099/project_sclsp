@@ -66,7 +66,9 @@
                                         <th>Job Type</th>
                                         <th>Job Published date</th>
                                         <th>Job End date</th>
-                                        <th width="8%">Assign Price</th>
+                                        <th width="8%">Assign General Fees</th>
+                                        <th width="8%">Assign OBC Fees</th>
+                                        <th width="8%">Assign SC/ST Fees</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -89,7 +91,7 @@
         datatable = $('#users-table').DataTable({
         processing: true,
         serverSide: true,
-        ajax: '{!! url('admin/jobs/list') !!}',
+        ajax: '{!! url('admin/jobs/list') !!}', 
         "aoColumnDefs": [ {
                "aTargets": [ 2 ],
                "mRender": function ( data, type, full ) {
@@ -105,9 +107,11 @@
             { data: 'state_name', name: 'state_name'},
             { data: 'job_location', name: 'job_location' },
             { data: 'job_type', name: 'job_type' },
-            { data: 'job_published', name: 'job_published' },
-            { data: 'job_deadline', name: 'job_deadline' },
+            { data: 'publish', name: 'job_published' },
+            { data: 'end', name: 'job_deadline' },
             { data: 'assign_price', name: 'assign_price', searchable: false},
+            { data: 'assign_obc_price', name: 'assign_obc_price', searchable: false},
+            { data: 'assign_scst_price', name: 'assign_scst_price', searchable: false},
             { data: 'action', name: 'action', orderable: false, searchable: false}
            
         ]
@@ -133,13 +137,33 @@
 
   function changeStatus(id) {
     var price = $('#price'+id).val();
+    var obc = $('#obc'+id).val();
+    var sc = $('#sc'+id).val();
     if(price == '') {
         swal("", "Price field must be required.", "warning");
+        return false;
+    }
+    if(obc == '') {
+        swal("", "OBC Fees field must be required.", "warning");
+        return false;
+    }
+    if(sc == '') {
+        swal("", "SC/ST Fees field must be required.", "warning");
         return false;
     }
     var remainder = (price % 1);
     if(remainder != 0) {
         swal("", "Price field must be integer.", "warning");
+        return false;
+    }
+    var remainder1 = (obc % 1);
+    if(remainder1 != 0) {
+        swal("", "OBC Fees field must be integer.", "warning");
+        return false;
+    }
+    var remainder2 = (sc % 1);
+    if(remainder2 != 0) {
+        swal("", "SC Fees field must be integer.", "warning");
         return false;
     }
     $.ajax({
@@ -148,7 +172,24 @@
           data  : {
               "_token": "{{ csrf_token() }}",
               'id'    : id,
-              'price' : price
+              'price' : price,
+              'obc'   : obc,
+              'sc'    : sc
+          },
+          success: function(data){
+            swal("", data, "success");
+            datatable.ajax.reload();
+          }
+      });
+  }
+
+  function unPublish(id) {
+    $.ajax({
+          method:'post',
+          url   : "{{ url('admin/jobs/unpublish-job') }}",
+          data  : {
+              "_token": "{{ csrf_token() }}",
+              'id'    : id
           },
           success: function(data){
             swal("", data, "success");
