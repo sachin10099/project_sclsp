@@ -269,6 +269,18 @@
                     <li class="{{ (request()->is('admin/jobs/list-view')) ? 'active' : '' }}">
                         <a href="{{ url('admin/jobs/list-view') }}"><span>Manage Jobs</span></a>
                     </li>
+                    <li class="{{ (request()->is('admin/manage/job/view')) ? 'active' : '' }}">
+                        <a href="{{ url('admin/manage/job/view') }}"><span>Manage Jobs Request(s)</span></a>
+                    </li>
+                    <li class="{{ (request()->is('form-filler/admit-card/list')) || (request()->is('form-filler/admit-card/add'))  ? 'active' : '' }}">
+                        <a href="{{ url('form-filler/admit-card/list') }}"><span>Manage Admit Card</span></a>
+                    </li>
+                    <li class="{{ (request()->is('form-filler/answer-key/list')) || (request()->is('form-filler/admit-card/add'))  ? 'active' : '' }}">
+                        <a href="{{ url('form-filler/answer-key/list') }}"><span>Manage Answer Keys</span></a>
+                    </li>
+                    <li class="{{ (request()->is('form-filler/results/list')) || (request()->is('form-filler/results/list'))  ? 'active' : '' }}">
+                        <a href="{{ url('form-filler/results/list') }}"><span>Manage Results</span></a>
+                    </li>
                     @endcan
                 </ul>
             </section>

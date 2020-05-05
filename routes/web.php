@@ -32,6 +32,10 @@ Route::get('form-filler/index', 'FormFiller\FormFillerController@index')->name('
 Route::get('form-filler/signup', 'FormFiller\FormFillerController@signUpForm')->name('formfiller.signUpForm');
 Route::get('form-filler/login', 'FormFiller\FormFillerController@loginView')->name('formfiller.loginView');
 Route::post('form-filler/user/signup', 'FormFiller\FormFillerController@userSignUp')->name('formfiller.userSignUp');
+Route::get('form-filler/results', 'FormFiller\FormFillerController@result')->name('formfiller.result');
+Route::get('form-filler/admitcards', 'FormFiller\FormFillerController@admitCards')->name('formfiller.admitCards');
+Route::get('form-filler/answerkeys', 'FormFiller\FormFillerController@answerKeys')->name('formfiller.answerKeys');
+Route::get('form-filler/answerkeys/{id}', 'FormFiller\FormFillerController@answerKeyDetail')->name('formfiller.answerKeyDetail');
 
 Route::post('user/send-query', 'Admin\SupportCenterController@sendQuery')->name('sendQuery');
 
@@ -126,6 +130,43 @@ Route::group(['middleware' => ['auth', 'adminCheck']], function () {
 	Route::post('admin/jobs/change-status', 'Jobs\JobsController@changeStatus')->name('admin.changeStatus');
 	Route::post('admin/jobs/unpublish-job', 'Jobs\JobsController@unPublish')->name('admin.unPublish');
 	Route::post('admin/jobs/delete', 'Jobs\JobsController@deleteJob')->name('admin.deleteJob');
+
+	// Manage Admit Card And Answers Keys
+	Route::get('form-filler/admit-card/list', 'AdminCard\AdmitCardController@index')->name('admitcard.list');
+	Route::get('form-filler/admit-card/data', 'AdminCard\AdmitCardController@getAdminCards')->name('admitcard.getAdminCards');
+	Route::get('form-filler/admit-card/add', 'AdminCard\AdmitCardController@addView')->name('admitcard.addView');
+	Route::post('form-filler/admit-card/add', 'AdminCard\AdmitCardController@addAdmitCard')->name('admitcard.addAdmitCard');
+	Route::get('form-filler/admit-card/list/edit/{id}', 'AdminCard\AdmitCardController@addView')->name('admitcard.addAdmitCardEdit');
+	Route::post('form-filler/admit-card/list/edit/', 'AdminCard\AdmitCardController@editAdmitCardDetail')->name('admitcard.editAdmitCardDetail');
+	Route::post('form-filler/admit-card/change-status', 'AdminCard\AdmitCardController@changeStatus')->name('admitcard.changeStatus');
+	Route::post('form-filler/admit-card/delete', 'AdminCard\AdmitCardController@deleteRecord')->name('admitcard.deleteRecord');
+
+	// Manage Amswers Keys
+	Route::get('form-filler/answer-key/list', 'AnswerKey\AnswerkeyController@index')->name('answerkey.list');
+	Route::get('form-filler/answer-key/data', 'AnswerKey\AnswerkeyController@getAnswerKeys')->name('answerkey.getAnswerKeys');
+	Route::get('form-filler/answer-key/add', 'AnswerKey\AnswerkeyController@addView')->name('answerkey.addView');
+	Route::post('form-filler/answer-key/add', 'AnswerKey\AnswerkeyController@addAnsweKey')->name('answerkey.addAnsweKey');
+	Route::get('form-filler/answer-key/edit/{id}', 'AnswerKey\AnswerkeyController@addView')->name('answerkey.addAnswerKeyEdit');
+	Route::post('form-filler/answer-key/edit/', 'AnswerKey\AnswerkeyController@editAdmitCardDetail')->name('answerkey.editAdmitCardDetail');
+	Route::post('form-filler/answer-key/change-status', 'AnswerKey\AnswerkeyController@changeStatus')->name('answerkey.changeStatus');
+	Route::post('form-filler/answer-key/upload-file', 'AnswerKey\AnswerkeyController@uploadFile')->name('answerkey.uploadFile');
+	Route::get('form-filler/answer-key/files/{id}', 'AnswerKey\AnswerkeyController@viewFiles')->name('answerkey.getFiles');
+	Route::get('form-filler/answer-key/files-data', 'AnswerKey\AnswerkeyController@getFiles')->name('answerkey.getFiles');
+	Route::post('form-filler/answer-key/delete/file', 'AnswerKey\AnswerkeyController@deleteFile')->name('answerkey.deleteFile');
+
+	// Manage Results
+	Route::get('form-filler/results/list', 'Results\ResultsController@index')->name('results.list');
+	Route::get('form-filler/results/list-data', 'Results\ResultsController@getResultData')->name('results.getResultData');
+	Route::get('form-filler/results/add', 'Results\ResultsController@addView')->name('results.addView');
+	Route::post('form-filler/results/add', 'Results\ResultsController@addResult')->name('results.addResult');
+	Route::post('form-filler/results/change-status', 'Results\ResultsController@changeStatus')->name('results.changeStatus');
+	Route::post('form-filler/results/status/delete', 'Results\ResultsController@deleteResult')->name('results.deleteResult');
+
+	// Manage Job Tequests
+	Route::get('admin/manage/job/view', 'Jobs\JobsController@jobRequestView')->name('admin.jobRequestView');
+	Route::get('admin/manage/job/list', 'Jobs\JobsController@jobRequestList')->name('admin.jobRequestList');
+	Route::get('admin/manage/job/detail/{id}', 'Jobs\JobsController@jobRequestDetail')->name('admin.jobRequestDetail');
+
 });
 
 Route::group(['middleware' => ['auth', 'formFiller']], function () {

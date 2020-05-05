@@ -67,6 +67,21 @@ Trait GlobalTrait
         return $image_path;
     }
 
+    protected function uploadAnswerKey($data) {
+        if($data->file) {
+            $filename      = $data->file->getClientOriginalName();
+            $fileExtension = $data->file->getClientOriginalExtension();
+            $imageName     = base64_encode(str_replace(' ', '', $filename)).date('ymdhis').'.'.$fileExtension;
+            $return        = $data->file('file')->move(
+            base_path() . '/public/assets/img/answerkey/', $imageName
+            );
+            $image_path =asset('/public/assets/img/answerkey/'. $imageName);
+            return $image_path;
+        } 
+        
+    }
+
+
     protected function filesUpload($data, $old_file) {
         if($data->image) {
             $file = basename($old_file);

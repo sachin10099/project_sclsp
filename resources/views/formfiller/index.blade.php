@@ -48,143 +48,122 @@ ul.b {
       </div>
     </header>
     <div style="padding-top: 100px;">
-    <div class="large-12 columns">
+    <div class="container-fluid">
         <div class="owl-carousel owl-theme">
           <div class="item">
-            <div class="w3-container" style="margin-top: 20px;">
-            <div class="w3-card-4" style="width:100%;">
-              <div class="container">
-
+            <div class="card" style="max-width: 95%">
+              <div class="card-body">
                 <p> <i class="fa fa-life-ring" aria-hidden="true" style="font-size: 30px;color:blue;margin-top: 11px;"></i>&nbsp;&nbsp;Save Money, Save Time <br> Save Tree</p>
                 <hr>
                 <center><p>Paper Less</p></center>
               </div>
             </div>
           </div>
-          </div>
           <div class="item">
-            <div class="w3-container" style="margin-top: 20px;">
-            <div class="w3-card-4" style="width:100%;">
-              <div class="container">
+            <div class="card" style="max-width: 95%">
+              <div class="card-body">
                 <p><i class="fa fa-bug" aria-hidden="true" style="font-size: 30px;color:red;margin-top: 11px;"></i>&nbsp;&nbsp;Any Issues 24/7 Video Guides & Call On 7905184088</p>
                 <hr>
                 <center><p>Personal Help</p></center>
               </div>
             </div>
           </div>
-          </div>
           <div class="item">
-            <div class="w3-container" style="margin-top: 20px;">
-            <div class="w3-card-4" style="width:100%;">
-              <div class="container">
-                <p><i class="fa fa-clock-o" aria-hidden="true" style="font-size: 30px;color:skyblue;margin-top: 11px;"></i>&nbsp;&nbsp;Work Done Minimum With in 24 Houres</p>
+            <div class="card" style="max-width: 95%">
+              <div class="card-body">
+                <p><i class="fa fa-clock-o" aria-hidden="true" style="font-size: 30px;color:skyblue;margin-top: 11px;"></i>&nbsp;&nbsp;Work Done Minimum With in 24 Houres&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
                 <hr>
                 <center><p>Tension Free</p></center>
               </div>
             </div>
           </div>
-          </div>
           <div class="item">
-            <div class="w3-container" style="margin-top: 20px;">
-            <div class="w3-card-4" style="width:100%;">
-              <div class="container">
+            <div class="card" style="max-width: 95%">
+              <div class="card-body">
                 <p><i class="fa fa-phone" aria-hidden="true" style="font-size: 30px;color:skyblue;margin-top: 11px;"></i>&nbsp;&nbsp;{{ $data['admin_info']['contact_number'] }}<br>{{ $data['admin_info']['email'] }}</p>
                 <hr>
                 <center><p>Ready For Help</p></center>
               </div>
             </div>
           </div>
-          </div>
         </div>
         </div>
       </div>
 
-        <section class="">
+        <div class="container-fluid">
         <div class="row">
-          <div class="col-sm-4">
-              <div class="w3-container">
-                <div class="w3-card-4" style="width:100%;">
-                  <header class="w3-container w3-red">
-                    <center><h4 style="color: white;">Latest Jobs</h4></center>
-                  </header>
-                  <div class="">
-                    <ul class="b">
-                      <li>Bihar City Manager Online Form 2020</li>
-                      <li>BPSC Project Manager Online Form 2020 (Re Open)</li>
-                      <li>UPPSC Pre 2020 / ACF/ RFO Online Form</li>
-                      <li>UPPSC Pre 2020 / ACF/ RFO Online Form</li>
-                      <li>UPPSC Pre 2020 / ACF/ RFO Online Form</li>
-                      <li>UPPSC Pre 2020 / ACF/ RFO Online Form</li>
-                      <li>UPPSC Pre 2020 / ACF/ RFO Online Form</li>
-                      <li>UPPSC Pre 2020 / ACF/ RFO Online Form</li>
-                      <li>UPPSC Pre 2020 / ACF/ RFO Online Form</li>
-                      <li>UPPSC Pre 2020 / ACF/ RFO Online Form</li>
-                    </ul>
-                  </div>
-                  <footer class="w3-container w3-red">
-                    <center><a href="">View All</a></center>
-                  </footer>
-                </div>
+          <div class="col-sm-6">
+            <div class="card">
+              <div class="card-header" style="background-color:gray;">
+                <center><strong><h4 style="color: white;">Latest Jobs</h4></strong></center>
               </div>
-          </div>
-          <div class="col-sm-4">
-              <div class="w3-container">
-              <div class="w3-card-4" style="width:100%;">
-                <header class="w3-container w3-red">
-                  <center><h4 style="color: white;">Admin Cards / Answer Keys</h4></center>
-                </header>
-
-                <div class="">
-                  <ul class="b">
-                      <li>Bihar City Manager Online Form 2020</li>
-                      <li>BPSC Project Manager Online Form 2020 (Re Open)</li>
-                      <li>UPPSC Pre 2020 / ACF/ RFO Online Form</li>
-                      <li>UPPSC Pre 2020 / ACF/ RFO Online Form</li>
-                      <li>UPPSC Pre 2020 / ACF/ RFO Online Form</li>
-                      <li>UPPSC Pre 2020 / ACF/ RFO Online Form</li>
-                      <li>UPPSC Pre 2020 / ACF/ RFO Online Form</li>
-                      <li>UPPSC Pre 2020 / ACF/ RFO Online Form</li>
-                      <li>UPPSC Pre 2020 / ACF/ RFO Online Form</li>
-                      <li>UPPSC Pre 2020 / ACF/ RFO Online Form</li>
-                  </ul>
-                </div>
-
-                <footer class="w3-container w3-red">
-                  <center><a href="">View All</a></center>
-                </footer>
+              <div class="card-body">
+                <ul>
+                @foreach($data['job_lists'] as $list)
+                  <a href="{{ url('form-filler/login') }}"><li style="color: black;">{{ $list->job_title }}</li></a>
+                @endforeach
+                </ul>
+              </div>
+              <div class="card-footer">
+                <center><a href="{{ url('form-filler/login') }}" style="color: black;">View All</a></center>
               </div>
             </div>
           </div>
-          <div class="col-sm-4">
-              <div class="w3-container">
-                <div class="w3-card-4" style="width:100%;">
-                  <header class="w3-container w3-red">
-                    <center><h4 style="color: white;">Results</h4></center>
-                  </header>
-                  <div class="">
-                    <ul class="b">
-                      <li>Bihar City Manager Online Form 2020</li>
-                      <li>BPSC Project Manager Online Form 2020 (Re Open)</li>
-                      <li>UPPSC Pre 2020 / ACF/ RFO Online Form</li>
-                      <li>UPPSC Pre 2020 / ACF/ RFO Online Form</li>
-                      <li>UPPSC Pre 2020 / ACF/ RFO Online Form</li>
-                      <li>UPPSC Pre 2020 / ACF/ RFO Online Form</li>
-                      <li>UPPSC Pre 2020 / ACF/ RFO Online Form</li>
-                      <li>UPPSC Pre 2020 / ACF/ RFO Online Form</li>
-                      <li>UPPSC Pre 2020 / ACF/ RFO Online Form</li>
-                      <li>UPPSC Pre 2020 / ACF/ RFO Online Form</li>
-                    </ul>
-                  </div>
-
-                  <footer class="w3-container w3-red">
-                    <center><a href="">View All</a></center>
-                  </footer>
-                </div>
+          <div class="col-sm-6">
+            <div class="card">
+              <div class="card-header" style="background-color:gray;">
+                <center><strong><h4 style="color: white;">Results</h4></strong></center>
               </div>
+              <div class="card-body">
+                <ul>
+                @foreach($data['results']  as $result)
+                  <a href="{{ $result->official_link }}" target="_blank"><li style="color: black;">{!! $result->title !!}</li></a>
+                @endforeach
+                </ul>
+              </div>
+              <div class="card-footer">
+                <center><a href="{{ url('form-filler/results') }}" style="color: black;">View All</a></center>
+              </div>
+            </div>
           </div>
-          
         </div>
-    </section>
+        <div class="row" style="margin-top: 30px;">
+          <div class="col-sm-6">
+            <div class="card">
+              <div class="card-header" style="background-color:gray;">
+                <center><strong><h4 style="color: white;">Admit Cards</h4></strong></center>
+              </div>
+              <div class="card-body">
+                <ul>
+                @foreach($data['admit_cards'] as $admit_card)
+                  <a href="{{ $admit_card->official_link }}" target="_blank"><li style="color: black;">{!! $admit_card->title !!}</li></a>
+                @endforeach
+                </ul>
+              </div>
+              <div class="card-footer">
+                <center><a href="{{ url('form-filler/admitcards') }}" style="color: black;">View All</a></center>
+              </div>
+            </div>
+          </div>
+           <div class="col-sm-6">
+            <div class="card">
+              <div class="card-header" style="background-color:gray;">
+                <center><strong><h4 style="color: white;">Answers Keys</h4></strong></center>
+              </div>
+              <div class="card-body">
+                <ul>
+                @foreach($data['answer_keys'] as $answer_key)
+                  <a href="{{ url('form-filler/answerkeys/') }}/{{$answer_key->id}}" target="_blank"><li style="color: black;">{!! $answer_key->title !!}</li></a>
+                @endforeach
+               </ul>
+              </div>
+              <div class="card-footer">
+                <center><a href="{{ url('form-filler/answerkeys') }}" style="color: black;">View All</a></center>
+              </div>
+            </div>
+          </div>
+          </div>
+        </div>
 
     <section class="py-5  fixed overlay" id="next" style="background-color: lightgray;margin-top: 80px;">
       <div class="container" >

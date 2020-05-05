@@ -12,9 +12,11 @@ use App\Models\City;
 use App\Models\State;
 use App\Models\Job;
 use App\Models\Plan;
+use App\Models\Result;
 use App\Models\Category;
 use App\Models\ContactUs;
 use App\Models\Subscribe;
+use App\Models\AdminCard;
 use App\Models\SocialLink;
 use App\Models\AppliedJob;
 use App\Models\Testimonial;
@@ -42,12 +44,77 @@ class FormFillerController extends Controller
      */
     public function index()
     {
-        $data['plans'] = Plan::get();
+        $data['plans']           = Plan::get();
         $data['form_user_count'] = User::where('type', 'form_user')->count();
-        $data['jobs'] = Job::where('status', 'active')->count();
-        $data['applied_job'] = AppliedJob::count();
-        $data['admin_info'] = User::where('type', 'admin')->first();
+        $data['jobs']            = Job::where('status', 'active')->count();
+        $data['applied_job']     = AppliedJob::count();
+        $data['admin_info']      = User::where('type', 'admin')->first();
+        $data['job_lists']       = Job::where('status', 'active')->orderBy('created_at', 'DESC')->limit(10)->get();
+        $data['results']         = Result::where('status', 'active')->orderBy('created_at', 'DESC')->limit(10)->get();
+        $data['admit_cards']     = AdminCard::where('status', 'active')->where('type', 'admit_card')->orderBy('created_at', 'DESC')->limit(10)->get();
+        $data['answer_keys']     = AdminCard::where('status', 'active')->where('type', 'answer_key')->orderBy('created_at', 'DESC')->limit(10)->get();
+
         return view('formfiller.index' ,compact('data'));
+    }
+
+     /**
+     * Results List 
+     *
+     * @category Form Filler Management
+     * @package  Form Filler Management
+     * @author   Sachiln Kumar <sachin679710@gmail.com>
+     * @license  PHP License 7.2.24
+     * @link
+     */
+    public function result() {
+        $data['admin_info']      = User::where('type', 'admin')->first();
+        $data['results']         = Result::where('status', 'active')->orderBy('created_at', 'DESC')->paginate(20);
+        return view('formfiller.result_list', compact('data'));
+    }
+
+    /**
+    *Admit Card List 
+    *
+    * @category Form Filler Management
+    * @package  Form Filler Management
+    * @author   Sachiln Kumar <sachin679710@gmail.com>
+    * @license  PHP License 7.2.24
+    * @link
+    */
+    public function admitCards() {
+        $data['admin_info']      = User::where('type', 'admin')->first();
+        $data['admit_cards']     = AdminCard::where('status', 'active')->where('type', 'admit_card')->orderBy('created_at', 'DESC')->paginate(20);
+        return view('formfiller.admit_card_list', compact('data'));
+    }
+
+    /**
+    *Answer Key List 
+    *
+    * @category Form Filler Management
+    * @package  Form Filler Management
+    * @author   Sachiln Kumar <sachin679710@gmail.com>
+    * @license  PHP License 7.2.24
+    * @link
+    */
+    public function answerKeyDetail($id) {
+        $data['admin_info']        = User::where('type', 'admin')->first();
+        $data['answerKeyDetails']  = AdminCard::with('getRetaltedDoc')->where('id', $id)->first();
+        return view('formfiller.answer_key_detail', compact('data'));
+    }
+
+    /**
+    * Answer Key Detail
+    *
+    * @category Form Filler Management
+    * @package  Form Filler Management
+    * @author   Sachiln Kumar <sachin679710@gmail.com>
+    * @license  PHP License 7.2.24
+    * @link
+    */
+    public function answerKeys() {
+        $data['admin_info']      = User::where('type', 'admin')->first();
+        $data['answerKeys']     = AdminCard::where('status', 'active')->where('type', 'answer_key')->orderBy('created_at', 'DESC')->paginate(20);
+        return view('formfiller.anser_key_list', compact('data'));
     }
 
      /**

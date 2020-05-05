@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\City;
 use App\Models\State;
 use App\Models\Company;
+use App\Models\AppliedJob;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
 use App\Http\Controllers\Controller;
@@ -294,6 +295,98 @@ class JobsController extends Controller
     	$picked = Job::find($request->id);
  		$picked->delete();
  		return 'Job Deleted Successfully.';
+    }
+
+    /**
+    * Job Request View Created By User
+    *
+    * @category Job Management
+    * @package  Job Management
+    * @author   Sachiln Kumar <sachin679710@gmail.com>
+    * @license  PHP License 7.2.24
+    * @link
+    */
+    public function jobRequestView(Request $request) {
+        return view('job_request.manage_job_request');
+    }
+
+    /**
+    * Job Request By User List
+    *
+    * @category Job Management
+    * @package  Job Management
+    * @author   Sachiln Kumar <sachin679710@gmail.com>
+    * @license  PHP License 7.2.24
+    * @link
+    */
+    public function jobRequestList()
+    {
+        $data = AppliedJob::with(
+            [
+                'jobReleatedUser',
+                'getJobDetail'
+            ]
+        )->orderBy('created_at', 'DESC')->get();
+        return Datatables::of($data)
+            ->addColumn('job_id', function ($data) {
+                return $data->job_id;
+            })
+            ->addColumn('job_title', function ($data) {
+                return $data->getJobDetail['job_title'];
+            })
+            ->addColumn('publish', function ($data) {
+                $publish = date('d-m-Y', strtotime($data->getJobDetail['job_published']));
+                return $publish;
+            })
+            ->addColumn('applicant_name', function ($data) {
+                return $data->jobReleatedUser['name'];
+            })
+            ->addColumn('applicant_email', function ($data) {
+                return $data->jobReleatedUser['email'];
+            })
+            ->addColumn('applicant_contact', function ($data) {
+                return $data->jobReleatedUser['contact_number'];
+            })
+            ->addColumn('action', function ($data) {
+                if($data->status == 'pending') {
+                    return '
+                        <p style="color:red;">Not Required</p>
+                        ';
+                } else {
+                     return '
+                        <a href="detail/'.$data->id.'"><i class="fa fa-eye" aria-hidden="true" style="color:#00bfff;font-size:20px;cursor:pointer;" data-toggle="tooltip" title="More info"></i></a>
+                        <i class="fa fa-check" aria-hidden="true"  style="color:orange;font-size:20px;cursor:pointer;" data-toggle="tooltip" title="Mark As Complete" onclick="changeStatus('.$data->id.')"></i>
+                        <i class="fa fa-ban" aria-hidden="true" style="color:red;font-size:20px;cursor:pointer;" data-toggle="tooltip" title="Reject" onclick="deleteJob('.$data->id.')"></i>
+                        ';
+                }
+               
+            })
+            ->rawColumns([
+                'assign_price',
+                'assign_obc_price',
+                'assign_scst_price',
+                'action'
+            ])
+            ->make(true);
+    }
+
+    /**
+    * Job Request Details Created By User
+    *
+    * @category Job Management
+    * @package  Job Management
+    * @author   Sachiln Kumar <sachin679710@gmail.com>
+    * @license  PHP License 7.2.24
+    * @link
+    */
+    public function jobRequestDetail($id) {
+        $data = AppliedJob::with(
+            [
+                'jobReleatedUser',
+                'getJobDetail'
+            ]
+        )->where('id', $id)->first();
+        return view('job_request.detail', compact('data'));
     }
 
 }
