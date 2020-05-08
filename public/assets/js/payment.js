@@ -2,8 +2,6 @@
 function pay(id, amount) {
 	var totalAmount = amount;
 	var product_id =  id;
-	alert();
-	return false;
 	var options = {
 		"key": "rzp_test_xsoVV2QZnOK4Ah",
 		"amount": (totalAmount*100), // 2000 paise = INR 20

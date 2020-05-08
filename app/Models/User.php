@@ -25,6 +25,7 @@ class User extends Authenticatable
         'password', 
         'postal_code', 
         'city_id', 
+        'state_id', 
         'profile_completed', 
         'email_verify',  
         'mobile_verified_at'
@@ -55,4 +56,13 @@ class User extends Authenticatable
     public function userQualification() {
         return $this->hasOne(FormUserQualification::class);
     }
+
+    public function city() {
+        return $this->belongsTo(City::class, 'city_id', 'id');
+    }
+
+    public function stateName() {
+        return $this->belongsTo(State::class, 'state_id', 'id');
+    }
+
 }

@@ -262,16 +262,16 @@ class FormFillerController extends Controller
                 'postal_code'       => 'required|digits:6|integer',
                 'l_v_id'            => 'required|integer',
                 'aadhaar'           => 'required|digits:12|integer',
-                'aadhaar_front'     => 'required|mimes:jpeg,jpg,png|max:10000',
-                'aadhaar_back'      => 'required|mimes:jpeg,jpg,png|max:10000',
-                'tenth'             => 'required|mimes:jpeg,jpg,png|max:10000',
-                'tweleth'           => 'required|mimes:jpeg,jpg,png|max:10000',
-                'tweleth'           => 'required|mimes:jpeg,jpg,png|max:10000',
-                'diploma'           => 'mimes:jpeg,jpg,png|max:10000',
-                'caste'             => 'required|mimes:jpeg,jpg,png|max:10000',
-                'graguation'        => 'required|mimes:jpeg,jpg,png|max:10000',
-                'postgraguation'    => 'mimes:jpeg,jpg,png|max:10000',
-                'others'            => 'mimes:jpeg,jpg,png|max:10000'
+                'aadhaar_front'     => 'required|mimes:jpeg,jpg,png|max:2000',
+                'aadhaar_back'      => 'required|mimes:jpeg,jpg,png|max:2000',
+                'tenth'             => 'required|mimes:jpeg,jpg,png|max:2000',
+                'tweleth'           => 'required|mimes:jpeg,jpg,png|max:2000',
+                'tweleth'           => 'required|mimes:jpeg,jpg,png|max:2000',
+                'diploma'           => 'mimes:jpeg,jpg,png|max:2000',
+                'caste'             => 'required|mimes:jpeg,jpg,png|max:2000',
+                'graguation'        => 'required|mimes:jpeg,jpg,png|max:2000',
+                'postgraguation'    => 'mimes:jpeg,jpg,png|max:2000',
+                'others'            => 'mimes:jpeg,jpg,png|max:2000'
             ] 
         );
         $user = \Auth::user()->update(

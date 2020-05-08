@@ -260,15 +260,15 @@
                                 </li>
                            </ul>
                         </div>
-                    </li>   
+                    </li> 
+                    <li class="{{ (request()->is('admin/jobs/list-view')) ? 'active' : '' }}">
+                        <a href="{{ url('admin/jobs/list-view') }}"><span>Manage Jobs</span></a>
+                    </li>  
                     <li class="{{ (request()->is('admin/query/list')) ? 'active' : '' }}">
                         <a href="{{ url('admin/query/list') }}"><span>Support Section</span></a>
                     </li>
                     @endcan
                     @can('check-operator')
-                    <li class="{{ (request()->is('admin/jobs/list-view')) ? 'active' : '' }}">
-                        <a href="{{ url('admin/jobs/list-view') }}"><span>Manage Jobs</span></a>
-                    </li>
                     <li class="{{ (request()->is('admin/manage/job/view')) ? 'active' : '' }}">
                         <a href="{{ url('admin/manage/job/view') }}"><span>Manage Jobs Request(s)</span></a>
                     </li>

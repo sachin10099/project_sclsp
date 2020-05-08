@@ -7,12 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 class AppliedJob extends Model
 {
     protected $fillable = [
+        'order_id',
     	'user_id',
     	'job_id',
     	'status',
     	'amount',
     	'amount_status',
-        'transaction_id'
+        'transaction_id',
+        'accepted_by',
+        'rejection_region',
+        'verified_by_user',
+        'user_query'
     ];
 
     public function jobReleatedUser() {
@@ -24,6 +29,10 @@ class AppliedJob extends Model
     }
 
     public function documents() {
-        return $this->hasOne(JobRelatedDocument::class, 'id', 'applied_job_id');
+        return $this->hasMany(JobRelatedDocument::class, 'applied_job_id', 'id')->where('user_id','=', \Auth::id());
+    }
+
+     public function jobAcceptedBy() {
+        return $this->belongsTo(User::class, 'accepted_by', 'id');
     }
 }

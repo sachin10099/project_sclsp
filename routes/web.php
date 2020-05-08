@@ -162,10 +162,14 @@ Route::group(['middleware' => ['auth', 'adminCheck']], function () {
 	Route::post('form-filler/results/change-status', 'Results\ResultsController@changeStatus')->name('results.changeStatus');
 	Route::post('form-filler/results/status/delete', 'Results\ResultsController@deleteResult')->name('results.deleteResult');
 
-	// Manage Job Tequests
+	// Manage Job Requests
 	Route::get('admin/manage/job/view', 'Jobs\JobsController@jobRequestView')->name('admin.jobRequestView');
 	Route::get('admin/manage/job/list', 'Jobs\JobsController@jobRequestList')->name('admin.jobRequestList');
 	Route::get('admin/manage/job/detail/{id}', 'Jobs\JobsController@jobRequestDetail')->name('admin.jobRequestDetail');
+	Route::post('admin/manage/job/accept-request', 'Jobs\JobsController@acceptRequest')->name('admin.acceptRequest');
+	Route::post('admin/manage/job/mark-as-pay', 'Jobs\JobsController@markAsPay')->name('admin.markAsPay');
+	Route::post('admin/manage/job/upload-file', 'Jobs\JobsController@afterCompleteUploadDoc')->name('admin.afterCompleteUploadDoc');
+	Route::post('admin/manage/job/reject-request', 'Jobs\JobsController@rejectRequest')->name('admin.rejectRequest');
 
 });
 
@@ -191,6 +195,7 @@ Route::group(['middleware' => ['auth', 'formFiller']], function () {
 	Route::get('form-filler/user/jobs-view', 'FormFiller\JobController@listView')->name('job.listView');
 	Route::get('form-filler/user/jobs', 'FormFiller\JobController@jobList')->name('job.jobList');
 	Route::get('form-filler/user/details/{id}', 'FormFiller\JobController@jobDetails')->name('job.jobDetails');
+	Route::post('form-filler/user/send-confirmation', 'FormFiller\JobController@sendConfirmation')->name('job.sendConfirmation');
 });
 
 // Operator User Routes

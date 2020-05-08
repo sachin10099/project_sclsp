@@ -10,10 +10,13 @@ use App\Models\Company;
 use App\Models\AppliedJob;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
+use App\Models\JobRelatedDocument;
 use App\Http\Controllers\Controller;
 use App\Notifications\PostJobNotification;
 use Illuminate\Support\Facades\Notification;
 use App\Http\Controllers\Concern\GlobalTrait;
+use App\Notifications\JobRejectedNotification;
+use App\Notifications\JobCompletedNotification;
 
 class JobsController extends Controller
 {
@@ -158,7 +161,7 @@ class JobsController extends Controller
         if($published_new < $current_new) {
             return redirect()->back()->with('error', 'Please select publish date must be after then current date.');
         }
-        if($published_new > $end_new) {
+        if($published_new >= $end_new) {
             return redirect()->back()->with('error', 'Please select job end date after then job publish date.');
         }
     	$url = $this->filesUpload($request, null);
@@ -353,11 +356,20 @@ class JobsController extends Controller
                         <p style="color:red;">Not Required</p>
                         ';
                 } else {
-                     return '
-                        <a href="detail/'.$data->id.'"><i class="fa fa-eye" aria-hidden="true" style="color:#00bfff;font-size:20px;cursor:pointer;" data-toggle="tooltip" title="More info"></i></a>
-                        <i class="fa fa-check" aria-hidden="true"  style="color:orange;font-size:20px;cursor:pointer;" data-toggle="tooltip" title="Mark As Complete" onclick="changeStatus('.$data->id.')"></i>
-                        <i class="fa fa-ban" aria-hidden="true" style="color:red;font-size:20px;cursor:pointer;" data-toggle="tooltip" title="Reject" onclick="deleteJob('.$data->id.')"></i>
+                    if($data->accepted_by) {
+                        if($data->accepted_by == \Auth::id()) {
+                           return '
+                            <a href="detail/'.$data->id.'"><i class="fa fa-eye" aria-hidden="true" style="color:#00bfff;font-size:20px;cursor:pointer;" data-toggle="tooltip" title="More info"></i></a>
+                            '; 
+                        } else {
+                            return '<p style="color:red;">Received</p>';
+                        }
+                    } else {
+                        return '
+                        <i class="fa fa-check" aria-hidden="true"  style="color:orange;font-size:20px;cursor:pointer;" data-toggle="tooltip" title="Accept Request" onclick="acceptRequest('.$data->id.')"></i>
                         ';
+                    }
+                     
                 }
                
             })
@@ -387,6 +399,104 @@ class JobsController extends Controller
             ]
         )->where('id', $id)->first();
         return view('job_request.detail', compact('data'));
+    }
+
+    /**
+    * Job Request Details Created By User
+    *
+    * @category Job Management
+    * @package  Job Management
+    * @author   Sachiln Kumar <sachin679710@gmail.com>
+    * @license  PHP License 7.2.24
+    * @link
+    */
+    public function acceptRequest(Request $request) {
+        $data = AppliedJob::find($request->id);
+        if($data->accepted_by) {
+            return 'already_accepted';
+        } else {
+            $data->update([
+                'accepted_by' => \Auth::id()
+            ]);
+            return 'Request Accepted Successfully.';
+        }
+    }
+
+    /**
+    * Make Sure Payment Is Done
+    *
+    * @category Job Management
+    * @package  Job Management
+    * @author   Sachiln Kumar <sachin679710@gmail.com>
+    * @license  PHP License 7.2.24
+    * @link
+    */
+    public function markAsPay(Request $request) {
+        $data = AppliedJob::find($request->id);
+        $data->update([
+            'amount_status' => 'paid',
+            'status'        => 'on_going'
+        ]);
+        return 'Payment is Done.';
+    }
+
+    /**
+    * Upload Documnets When Job Completed
+    *
+    * @category Job Management
+    * @package  Job Management
+    * @author   Sachiln Kumar <sachin679710@gmail.com>
+    * @license  PHP License 7.2.24
+    * @link
+    */
+    public function afterCompleteUploadDoc(Request $request) {
+        $request->validate(
+            [
+                'name'  => 'required|max:150',
+                'image' => 'required|mimes:pdf'
+            ]
+        );
+        $url = $this->filesUpload($request, null);
+        $insert = JobRelatedDocument::create(
+            [
+                'applied_job_id' => $request->id,
+                'user_id'        => $request->user_id,
+                'document_name'  => $request->name,
+                'document_file'  => $url
+            ]
+        );
+        $data = AppliedJob::find($request->id);
+        $user = User::find($data->user_id);
+        $data->update([
+            'status'        => 'completed'
+        ]);
+        $user->notify(New JobCompletedNotification($data));
+        return redirect()->back()->with('success', 'Documnet Uploaded & Job Completed Successfully.');
+    }
+
+    /**
+    * Upload Documnets When Job Completed
+    *
+    * @category Job Management
+    * @package  Job Management
+    * @author   Sachiln Kumar <sachin679710@gmail.com>
+    * @license  PHP License 7.2.24
+    * @link
+    */
+    public function rejectRequest(Request $request) {
+        $request->validate(
+            [
+                'region'  => 'required'
+            ]
+        );
+        $data = AppliedJob::find($request->id);
+        $data->update([
+            'status'           => 'reject',
+            'rejection_region' => $request->region
+        ]);
+        $user = User::find($data->user_id);
+        $user->notify(New JobRejectedNotification($data));
+        return redirect()->back()->with('success', 'Request Rejected Successfully.');
     }
 
 }

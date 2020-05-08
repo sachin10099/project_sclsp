@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use App\Notifications\JobApplyNotification;
 use Illuminate\Support\Facades\Notification;
 use App\Http\Controllers\Concern\GlobalTrait;
+use App\Notifications\SendConfirmationNotification;
 
 class JobController extends Controller
 {
@@ -50,8 +51,11 @@ class JobController extends Controller
         } elseif ($check['userInfo']['getCaterory']['name'] == 'SC' || $check['userInfo']['getCaterory']['name'] == 'ST') {
             $price = $job->sc_st_fees + $our_fees;
         }
+        $rand = rand(10000, 999999);
+        $order_id = 'ORDER'.$rand;
         $create = AppliedJob::create(
         	[
+                'order_id'=> $order_id,
         		'user_id' => \Auth::id(),
         		'job_id'  => $request->id,
         		'amount'  => $price,
@@ -200,12 +204,33 @@ class JobController extends Controller
         $data = AppliedJob::with(
                 [
                     'documents',
+                    'jobAcceptedBy',
                     'getJobDetail' => function($state) {
                         $state->with('getState');
                     }
                 ]
             )->where('id', $id)->first();
         return view('formfiller.job_detail', compact('data'));
+    }
+
+    /**
+    * Send Confirmation
+    * @category Form Filler Management
+    * @package  Form Filler Management
+    * @author   Sachiln Kumar <sachin679710@gmail.com>
+    * @license  PHP License 7.2.24
+    * @link
+    */
+    public function sendConfirmation(Request $request) {
+        $data = AppliedJob::find($request->id);
+        $data->update(
+            [
+                'verified_by_user' => 'Yes'
+            ]
+        );
+        $picked = User::find($data->accepted_by);
+        $picked->notify(New SendConfirmationNotification($data));
+        return 'Your Confirmation Send Successfully.';
     }
 
 }

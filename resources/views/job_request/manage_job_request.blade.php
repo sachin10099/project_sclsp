@@ -60,6 +60,7 @@
                                 <thead>
                                     <tr>
                                         <th width="1%">Job Id</th>
+                                        <th width="1%">Order Id</th>
                                         <th>Job Title</th>
                                         <th>Job Published date</th>
                                         <th>Applicant Name</th>
@@ -100,6 +101,7 @@
         ],
         columns: [
             { data: 'job_id', name: 'job_id' },
+            { data: 'order_id', name: 'order_id' },
             { data: 'job_title', name: 'job_title' },
             { data: 'publish', name: 'publish'},
             { data: 'applicant_name', name: 'applicant_name' },
@@ -177,15 +179,20 @@
       });
   }
 
-  function unPublish(id) {
+  function acceptRequest(id) {
     $.ajax({
           method:'post',
-          url   : "{{ url('admin/jobs/unpublish-job') }}",
+          url   : "{{ url('admin/manage/job/accept-request') }}",
           data  : {
               "_token": "{{ csrf_token() }}",
               'id'    : id
           },
           success: function(data){
+            if(data == 'already_accepted') {
+              swal("", 'Already Accepted By Other Operator', "error");
+              datatable.ajax.reload();
+              return false;
+            }
             swal("", data, "success");
             datatable.ajax.reload();
           }
