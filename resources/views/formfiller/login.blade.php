@@ -26,12 +26,12 @@
 			<center>
 				<form method="post" action="{{ url('global/login') }}">
 				@csrf
-				<label><strong>Enter Email Id:</strong></label>
+				<label><strong>Enter email id or contact number:</strong></label>
 				@if($errors->has('email'))
 		            <span class="" style="color: red;">{{ $errors->first('email') }}</span>
 		        @endif
-				<input type="email" class="form-control" name="email" required=""><br>
-				<label><strong>Enter Your Password:</strong></label>
+				<input type="text" class="form-control" name="email" required=""><br>
+				<label><strong>Enter your password:</strong></label>
 				@if($errors->has('password'))
 		            <span class="" style="color: red;">{{ $errors->first('password') }}</span>
 		        @endif

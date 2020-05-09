@@ -14,7 +14,7 @@
                             @foreach ($notifications as $notification) 
                             @if(!$notification->read_at)
                                 <li>
-                                    <p>{{ $notification->data['message'] }}</p>
+                                    <p>{{ $notification->data['message'] }}</p>  
                                     <span>5 mins ago</span>
                                     <div class="notification-btn">
                                         <a href="javascript:void(0);"><img src="{{ asset('/') }}public/dist/images/mail-blue-border-icon.svg" alt="Mail Icon" onclick="readNotification('{{$notification->id}}')" /></a>

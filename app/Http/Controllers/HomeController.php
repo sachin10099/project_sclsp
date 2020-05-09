@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Hash;
 use App\Models\Faq;
 use App\Models\Home;
 use App\Models\User;
@@ -93,26 +94,37 @@ class HomeController extends Controller
      */
 
     public function userLogin(Request $request) {
-        $credentials = [
-            'email'    => $request['email'],
-            'password' => $request['password'],
-        ];
-        if(\Auth::attempt($credentials)) {
-            if(\Auth::user()->email_verify == 'Yes') {
-                if(\Auth::user()->type == 'admin') {
-                    return redirect()->back()->with('error', 'Unauthorized Access!');
-                } else if(\Auth::user()->type == 'form_user') {
-                    return redirect('form-filler/dashboard');     
-                } else if(\Auth::user()->type == 'operator') {
-                    return redirect('admin/dashboard');   
+        $check_user = User::where('email', $request->email)->orWhere('contact_number', $request->email)->first();
+        if($check_user) {
+            if(preg_match('/^[0-9]{10}+$/', $request->email)) {
+                $type = 'mobile';
+            } else {
+                $type = 'email';
+            }
+            $check_for = $type == 'email' ? 'email_verify' : 'mobile_verified_at';
+            $msg = $type == 'email' ? 'Email' : 'Mobile Number';
+            $check_type = $type == 'email' ? 'email' : 'contact_number';
+            if($check_user->$check_for == 'Yes') {
+                if (\Auth::attempt([
+                    $check_type => $request->email,
+                    'password' => $request->password])
+                ){
+                    if($check_user->type == 'admin') {
+                        return redirect()->back()->with('error', 'Unauthorized Access!');
+                    } else if($check_user->type == 'form_user') {
+                        return redirect('form-filler/dashboard');     
+                    } else if($check_user->type == 'operator') {
+                        return redirect('admin/dashboard');   
+                    }
                 }
+                return redirect()->back()->with('error', 'Invalid login credentials.'); 
+            } else {
+                return redirect()->back()->with('error', 'Your '.$msg.' is not verified, please verify your email.');
             }
-            else {
-                 return redirect()->back()->with('error', 'Your email is not verified, please verify your email.');
-            }
-            
+
+        } else {
+             return redirect()->back()->with('error', 'Invalid login credentials.');
         }
-        return redirect()->back()->with('error', 'Invalid login credentials.');
     }
 
 

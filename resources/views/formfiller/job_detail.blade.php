@@ -1,31 +1,35 @@
 @extends('front.formfiller_dashboard')
 @section('content')
 <!-- Modal -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Modal Header</h4>
-      </div>
-      <div class="modal-body">
-        <p>Some text in the modal.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-
-  </div>
-</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<div class="content">
+		<!-- Modal -->
+		<div id="RejectRegion" class="modal fade" role="dialog">
+		  <div class="modal-dialog">
+
+		    <!-- Modal content-->
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        Problem Statement
+		      </div>
+		      <div class="modal-body">
+		        <p>{!! $data->rejection_region !!}</p>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		      </div>
+		    </div>
+
+		  </div>
+		</div>
 	<div class="container-fluid">
 	<div class="row">
 	<div class="col-md-12">
-	  
+	  	@if(session()->has('success'))
+	        <div class="alert alert-success" id="hideAlert">
+	            {{ session()->get('success') }}
+	        </div>
+	    @endif
 	  	@if($data->status == 'reject')
 	  	<strong>Note: 
 	  		Your payment will be returned within 24 hours. If you do not get a refund after 24 hours, you can call the administrator user free mind.
@@ -51,7 +55,7 @@
                 @elseif($data->status == 'cancled')
                 <b><span style="color: red;">Completed</span></b> 
                 @elseif($data->status == 'reject')
-                <b><span style="color: red;">Rejected</span><br><span style="color: blue;font-size: 25px;cursor: pointer;"><i class="fa fa-eye" aria-hidden="true" data-toggle="tooltip" title="View Region" onclick="rejectRegion('{{ $data->rejection_region }}')"></i></span></b> 
+                <b><span style="color: red;">Rejected</span><br><span style="color: blue;font-size: 25px;cursor: pointer;" data-toggle="modal" data-target="#RejectRegion"><i class="fa fa-eye" aria-hidden="true" data-toggle="tooltip" title="View Region"></i></span></b> 
             @endif
 			</div>
 	      </div>
@@ -115,10 +119,12 @@
 				        <button type="button" class="close" data-dismiss="modal">&times;</button>
 				      </div>
 				      <div class="modal-body">
-				      	<form method="post" action="">
+				      	<form method="post" action="{{ url('form-filler/user/send-issue') }}">
+				      		@csrf
 				      		<div class="form-group">
 							  <label for="comment">Enter Your Problem:</label>
-							  <textarea class="form-control" name="issue" rows="5"></textarea>
+							  <input type="hidden" name="id" value="{{ $data->id }}">
+							  <textarea class="form-control" name="issue" rows="5" required=""></textarea>
 							</div>
 							<br>
 							<input type="submit" class="btn btn-info">
@@ -129,7 +135,15 @@
 				  </div>
 				</div>
       			<button class="btn btn-info" onclick="sendConfirmation('{{ $data->id }}')">Send Confirmation</button>
-      			<button class=" btn btn-danger" data-toggle="modal" data-target="#sendIssue">Send Issue / Problem</button>
+      			@if($data->verified_by_user == 'No')
+      				@if($data->user_query)
+      				<button class=" btn btn-danger" data-toggle="modal" data-target="#sendIssue" disabled="">Send Issue / Problem</button>
+      				@else
+      				<button class=" btn btn-danger" data-toggle="modal" data-target="#sendIssue">Send Issue / Problem</button>
+      				@endif
+  				@else
+  					<button class=" btn btn-danger" data-toggle="modal" data-target="#sendIssue" disabled="">Send Issue / Problem</button>
+  				@endif
       		</center>
       		<br>
       		<h4>Job Filled By:</h4>
@@ -172,7 +186,9 @@
 		                success: function(data){
 		                    document.getElementById('loader').style.display ="none";
 		                    swal("", data, "success");
-		                    datatable.ajax.reload();
+		                    setTimeout(function() {
+		                    	location.reload();
+		                    }, 2000);
 		                }
 		            });
 		        }else {

@@ -31,7 +31,7 @@
                       <div class="col-md-6">
                         <div class="form-group">
                           <label class="bmd-label-floating">Contact Number</label>
-                          <input type="text" class="form-control" name="contact_number" value="{{ \Auth::user()->contact_number }}" autocomplete="off" required="">
+                          <input type="text" class="form-control" name="contact_number" value="{{ \Auth::user()->contact_number }}" autocomplete="off" required="" readonly="">
                           @if($errors->has('contact_number'))
                               <span style="color: red;">{{ $errors->first('contact_number') }}</span>
                           @endif

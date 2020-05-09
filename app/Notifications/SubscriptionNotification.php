@@ -45,7 +45,8 @@ class SubscriptionNotification extends Notification
 
         $data = 'New user has subscribed to your website.';
         return [
-            'message' => $data
+            'message' => $data,
+            'type'    => 'subscribtion'
         ];
     }
 }

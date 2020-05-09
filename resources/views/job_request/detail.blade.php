@@ -93,6 +93,46 @@
     @endif
     <div class="loading" id="loader">Loading&#8230;</div>
 
+    @if($data->status == 'completed')
+    <!--  End loader Content -->
+    <section class="manage-company-user-section" style="margin-bottom: 20px;">
+        <div class="tab-section">
+          <div class="tab-content" style="background-color: white;">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-sm-4">
+                  @if($data->verified_by_user == 'No' && $data->user_query == null)
+                    <img src="{{ asset('public/assets3/img/timerloader.gif') }}" style="width: 100%;height: auto;">
+                  @elseif($data->verified_by_user == 'Yes' && $data->user_query == null)
+                    <img src="{{ asset('public/assets3/img/confirm.gif') }}" style="width: 100%;height: auto;">
+                  @elseif($data->verified_by_user == 'No' && $data->user_query != null)
+                    <center><i class="fa fa-question-circle" aria-hidden="true" style="font-size: 50px;color: red;margin-top: 25px;"></i></center>
+                  @elseif($data->verified_by_user == 'Yes' && $data->user_query != null)
+                    <img src="{{ asset('public/assets3/img/confirm.gif') }}" style="width: 100%;height: auto;">
+                  @endif
+                </div>
+                <div class="col-sm-8">
+                  @if($data->verified_by_user == 'No' && $data->user_query == null)
+                    <center><h3 style="margin-top: 100px;">Waiting For User Response.</h3></center>
+                  @elseif($data->verified_by_user == 'Yes' && $data->user_query == null)
+                    <center><h3 style="margin-top: 100px;color: green;">Confirmed.</h3></center>
+                  @elseif($data->verified_by_user == 'No' && $data->user_query != null)
+                    <p style="margin-top: 15px;margin-bottom: 15px;">
+                      <strong>User Query:</strong><br>
+                      {{ $data->user_query }}</p>
+                  @elseif($data->verified_by_user == 'Yes' && $data->user_query != null)
+                    <center><h3 style="margin-top: 100px;color: green;">Confirmed.</h3></center>
+                  @endif
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+            
+          </div>
+    </section>
+    @endif
+
     <!--  End loader Content -->
     <section class="content manage-company-user-section">
         <div class="tab-section">
@@ -119,6 +159,8 @@
                 <b><span style="color: red;">Completed</span></b> 
                 @elseif($data->status == 'reject')
                 <b><span style="color: red;">Rejected</span></b> 
+                @elseif($data->status == 'pending')
+                <b><span style="color: skyblue;">Pending</span></b> 
                 @endif
                 </div>
                 </div>
@@ -195,8 +237,12 @@
                     
                   </div>
                   <div class="col-sm-4">
+                    @if($data->jobReleatedUser['profile_pic'])
                     <strong>Profile Photo: </strong><br><img src="{{ $data->jobReleatedUser['profile_pic'] }}" alt="Profile Photo" style="width: 100:height:auto;"><br>
                     <center><a href="{{ $data->jobReleatedUser['profile_pic'] }}" download><button class="btn btn-info" style="margin-top: 50px;">Download</button></a></center>
+                    @else
+                      <strong>Profile Photo: </strong><br><img src="{{ asset('/') }}public/assets/img/default.png" alt="Profile Photo" style="width: 100:height:auto;"><br>
+                    @endif
                   </div>
                 </div>
                 <div class="container-fluid">
@@ -247,27 +293,45 @@
                         @endif
                         </center>
                       </div>
-                      @if($data->status == 'completed')
-                        <div class="row" style="margin-bottom: 30px;">
-                          <center><strong>Wait For User Satisfaction: 
-                            @if($data->verified_by_user == 'No')
-                              <span style="color: red;">{{ $data->verified_by_user }}</span>
-                            @else
-                              <span style="color: blue;">{{ $data->verified_by_user }}</span>
-                            @endif
-                          </strong>
-                          </center>
-                        </div>
-                      @endif
                 </div>
                 </div>
                 </div>
             
               </div>
              </div>
+    </section>
+    @if($data->status == 'completed')
+    <!--  End loader Content -->
+    <section class="manage-company-user-section" style="margin-top: 20px;">
+        <div class="tab-section">
+          <div class="tab-content" style="background-color: white;">
+            <div class="container-fluid">
+              <center><strong>Manage Uploaded Documents</strong></center><br>
+              <button class="btn btn-primary" onclick="uploadDoc()">Upload Document</button><br>
+              <div class="row">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Document Name</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      @foreach($data['documentList'] as $document)
+                      <tr>
+                        <td>{{ $document->document_name }}</td>
+                        <td><i class="fa fa-trash" aria-hidden="true" style="font-size: 20px;color: red;" onclick="deleteRelatedDoc('{{ $document->id }}')"></i></td>
+                      </tr>
+                      @endforeach
+                    </tbody>
+                  </table>
+              </div>
+            </div>
+          </div>
             
           </div>
     </section>
+    @endif
 </div>
 <!-- /.content-wrapper -->
 </div>
@@ -296,6 +360,39 @@
                     document.getElementById('loader').style.display ="none";
                     swal("", data, "success");
                     location.reload();
+                }
+            });
+        }else {
+            document.getElementById('loader').style.display ="none";
+        }
+    });
+    
+  }
+
+  function deleteRelatedDoc(id) {
+    document.getElementById('loader').style.display ="block";
+    swal({
+        title: "Are you sure?",
+        text: "Delete this document.",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    })
+    .then((willDelete) => {
+        if (willDelete) {
+            $.ajax({
+                method:'post',
+                url   : "{{ url('admin/manage/job/delete-doc') }}",
+                data  : {
+                    "_token": "{{ csrf_token() }}",
+                    'id'    : id
+                },
+                success: function(data){
+                    document.getElementById('loader').style.display ="none";
+                    swal("", data, "success");
+                    setTimeout(function() {
+                      location.reload();
+                    }, 2000);
                 }
             });
         }else {

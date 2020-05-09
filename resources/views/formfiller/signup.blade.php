@@ -64,9 +64,9 @@
       <form method="post" action="{{ url('operator/signup') }}">
         @csrf
         <label><strong>Enter full name:</strong></label>
-        <input type="text" class="form-control" name="name" required="">
-        @if($errors->has('name'))
-            <span class="" style="color: red;">{{ $errors->first('name') }}</span>
+        <input type="text" class="form-control" name="operator_name" required="">
+        @if($errors->has('operator_name'))
+            <span class="" style="color: red;">{{ $errors->first('operator_name') }}</span>
              <script type="text/javascript">
                 setTimeout(function(){ 
                     changeViewSignUp('operator', 'user');
@@ -76,9 +76,9 @@
         @endif
         <br>
         <label><strong>Enter Email Id:</strong></label>
-        <input type="email" class="form-control" name="email" required="">
-        @if($errors->has('email'))
-            <span class="" style="color: red;">{{ $errors->first('email') }}</span>
+        <input type="email" class="form-control" name="operator_email" required="">
+        @if($errors->has('operator_email'))
+            <span class="" style="color: red;">{{ $errors->first('operator_email') }}</span>
              <script type="text/javascript">
                 setTimeout(function(){ 
                     changeViewSignUp('operator', 'user');
@@ -89,9 +89,9 @@
         <br>
     
         <label><strong>Enter Contact Number:</strong></label>
-        <input type="number" class="form-control" name="contact_number" required="">
-        @if($errors->has('contact_number'))
-            <span class="" style="color: red;">{{ $errors->first('contact_number') }}</span>
+        <input type="number" class="form-control" name="operator_contact_number" required="">
+        @if($errors->has('operator_contact_number'))
+            <span class="" style="color: red;">{{ $errors->first('operator_contact_number') }}</span>
             <script type="text/javascript">
                 setTimeout(function(){ 
                     changeViewSignUp('operator', 'user');
@@ -101,7 +101,7 @@
         <br>
         <label><strong>Choose Your State:</strong></label>
         <div class="form-group">
-          <select class="form-control" name="state" required="">
+          <select class="form-control" name="operator_state" required="">
             <option></option>
              <option></option>
             @foreach($data['states'] as $state)
@@ -110,8 +110,8 @@
           </select>
         </div>
         <br>
-        @if($errors->has('state'))
-            <span class="" style="color: red;">{{ $errors->first('state') }}</span>
+        @if($errors->has('operator_state'))
+            <span class="" style="color: red;">{{ $errors->first('operator_state') }}</span>
             <script type="text/javascript">
                 setTimeout(function(){ 
                     changeViewSignUp('operator', 'user');
@@ -121,7 +121,7 @@
 
         <label><strong>Choose Your City:</strong></label>
         <div class="form-group">
-          <select class="form-control" name="city" required="">
+          <select class="form-control" name="operator_city" required="">
             <option></option>
             @foreach($data['cities'] as $city)
                 <option value="{{ $city->id }}">{{ $city->name }}</option>
@@ -131,8 +131,8 @@
             @endforeach
           </select>
         </div>
-        @if($errors->has('city'))
-            <span class="" style="color: red;">{{ $errors->first('city') }}</span>
+        @if($errors->has('operator_city'))
+            <span class="" style="color: red;">{{ $errors->first('operator_city') }}</span>
             <script type="text/javascript">
                 setTimeout(function(){ 
                     changeViewSignUp('operator', 'user');
@@ -142,9 +142,9 @@
         <br>
 
         <label><strong>Enter Your Area Pincode:</strong></label>
-        <input type="number" class="form-control" name="pincode" required="">
-        @if($errors->has('pincode'))
-            <span class="" style="color: red;">{{ $errors->first('pincode') }}</span>
+        <input type="number" class="form-control" name="operator_pincode" required="">
+        @if($errors->has('operator_pincode'))
+            <span class="" style="color: red;">{{ $errors->first('operator_pincode') }}</span>
             <script type="text/javascript">
                 setTimeout(function(){ 
                     changeViewSignUp('operator', 'user');
@@ -154,9 +154,9 @@
         <br>
         
         <label><strong>Enter Your Complete Address:</strong></label>
-        <input type="text" class="form-control" name="address" required="">
-        @if($errors->has('address'))
-            <span class="" style="color: red;">{{ $errors->first('address') }}</span>
+        <input type="text" class="form-control" name="operator_address" required="">
+        @if($errors->has('operator_address'))
+            <span class="" style="color: red;">{{ $errors->first('operator_address') }}</span>
              <script type="text/javascript">
                 setTimeout(function(){ 
                     changeViewSignUp('operator', 'user');
@@ -166,9 +166,9 @@
         <br>
 
         <label><strong>Password:</strong></label>
-        <input type="password" class="form-control" name="password" required="">
-        @if($errors->has('password'))
-            <span class="" style="color: red;">{{ $errors->first('password') }}</span>
+        <input type="password" class="form-control" name="operator_password" required="">
+        @if($errors->has('operator_password'))
+            <span class="" style="color: red;">{{ $errors->first('operator_password') }}</span>
              <script type="text/javascript">
                 setTimeout(function(){ 
                     changeViewSignUp('operator', 'user');
@@ -179,9 +179,9 @@
         <br>
         
         <label><strong>Confirm Password:</strong></label>
-        <input type="password" class="form-control" name="confirm_password" required="">
-        @if($errors->has('confirm_password'))
-            <span class="" style="color: red;">{{ $errors->first('confirm_password') }}</span>
+        <input type="password" class="form-control" name="operator_confirm_password" required="">
+        @if($errors->has('operator_confirm_password'))
+            <span class="" style="color: red;">{{ $errors->first('operator_confirm_password') }}</span>
              <script type="text/javascript">
                 setTimeout(function(){ 
                     changeViewSignUp('operator', 'user');

@@ -7,11 +7,11 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class JobRejectedNotification extends Notification
+class SendIssueNotification extends Notification
 {
     use Queueable;
 
-    protected $data;
+        protected $data;
     /**
      * Create a new notification instance.
      *
@@ -43,13 +43,13 @@ class JobRejectedNotification extends Notification
     public function toDatabase($notifiable)
     {
 
-        $msg = 'Your job request has been rejected. Please check the region in your job details.';
+        $msg = 'Issue Generate For Order '.$this->data->order_id. ' that are submitted by '. $notifiable->name.'.';
         return [
             'title'   => $this->data->job_title,
             'message' => $msg,
             'data'    => $this->data,
             'job_id'  => $this->data->id,
-            'type'    => 'reject_job'
+            'type'    => 'send_issue'
         ];
     }
 }

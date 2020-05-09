@@ -2,7 +2,7 @@
 @section('content')
       <!-- End Navbar -->
       @if(session()->has('success'))
-        <div class="alert alert-success" id="hideAlert">
+        <div class="alert alert-success" id="" style="margin-top: 50px;">
             {{ session()->get('success') }}
         </div>
       @endif

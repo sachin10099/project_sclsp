@@ -44,7 +44,7 @@
                             <div class="small-box bg-white global-shadow">
                                 <div class="inner">
                                     <p class="text-blue">Form Fillers Users</p>
-                                    <h3 class="text-blue">15</h3>
+                                    <h3 class="text-blue">{{ $data['form_filler_user_count'] }}</h3>
                                 </div>
                                 <div class="icon bg-blue">
                                     <i class="ion"><img src="{{ asset('/') }}public/dist/images/booking-assign-icon.svg" alt="Assign Booking Icon"></i>
@@ -57,7 +57,7 @@
                             <div class="small-box bg-white global-shadow">
                                 <div class="inner">
                                     <p class="text-green">Total Jobs</p>
-                                    <h3 class="text-green">100</h3>
+                                    <h3 class="text-green">{{ $data['job_count'] }}</h3>
                                 </div>
                                 <div class="icon bg-green">
                                     <i class="ion"><img src="{{ asset('/') }}public/dist/images/booking-complete-icon.svg" alt="Assign Booking Icon"></i>

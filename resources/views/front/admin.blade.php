@@ -272,6 +272,9 @@
                     <li class="{{ (request()->is('admin/manage/job/view')) ? 'active' : '' }}">
                         <a href="{{ url('admin/manage/job/view') }}"><span>Manage Jobs Request(s)</span></a>
                     </li>
+                    <li class="{{ (request()->is('admin/manage/job/own-list')) ? 'active' : '' }}">
+                        <a href="{{ url('admin/manage/job/own-list') }}"><span>Manage Accepted Request(s)</span></a>
+                    </li>
                     <li class="{{ (request()->is('form-filler/admit-card/list')) || (request()->is('form-filler/admit-card/add'))  ? 'active' : '' }}">
                         <a href="{{ url('form-filler/admit-card/list') }}"><span>Manage Admit Card</span></a>
                     </li>

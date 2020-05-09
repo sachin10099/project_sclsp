@@ -89,7 +89,7 @@
         datatable = $('#users-table').DataTable({
         processing: true,
         serverSide: true,
-        ajax: '{!! url('admin/manage/job/list') !!}', 
+        ajax: '{!! url('admin/manage/own/job/list') !!}', 
         "aoColumnDefs": [ {
                "aTargets": [ 2 ],
                "mRender": function ( data, type, full ) {
@@ -114,7 +114,6 @@
     });
   });
 
-  
   function acceptRequest(id) {
     $.ajax({
           method:'post',
@@ -134,6 +133,7 @@
           }
       });
   }
+
 </script>
 @endpush
 @endsection

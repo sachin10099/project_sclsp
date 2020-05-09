@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Job;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\SupportCenter;
@@ -147,6 +148,8 @@ class AuthController extends Controller
      */
     public function dashboard()
     {
+        $data['job_count'] = Job::count();
+        $data['form_filler_user_count'] = User::where('type', 'form_user')->count();
         $data['query_count']    = SupportCenter::where('replied_at', 'No')->count();
         return view('admin.dashboard', compact('data'));
     }
@@ -191,7 +194,7 @@ class AuthController extends Controller
         $request->validate(
             [
                 'name'    => 'max:150',
-                'contact' => 'numeric|digits:10',
+                'contact_number' => 'numeric|digits:10|unique:users,contact_number,'.\Auth::id(),
                 'email'   => 'email|unique:users,email,'.\Auth::id(),
                 'address' => 'max:200',
                 'image'   => 'mimes:jpeg,jpg,png|max:10000'
@@ -204,7 +207,7 @@ class AuthController extends Controller
                 'name'           => $request->name,
                 'email'          => $request->email,
                 'address'        => $request->address,
-                'contact_number' => $request->contact,
+                'contact_number' => $request->contact_number,
                 'profile_pic'    => $url
             ]
         );

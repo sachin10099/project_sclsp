@@ -43,9 +43,9 @@
                             <div class="col-md-5 col-sm-6">
                                 <div class="form-group">
                                     <label for="">Mobile Number</label>
-                                    <input type="text" class="form-control" name="contact" value="{{ \Auth::user()->contact_number }}" autocomplete="off">
-                                    @if($errors->has('contact'))
-                                        <span class="text-danger">{{ $errors->first('contact') }}</span>
+                                    <input type="text" class="form-control" name="contact_number" value="{{ \Auth::user()->contact_number }}" autocomplete="off">
+                                    @if($errors->has('contact_number'))
+                                        <span class="text-danger">{{ $errors->first('contact_number') }}</span>
                                     @endif
                                 </div>
                             </div>

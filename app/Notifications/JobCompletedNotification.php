@@ -48,7 +48,8 @@ class JobCompletedNotification extends Notification
             'title'   => $this->data->job_title,
             'message' => $msg,
             'data'    => $this->data,
-            'job_id'  => $this->data->id
+            'job_id'  => $this->data->id,
+            'type'    => 'complete_job'
         ];
     }
 }

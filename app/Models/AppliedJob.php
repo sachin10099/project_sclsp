@@ -32,6 +32,10 @@ class AppliedJob extends Model
         return $this->hasMany(JobRelatedDocument::class, 'applied_job_id', 'id')->where('user_id','=', \Auth::id());
     }
 
+    public function documentList() {
+        return $this->hasMany(JobRelatedDocument::class, 'applied_job_id', 'id');
+    }
+
      public function jobAcceptedBy() {
         return $this->belongsTo(User::class, 'accepted_by', 'id');
     }

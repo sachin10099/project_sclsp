@@ -10,6 +10,7 @@ use Yajra\Datatables\Datatables;
 use App\Http\Controllers\Controller;
 use App\Notifications\JobApplyNotification;
 use Illuminate\Support\Facades\Notification;
+use App\Notifications\SendIssueNotification;
 use App\Http\Controllers\Concern\GlobalTrait;
 use App\Notifications\SendConfirmationNotification;
 
@@ -223,6 +224,9 @@ class JobController extends Controller
     */
     public function sendConfirmation(Request $request) {
         $data = AppliedJob::find($request->id);
+        if($data->verified_by_user == 'Yes') {
+            return 'Already Confirmed This Job';
+        }
         $data->update(
             [
                 'verified_by_user' => 'Yes'
@@ -231,6 +235,26 @@ class JobController extends Controller
         $picked = User::find($data->accepted_by);
         $picked->notify(New SendConfirmationNotification($data));
         return 'Your Confirmation Send Successfully.';
+    }
+
+    /**
+    * Send Confirmation
+    * @category Form Filler Management
+    * @package  Form Filler Management
+    * @author   Sachiln Kumar <sachin679710@gmail.com>
+    * @license  PHP License 7.2.24
+    * @link
+    */
+    public function sendIssue(Request $request) {
+        $data = AppliedJob::find($request->id);
+        $data->update(
+            [
+                'user_query' => $request->issue
+            ]
+        );
+        $picked = User::find($data->accepted_by);
+        $picked->notify(New SendIssueNotification($data));
+        return redirect()->back()->with('success', 'Your Problem Send Successfully.');
     }
 
 }

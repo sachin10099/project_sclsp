@@ -43,7 +43,8 @@ class JobApplyNotification extends Notification
         $msg = \Auth::user()->name.' has just apply for a job';
         return [
             'message' => $msg,
-            'data'    => $this->data
+            'data'    => $this->data,
+            'type'    => 'apply_job'
         ];
     }
 }

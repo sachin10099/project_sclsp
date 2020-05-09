@@ -20,6 +20,7 @@ use App\Models\AdminCard;
 use App\Models\SocialLink;
 use App\Models\AppliedJob;
 use App\Models\Testimonial;
+use App\Models\Notification;
 use App\Models\FormUserInfo;
 use Illuminate\Http\Request;
 use App\Models\SupportCenter;
@@ -174,7 +175,7 @@ class FormFillerController extends Controller
             [
                 'user_name'         => 'required|max:150',
                 'email'             => 'required|email|max:225|unique:users',
-                'contact_number'    => 'required|digits:10',
+                'contact_number'    => 'required|digits:10|unique:users',
                 'address'           => 'required|max:225',
                 'user_password'     => 'required',
                 'user_confirm_pass' => 'required|same:user_password',
@@ -343,7 +344,7 @@ class FormFillerController extends Controller
                 'email'             => 'required|email|max:255|unique:users,email,'.\Auth::user()->id.',id',
                 'f_name'            => 'required|max:150',
                 'm_name'            => 'required|max:150',
-                'contact_number'    => 'required|digits:10',
+                'contact_number'    => 'required|digits:10,|unique:users,contact_number,'.\Auth::user()->id,
                 'address'           => 'required|max:225',
                 'postal_code'       => 'required|digits:6|integer',
                 'l_v_id'            => 'required|integer',
@@ -476,13 +477,18 @@ class FormFillerController extends Controller
     * @link
     */
     public function readNotification($notification_id, $job_id) {
-        \Auth::user()->notifications()
-        ->where('id', $notification_id)->update(
+        $data = Notification::where('id', $notification_id)->first();
+        $data->update(
             [
                 'read_at' => \Carbon\Carbon::now()->toDateTimeString()
             ]
         );
-        $url = 'form-filler/job/profile/'.$job_id;
+        $picked = \Auth::user()->notifications()->where('id', $notification_id)->first();
+        if($picked->data['type'] != 'new_job') {
+            $url = 'form-filler/user/details/'.$job_id;
+        }else {
+            $url = 'form-filler/job/profile/'.$job_id;
+        }
         return redirect($url);
     }
 
