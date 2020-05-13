@@ -121,7 +121,7 @@
                 </div>
                 <div class="form-button">
                     <a href="{{ url('admin/jobs/list-view') }}"><b-button type="submit" class="btn btn-warning">Cancel</b-button></a>
-                    <input type="submit" class="btn btn-info" value="Save Changes">
+                    <input type="submit" class="btn btn-info" value="Save">
                 </div>
             </form>
         </div>

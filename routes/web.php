@@ -117,7 +117,8 @@ Route::group(['middleware' => ['auth', 'adminCheck']], function () {
 	// Admin Notification List
 	Route::get('admin/notification/list', 'Admin\NotificationController@index')->name('admin.linkList');	
 	Route::post('admin/notification/delete', 'Admin\NotificationController@deleteNotification')->name('admin.deleteNotification');	
-	Route::post('admin/notification/read', 'Admin\NotificationController@readNotification')->name('admin.readNotification');	
+	Route::get('admin/notification/read/{id}/{job_id}', 'Admin\NotificationController@readNotification')->name('admin.readNotification');	
+	Route::get('admin/notification/read/{id}', 'Admin\NotificationController@readByAdmin')->name('admin.readByAdmin');	
 
 	// Manage Jobs
 	Route::get('admin/jobs/list', 'Jobs\JobsController@index')->name('admin.jobs-list');
@@ -130,6 +131,7 @@ Route::group(['middleware' => ['auth', 'adminCheck']], function () {
 	Route::post('admin/jobs/change-status', 'Jobs\JobsController@changeStatus')->name('admin.changeStatus');
 	Route::post('admin/jobs/unpublish-job', 'Jobs\JobsController@unPublish')->name('admin.unPublish');
 	Route::post('admin/jobs/delete', 'Jobs\JobsController@deleteJob')->name('admin.deleteJob');
+	Route::get('admin/applied/jobs', 'Jobs\JobsController@appliedJobsList')->name('admin.appliedJobsList');
 
 	// Manage Admit Card And Answers Keys
 	Route::get('form-filler/admit-card/list', 'AdminCard\AdmitCardController@index')->name('admitcard.list');
@@ -174,6 +176,23 @@ Route::group(['middleware' => ['auth', 'adminCheck']], function () {
 	Route::post('admin/manage/job/reject-request', 'Jobs\JobsController@rejectRequest')->name('admin.rejectRequest');
 	Route::post('admin/manage/job/delete-doc', 'Jobs\JobsController@deleteDoc')->name('admin.deleteDoc');
 
+	// Manage Terms And Conditions
+	Route::get('admin/manage/terms', 'Admin\HomeController@termsData')->name('admin.termsData');
+	Route::post('admin/manage/terms', 'Admin\HomeController@termsDataUpdate')->name('admin.termsDataUpdate');
+	Route::get('admin/manage/privecy-policy', 'Admin\HomeController@privecyPolicy')->name('admin.privecyPolicy');
+	Route::post('admin/manage/privecy-policy', 'Admin\HomeController@privecyPolicyUpdate')->name('admin.privecyPolicyUpdate');
+	Route::get('admin/manage/applied/job/list', 'Jobs\JobsController@appliedRequestList')->name('admin.appliedRequestList');
+	Route::get('admin/applied/job-detail/{id}', 'Jobs\JobsController@appliedRequestJobDetail')->name('admin.appliedRequestJobDetail');
+
+	// Admission Controller
+	Route::get('admin/admission/list', 'Admission\AdmissionController@index')->name('admin.admission.index');
+	Route::get('admin/admission/list-view', 'Admission\AdmissionController@admissionListView')->name('admin.admission.admissionListView');
+	Route::get('admin/admission/create', 'Admission\AdmissionController@postAdmissionView')->name('admin.admission.postAdmissionView');
+	Route::post('admin/admission/create', 'Admission\AdmissionController@createNewAdmission')->name('admin.admission.createNewAdmission');
+
+	// Notice Management
+	Route::get('admin/notice/list-view', 'Admission\AdmissionController@noticeView')->name('admin.noticeView');
+
 });
 
 Route::group(['middleware' => ['auth', 'formFiller']], function () {
@@ -200,10 +219,18 @@ Route::group(['middleware' => ['auth', 'formFiller']], function () {
 	Route::get('form-filler/user/details/{id}', 'FormFiller\JobController@jobDetails')->name('job.jobDetails');
 	Route::post('form-filler/user/send-confirmation', 'FormFiller\JobController@sendConfirmation')->name('job.sendConfirmation');
 	Route::post('form-filler/user/send-issue', 'FormFiller\JobController@sendIssue')->name('job.sendIssue');
+
+	// Magnage Admissions
+	Route::get('form-filler/admissions', 'FormFiller\FormFillerController@admissionListView')->name('job.admissionListView');
+	Route::get('form-filler/admissions/list', 'FormFiller\FormFillerController@admissionList')->name('job.admissionList');
 });
 
 // Operator User Routes
+Route::get('operator/signup', 'Operator\OperatorController@operatorSignUpView')->name('operator.operatorSignUpView');
 Route::post('operator/signup', 'Operator\OperatorController@signup')->name('operator.signup');
+// Terms And Condition Url And Term Policies
+Route::get('term-condition', 'HomeController@terms')->name('terms');
+Route::get('policies', 'HomeController@policy')->name('policy');
 
 
 

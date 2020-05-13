@@ -2,7 +2,7 @@
 @section('content')
       <!-- End Navbar -->
       @if(session()->has('success'))
-        <div class="alert alert-success" id="" style="margin-top: 50px;">
+        <div class="alert alert-success" id="hideAlert" style="margin-top: 50px;">
             {{ session()->get('success') }}
         </div>
       @endif
@@ -15,12 +15,12 @@
                   <div class="card-icon">
                     <i class="fa fa-arrow-right" aria-hidden="true"></i>
                   </div>
-                  <p class="card-category">Total Upcoming Jobs</p>
-                  <h3 class="card-title">0</h3>
+                  <p class="card-category">Total Pending Jobs</p>
+                  <h3 class="card-title">{{ $data['pending_job_count'] }}</h3>
                 </div>
                 <div class="card-footer">
                   <div class="stats">
-                    <a href="{{ url('form-filler/job/list-view') }}">View More...</a>
+                    <a href="{{ url('form-filler/user/jobs-view') }}">View More...</a>
                   </div>
                 </div>
               </div>
@@ -31,12 +31,12 @@
                   <div class="card-icon">
                     <i class="fa fa-star" aria-hidden="true"></i>
                   </div>
-                  <p class="card-category">Total Past<br> Jobs</p>
-                  <h3 class="card-title">0</h3>
+                  <p class="card-category">Total Under Processing Jobs</p>
+                  <h3 class="card-title">{{ $data['ongoing_job_count'] }}</h3>
                 </div>
                 <div class="card-footer">
                   <div class="stats">
-                    <a href="{{ url('form-filler/job/list-view') }}/past">View More...</a>
+                    <a href="{{ url('form-filler/user/jobs-view') }}/past">View More...</a>
                   </div>
                 </div>
               </div>
@@ -47,12 +47,12 @@
                   <div class="card-icon">
                     <i class="fa fa-clock-o" aria-hidden="true"></i>
                   </div>
-                  <p class="card-category">Total Pending Jobs</p>
-                  <h3 class="card-title">0</h3>
+                  <p class="card-category">Total Completed Jobs</p>
+                  <h3 class="card-title">{{ $data['completed_job_count'] }}</h3>
                 </div>
                 <div class="card-footer">
                   <div class="stats">
-                    <a href="{{ url('form-filler/job/list-view') }}">View More...</a>
+                    <a href="{{ url('form-filler/user/jobs-view') }}">View More...</a>
                   </div>
                 </div>
               </div>
@@ -64,67 +64,71 @@
                     <i class="fa fa-ban" aria-hidden="true"></i>
                   </div>
                   <p class="card-category">Total Rejected Jobs</p>
-                  <h3 class="card-title">0</h3>
+                  <h3 class="card-title">{{ $data['reject_job_count'] }}</h3>
                 </div>
                 <div class="card-footer">
                   <div class="stats">
-                    <a href="{{ url('form-filler/job/list-view') }}">View More...</a>
+                    <a href="{{ url('form-filler/user/jobs-view') }}">View More...</a>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-<!--           <div class="row">
-            <div class="col-md-4">
+          <div class="row">
+            <div class="col-md-6">
               <div class="card card-chart">
-                <div class="card-header card-header-success">
-                  <div class="ct-chart" id="dailySalesChart"></div>
+                <div class="card-header card-header-success" style="background: linear-gradient(30deg, blue, gray);color: white;">
+                  <h3>Admissions</h3>
                 </div>
                 <div class="card-body">
-                  <h4 class="card-title">Daily Sales</h4>
-                  <p class="card-category">
-                    <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p>
+                  @foreach($data['admissions'] as $admission)
+                    <a href="{{ url('form-filler/job/profile/') }}/{{ $admission->id }}"><p>* {{ $admission->job_title }}</p>
+                  @endforeach
                 </div>
                 <div class="card-footer">
-                  <div class="stats">
-                    <i class="material-icons">access_time</i> updated 4 minutes ago
-                  </div>
+                  <a href="{{ url('form-filler/admissions') }}">View All</a>
                 </div>
               </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
               <div class="card card-chart">
-                <div class="card-header card-header-warning">
-                  <div class="ct-chart" id="websiteViewsChart"></div>
+                <div class="card-header card-header-warning" style="background: linear-gradient(30deg, brown, gray);">
+                  <h3>Important Notice</h3>
                 </div>
                 <div class="card-body">
-                  <h4 class="card-title">Email Subscriptions</h4>
-                  <p class="card-category">Last Campaign Performance</p>
+                  <table class="table">
+                      <thead>
+                        <tr>
+                          <th>Firstname</th>
+                          <th>Lastname</th>
+                          <th>Email</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>John</td>
+                          <td>Doe</td>
+                          <td>john@example.com</td>
+                        </tr>
+                        <tr>
+                          <td>Mary</td>
+                          <td>Moe</td>
+                          <td>mary@example.com</td>
+                        </tr>
+                        <tr>
+                          <td>July</td>
+                          <td>Dooley</td>
+                          <td>july@example.com</td>
+                        </tr>
+                      </tbody>
+                    </table>
                 </div>
                 <div class="card-footer">
-                  <div class="stats">
-                    <i class="material-icons">access_time</i> campaign sent 2 days ago
-                  </div>
+                  <a href="#">View All</a>
                 </div>
               </div>
             </div>
-            <div class="col-md-4">
-              <div class="card card-chart">
-                <div class="card-header card-header-danger">
-                  <div class="ct-chart" id="completedTasksChart"></div>
-                </div>
-                <div class="card-body">
-                  <h4 class="card-title">Completed Tasks</h4>
-                  <p class="card-category">Last Campaign Performance</p>
-                </div>
-                <div class="card-footer">
-                  <div class="stats">
-                    <i class="material-icons">access_time</i> campaign sent 2 days ago
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div> -->
+          </div>
         </div>
       </div>
     </div>

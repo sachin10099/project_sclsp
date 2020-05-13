@@ -474,7 +474,9 @@
                         <div class="form-group">
                           <label>Upload Aadhaar (Front Side)</label>
                           <input type='file' name="aadhaar_front" onchange="readURL(this);">
-                          <img id="aadhaar1"  src="{{ $user_infos->userInfo['aadhaar_img_front'] }}" alt="your image" style="margin-top: 10px;max-width: 200px;max-height: 150px;" />
+                          <a href="{{ $user_infos->userInfo['aadhaar_img_front'] }}" download="">
+                            <img id="aadhaar1"  src="{{ $user_infos->userInfo['aadhaar_img_front'] }}" alt="your image" style="margin-top: 10px;max-width: 200px;max-height: 150px;" />
+                          </a>
                           @if($errors->has('aadhaar_front'))
                               <span style="color: red;">{{ $errors->first('aadhaar_front') }}</span>
                           @endif
@@ -485,7 +487,9 @@
                           <div class="form-group">
                           <label>Upload Aadhaar (Back Side)</label>
                           <input type='file' name="aadhaar_back" onchange="readURLNew(this);">
-                          <img id="aadhaar2"  src="{{ $user_infos->userInfo['aadhaar_img_back'] }}" alt="your image" style="margin-top: 10px;max-width: 200px;max-height: 150px;" />
+                          <a href="{{ $user_infos->userInfo['aadhaar_img_back'] }}" download="">
+                            <img id="aadhaar2"  src="{{ $user_infos->userInfo['aadhaar_img_back'] }}" alt="your image" style="margin-top: 10px;max-width: 200px;max-height: 150px;" />
+                          </a>
                           @if($errors->has('aadhaar_back'))
                               <span style="color: red;">{{ $errors->first('aadhaar_back') }}</span>
                           @endif
@@ -498,7 +502,9 @@
                         <div class="form-group">
                           <label>Upload 10th Marksheet</label>
                           <input type='file' name="tenth" onchange="tenthLoad(this);">
-                          <img id="tenth"  src="{{ $user_infos->userQualification['tenth_doc_image'] }}" alt="your image" style="margin-top: 10px;max-width: 200px;max-height: 150px;" />
+                          <a href="{{ $user_infos->userQualification['tenth_doc_image'] }}" download="">
+                            <img id="tenth"  src="{{ $user_infos->userQualification['tenth_doc_image'] }}" alt="your image" style="margin-top: 10px;max-width: 200px;max-height: 150px;" />
+                          </a>
                           @if($errors->has('tenth'))
                               <span style="color: red;">{{ $errors->first('tenth') }}</span>
                           @endif
@@ -509,7 +515,9 @@
                           <div class="form-group">
                           <label>Upload 12th Marksheet</label>
                           <input type='file' name="tweleth" onchange="twelethLoad(this);">
-                          <img id="tweleth"  src="{{ $user_infos->userQualification['tweleth_doc_image'] }}" alt="your image" style="margin-top: 10px;max-width: 200px;max-height: 150px;" />
+                          <a href="{{ $user_infos->userQualification['tweleth_doc_image'] }}" download="">
+                            <img id="tweleth"  src="{{ $user_infos->userQualification['tweleth_doc_image'] }}" alt="your image" style="margin-top: 10px;max-width: 200px;max-height: 150px;" />
+                          </a>
                           @if($errors->has('tweleth'))
                               <span style="color: red;">{{ $errors->first('tweleth') }}</span>
                           @endif
@@ -523,7 +531,9 @@
                           <label>If you have any diploma upload document (optional)</label>
                           <input type='file' name="diploma" onchange="diplomaLoad(this);" />
                           @if($user_infos->userQualification['diploma_doc_image'])
-                            <img id="diploma"  src="{{ $user_infos->userQualification['diploma_doc_image'] }}" alt="your image" style="margin-top: 10px;max-width: 200px;max-height: 150px;" />
+                            <a href="{{ $user_infos->userQualification['diploma_doc_image'] }}" download="">
+                              <img id="diploma"  src="{{ $user_infos->userQualification['diploma_doc_image'] }}" alt="your image" style="margin-top: 10px;max-width: 200px;max-height: 150px;" />
+                            </a>
                           @else
                             <img id="diploma"  src="{{ asset('public/assets3/img/default.png') }}" alt="your image" style="margin-top: 10px;max-width: 200px;max-height: 150px;" />
                           @endif
@@ -538,7 +548,9 @@
                           <div class="form-group">
                           <label>Upload Caste Certificate</label>
                           <input type='file' name="caste" onchange="casteLoad(this);">
-                          <img id="caste"  src="{{ $user_infos->userQualification['caste_certificate'] }}" alt="your image" style="margin-top: 10px;max-width: 200px;max-height: 150px;" />
+                          <a href="{{ $user_infos->userQualification['caste_certificate'] }}" download="">
+                            <img id="caste"  src="{{ $user_infos->userQualification['caste_certificate'] }}" alt="your image" style="margin-top: 10px;max-width: 200px;max-height: 150px;" />
+                          </a>
                           @if($errors->has('caste'))
                               <span style="color: red;">{{ $errors->first('caste') }}</span>
                           @endif
@@ -551,7 +563,9 @@
                         <div class="form-group">
                           <label>Upload Graguation Document</label>
                           <input type='file' name="graguation" onchange="graguationLoad(this);">
-                          <img id="graguation"  src="{{ $user_infos->userQualification['graguation'] }}" alt="your image" style="margin-top: 10px;max-width: 200px;max-height: 150px;" />
+                          <a href="{{ $user_infos->userQualification['graguation'] }}" download="">
+                            <img id="graguation"  src="{{ $user_infos->userQualification['graguation'] }}" alt="your image" style="margin-top: 10px;max-width: 200px;max-height: 150px;" />
+                          </a>
                           @if($errors->has('graguation'))
                               <span style="color: red;">{{ $errors->first('graguation') }}</span>
                           @endif
@@ -563,7 +577,9 @@
                           <label>Upload Post Graguation Document (optional)</label>
                           <input type='file' name="postgraguation" onchange="postgraguationLoad(this);">
                           @if($user_infos->userQualification['post_graguation'])
-                            <img id="postgraguation"  src="{{ $user_infos->userQualification['post_graguation'] }}" alt="your image" style="margin-top: 10px;max-width: 200px;max-height: 150px;" />
+                            <a href="{{ $user_infos->userQualification['post_graguation'] }}" download="">
+                              <img id="postgraguation"  src="{{ $user_infos->userQualification['post_graguation'] }}" alt="your image" style="margin-top: 10px;max-width: 200px;max-height: 150px;" />
+                            </a>
                           @else
                             <img id="postgraguation"  src="{{ asset('public/assets3/img/default.png') }}" alt="your image" style="margin-top: 10px;max-width: 200px;max-height: 150px;" />
                           @endif
@@ -581,7 +597,9 @@
                           <label>Upload Others Document (Optional)</label>
                           <input type='file' name="others" onchange="othersLoad(this);">
                           @if($user_infos->userQualification['others'])
-                            <img id="others"  src="{{ $user_infos->userQualification['others'] }}" alt="your image" style="margin-top: 10px;max-width: 200px;max-height: 150px;" />
+                            <a href="{{ $user_infos->userQualification['others'] }}" download="">
+                              <img id="others"  src="{{ $user_infos->userQualification['others'] }}" alt="your image" style="margin-top: 10px;max-width: 200px;max-height: 150px;" />
+                            </a>
                           @else
                             <img id="others"  src="{{ asset('public/assets3/img/default.png') }}" alt="your image" style="margin-top: 10px;max-width: 200px;max-height: 150px;" />
                           @endif

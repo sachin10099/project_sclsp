@@ -20,16 +20,24 @@ function pay(id, amount) {
 				}, 
 				success: function(data){  
 			        swal({
-					  title: data,
+					  title: "Your payment is successfully done.",
 					  text: "",
 					  icon: "success",
 					  buttons: true,
 					  dangerMode: true,
+					  showCancelButton: false,
 					})
 					.then((willDelete) => {
-						var base_url = window.location.origin;
-						var new_url = base_url+'/SCLSP/form-filler/job/list-view';
-					    window.location.assign(new_url);
+						if(data == 'job') {
+							var base_url = window.location.origin;
+							var new_url = base_url+'/SCLSP/form-filler/job/list-view';
+						    window.location.assign(new_url);
+						} else {
+							var base_url = window.location.origin;
+							var new_url = base_url+'/form-filler/admissions';
+						    window.location.assign(new_url);
+						}
+						
 					});
 			    },
 			    error: function(XMLHttpRequest, textStatus, errorThrown) { 

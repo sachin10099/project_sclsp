@@ -14,6 +14,7 @@ use App\Models\Subscribe;
 use App\Models\SocialLink;
 use App\Models\Testimonial;
 use Illuminate\Http\Request;
+use App\Models\TermCondition;
 use App\Models\SupportCenter;
 use App\Http\Controllers\Concern\GlobalTrait;
 use App\Notifications\SubscriptionNotification;
@@ -119,7 +120,7 @@ class HomeController extends Controller
                 }
                 return redirect()->back()->with('error', 'Invalid login credentials.'); 
             } else {
-                return redirect()->back()->with('error', 'Your '.$msg.' is not verified, please verify your email.');
+                return redirect()->back()->with('error', 'Your '.$msg.' is not verified, please verify your '.$msg);
             }
 
         } else {
@@ -137,5 +138,35 @@ class HomeController extends Controller
         \Auth::logout();
         \Session::flush();
         return redirect('global/login');
+    }
+
+    /**
+     * Term And Condition Url
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function terms() {
+        $data['contact_info']   = User::where('type', 'admin')->first();
+        $data['facebook_link']  = SocialLink::where('slug', 'facebook')->first();
+        $data['twitter_link']   = SocialLink::where('slug', 'twitter')->first();
+        $data['insta_link']     = SocialLink::where('slug', 'insta')->first();
+        $data['linkedin_link']  = SocialLink::where('slug', 'linkedin')->first();
+        $data['terms']          = TermCondition::where('slug', 'terms')->first();
+        return view('terms', compact('data'));
+    }
+
+    /**
+     * Policy
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function policy() {
+        $data['contact_info']   = User::where('type', 'admin')->first();
+        $data['facebook_link']  = SocialLink::where('slug', 'facebook')->first();
+        $data['twitter_link']   = SocialLink::where('slug', 'twitter')->first();
+        $data['insta_link']     = SocialLink::where('slug', 'insta')->first();
+        $data['linkedin_link']  = SocialLink::where('slug', 'linkedin')->first();
+        $data['policy']          = TermCondition::where('slug', 'policy')->first();
+        return view('policy', compact('data'));
     }
 }

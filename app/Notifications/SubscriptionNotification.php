@@ -43,7 +43,7 @@ class SubscriptionNotification extends Notification
     public function toDatabase($notifiable)
     {
 
-        $data = 'New user has subscribed to your website.';
+        $data = 'New user has subscribed your plateform';
         return [
             'message' => $data,
             'type'    => 'subscribtion'

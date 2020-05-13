@@ -199,14 +199,23 @@
 
       <nav class="nav-menu d-none d-lg-block">
         <ul>
-          <li class="active"><a href="#header">Home</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#testimonials">Testimonials</a></li>
-          <li><a href="#team">Team</a></li>
-          <li><a href="#faq">Faq</a></li>
-
-          <li><a href="#contact">Contact</a></li>
+          @if((request()->is('/')))
+            <li class="active"><a href="#header">Home</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+            <li><a href="#team">Team</a></li>
+            <li><a href="#faq">Faq</a></li>
+            <li><a href="#contact">Contact</a></li>
+          @else
+            <li class="active"><a href="{{ url('/') }}#header">Home</a></li>
+            <li><a href="{{ url('/') }}#services">Services</a></li>
+            <li><a href="{{ url('/') }}#about">About</a></li>
+            <li><a href="{{ url('/') }}#testimonials">Testimonials</a></li>
+            <li><a href="{{ url('/') }}#team">Team</a></li>
+            <li><a href="{{ url('/') }}#faq">Faq</a></li>
+            <li><a href="{{ url('/') }}#contact">Contact</a></li>
+          @endif
 
         </ul>
       </nav><!-- .nav-menu -->
@@ -236,16 +245,16 @@
             <h4>Useful Links</h4>
             <ul>
               <li><i class="bx bx-chevron-right"></i> <a href="{{ url('/') }}">Home</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{{ url('term-condition') }}">Terms of service</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{{ url('policies') }}">Privacy policy</a></li>
             </ul>
           </div>
 
           <div class="col-lg-3 col-md-6 footer-links">
             <h4>Our Services</h4>
             <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="{{ url('form-filler/index') }}">Form Filler</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="#services">City Stay Point</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#services">Form Filler</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="#services">Exam Test Series</a></li>
             </ul>
           </div>
@@ -297,6 +306,28 @@
       setTimeout(function(){ 
           document.getElementById("hideAlert").style.display  = "none";
       }, 5000);
+
+      function subscribe() {
+        var email = $('#subscribe_email').val();
+        if(email == '') {
+          swal("", "Email field must be required.", "warning");
+          return false;
+        }
+        $.ajax({
+            method:'post',
+            url   : "{{ url('subscribe') }}",
+            data  : {
+                "_token": "{{ csrf_token() }}",
+                'email'    : email
+            },
+            success: function(data){
+                swal("", data, "success");
+                setTimeout(function(){ 
+                    location.reload()
+                }, 2000);
+            }
+        });
+      }
   </script>
 
 </body>

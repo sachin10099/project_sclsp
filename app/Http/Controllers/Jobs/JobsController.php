@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Notification;
 use App\Http\Controllers\Concern\GlobalTrait;
 use App\Notifications\JobRejectedNotification;
 use App\Notifications\JobCompletedNotification;
+use App\Notifications\PostAdmissionNotification;
 
 class JobsController extends Controller
 {
@@ -33,7 +34,7 @@ class JobsController extends Controller
 	*/
     public function index()
     {
-  		$data = Job::with('getState')->orderBy('created_at', 'DESC')->get();
+  		$data = Job::with('getState')->where('slug', 'job')->orderBy('created_at', 'DESC')->get();
     	return Datatables::of($data)
     		->addColumn('state_name', function ($data) {
                 return $data->getState['name'];
@@ -261,7 +262,12 @@ class JobsController extends Controller
         );
         $users = User::where('type', 'form_user')->get();
         if(is_null($check)) {
-            Notification::send($users, new PostJobNotification($picked));
+            if($picked->slug == 'job') {
+                Notification::send($users, new PostJobNotification($picked));
+            } else {
+                Notification::send($users, new PostAdmissionNotification($picked));
+            }
+            
         }
         return 'Job Published Successfully.';
     }
@@ -457,6 +463,27 @@ class JobsController extends Controller
     * @license  PHP License 7.2.24
     * @link
     */
+    public function appliedRequestJobDetail($id) {
+        $data = AppliedJob::with(
+            [
+                'documentList',
+                'jobReleatedUser',
+                'getJobDetail',
+                'jobAcceptedBy'
+            ]
+        )->where('id', $id)->first();
+        return view('admin.applied_job_detail', compact('data'));
+    }
+
+    /**
+    * Job Request Details Created By User
+    *
+    * @category Job Management
+    * @package  Job Management
+    * @author   Sachiln Kumar <sachin679710@gmail.com>
+    * @license  PHP License 7.2.24
+    * @link
+    */
     public function acceptRequest(Request $request) {
         $data = AppliedJob::find($request->id);
         if($data->accepted_by) {
@@ -559,6 +586,65 @@ class JobsController extends Controller
         $data = JobRelatedDocument::find($request->id);
         $data->delete();
         return 'Documnet Deleted Successfully.';
+    }
+
+    /**
+    * Goto Applied Job List
+    *
+    * @category Job Management
+    * @package  Job Management
+    * @author   Sachiln Kumar <sachin679710@gmail.com>
+    * @license  PHP License 7.2.24
+    * @link
+    */
+    public function appliedJobsList(Request $request) {
+        return view('admin.manage_applied_jobs');
+    }
+
+    /**
+    * Job Request By User List
+    *
+    * @category Job Management
+    * @package  Job Management
+    * @author   Sachiln Kumar <sachin679710@gmail.com>
+    * @license  PHP License 7.2.24
+    * @link
+    */
+    public function appliedRequestList()
+    {
+        $data = AppliedJob::with(
+            [
+                'jobReleatedUser',
+                'getJobDetail'
+            ]
+        )->orderBy('created_at', 'DESC')->get();
+        return Datatables::of($data)
+            ->addColumn('job_id', function ($data) {
+                return $data->job_id;
+            })
+            ->addColumn('job_title', function ($data) {
+                return $data->getJobDetail['job_title'];
+            })
+            ->addColumn('publish', function ($data) {
+                $publish = date('d-m-Y', strtotime($data->getJobDetail['job_published']));
+                return $publish;
+            })
+            ->addColumn('applicant_name', function ($data) {
+                return $data->jobReleatedUser['name'];
+            })
+            ->addColumn('applicant_email', function ($data) {
+                return $data->jobReleatedUser['email'];
+            })
+            ->addColumn('applicant_contact', function ($data) {
+                return $data->jobReleatedUser['contact_number'];
+            })
+            ->addColumn('action', function ($data) {
+                return '
+                    <a href="job-detail/'.$data->id.'"><i class="fa fa-eye" aria-hidden="true" style="color:#00bfff;font-size:20px;cursor:pointer;" data-toggle="tooltip" title="More info"></i></a>
+                    '; 
+               
+            })
+            ->make(true);
     }
 
 }

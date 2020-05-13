@@ -178,6 +178,7 @@ class FormFillerController extends Controller
                 'contact_number'    => 'required|digits:10|unique:users',
                 'address'           => 'required|max:225',
                 'user_password'     => 'required',
+                'checkbox'         => 'required',
                 'user_confirm_pass' => 'required|same:user_password',
             ],
             [
@@ -191,6 +192,7 @@ class FormFillerController extends Controller
                 'email'          => $request->email,
                 'contact_number' => $request->contact_number,
                 'address'        => $request->address,
+                'accept_terms'   => $request->checkbox,
                 'password'       => \Hash::make($request->user_password)
             ]
         ); 
@@ -215,7 +217,12 @@ class FormFillerController extends Controller
             $data['categories'] = Category::get();
             return view('formfiller.profile', compact('data'));
         }
-        return view('formfiller.dashboard');
+        $data['pending_job_count'] = AppliedJob::where('user_id', \Auth::id())->where('status', 'pending')->count();
+        $data['ongoing_job_count'] = AppliedJob::where('user_id', \Auth::id())->where('status', 'on_going')->count();
+        $data['completed_job_count'] = AppliedJob::where('user_id', \Auth::id())->where('status', 'completed')->count();
+        $data['reject_job_count']    = AppliedJob::where('user_id', \Auth::id())->where('status', 'reject')->count();
+        $data['admissions']          = Job::where('slug', 'admission')->where('status', 'active')->orderBy('created_at', 'DESC')->limit(5)->get();
+        return view('formfiller.dashboard', compact('data'));
     }
 
     /**
@@ -503,11 +510,11 @@ class FormFillerController extends Controller
     public function jobList(Request $request) {
         $date = date("Y-m-d");
         if($request->status == 'today') {
-            $data = Job::with('getState')->whereDate('job_published', $date)->where('status', 'active')->get();
+            $data = Job::with('getState')->whereDate('job_published', $date)->where('slug', 'job')->where('status', 'active')->get();
         } else if($request->status == 'upcomening') {
-            $data = Job::with('getState')->whereDate('job_published','>', $date)->where('status', 'active')->get();
+            $data = Job::with('getState')->whereDate('job_published','>', $date)->where('slug', 'job')->where('status', 'active')->get();
         } else if($request->status == 'past') {
-            $data = Job::with('getState')->whereDate('job_published','<', $date)->where('status', 'active')->get();
+            $data = Job::with('getState')->whereDate('job_published','<', $date)->where('slug', 'job')->where('status', 'active')->get();
         }
         return Datatables::of($data)
             ->addColumn('state_name', function ($data) {
@@ -562,6 +569,72 @@ class FormFillerController extends Controller
         $data = Job::find($id);
         $fees = $this->siteConfig('FEES');
         return view('formfiller.job_profile', compact('data', 'fees'));
+    }
+
+    /**
+    * Job List
+    * @category Form Filler Management
+    * @package  Form Filler Management
+    * @author   Sachiln Kumar <sachin679710@gmail.com>
+    * @license  PHP License 7.2.24
+    * @link
+    */
+    public function admissionList(Request $request) {
+        $date = date("Y-m-d");
+        if($request->status == 'today') {
+            $data = Job::with('getState')->whereDate('job_published', $date)->where('slug', 'admission')->where('status', 'active')->get();
+        } else if($request->status == 'upcomening') {
+            $data = Job::with('getState')->whereDate('job_published','>', $date)->where('slug', 'admission')->where('status', 'active')->get();
+        } else if($request->status == 'past') {
+            $data = Job::with('getState')->whereDate('job_published','<', $date)->where('slug', 'admission')->where('status', 'active')->get();
+        }
+        return Datatables::of($data)
+            ->addColumn('state_name', function ($data) {
+                return $data->getState['name'];
+            })
+            
+            ->addColumn('assign_price', function ($data) {
+
+                return '<input type="text" id="price'.$data->id.'" class="form-control" value="'.$data->price.'">';
+            })
+            ->addColumn('publish', function ($data) {
+                $publish = date('d-m-Y', strtotime($data->job_published));
+                return $publish;
+            })
+            ->addColumn('end', function ($data) {
+                $end = date('d-m-Y', strtotime($data->job_deadline));
+                return $end;
+            })
+            ->addColumn('image', function ($data) {
+                return '<img src="'.$data->feature_image.'" style="max-width:100px;max-height:100spx;">';
+            })
+            ->addColumn('action', function ($data) {
+                 $date = date("Y-m-d");
+                if($data->job_published > $date) {
+                    return '
+                        <p>Not Required</p>
+                        ';
+                } elseif ($data->job_published && $data->job_deadline < $date) {
+                    return '
+                       <p>Not Required</p>
+                        ';
+                } else {
+                    return '
+                        <a href="job/profile/'.$data->id.'"><i class="fa fa-eye" aria-hidden="true" style="color:#00bfff;font-size:20px;" data-toggle="tooltip" title="More info"></i></a>
+                        ';
+                }
+                
+               
+            })
+            ->rawColumns([
+                'image',
+                'action'
+            ])
+            ->make(true);
+    }
+
+    public function admissionListView() {
+        return view('formfiller.admissions');
     }
 
 

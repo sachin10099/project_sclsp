@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Job;
 use App\Models\User;
+use App\Models\AppliedJob;
 use Illuminate\Http\Request;
 use App\Models\SupportCenter;
 use App\Models\UserVerification;
@@ -148,9 +149,14 @@ class AuthController extends Controller
      */
     public function dashboard()
     {
-        $data['job_count'] = Job::count();
         $data['form_filler_user_count'] = User::where('type', 'form_user')->count();
-        $data['query_count']    = SupportCenter::where('replied_at', 'No')->count();
+        $data['operator_user_count']    = User::where('type', 'operator')->count();
+        $data['job_count']              = Job::count();
+        $data['query_count']            = SupportCenter::where('replied_at', 'No')->count();
+        $data['pending_jobs_count']           = \Auth::user()->type == 'operator' ? AppliedJob::where('accepted_by', \Auth::id())->where('status', 'pending')->count() : AppliedJob::where('status', 'pending')->count();
+        $data['ongoing_jobs_count']           = \Auth::user()->type == 'operator' ? AppliedJob::where('accepted_by', \Auth::id())->where('status', 'on_going')->count() : AppliedJob::where('status', 'on_going')->count();
+        $data['completed_jobs_count']           = \Auth::user()->type == 'operator' ? AppliedJob::where('accepted_by', \Auth::id())->where('status', 'completed')->count() : AppliedJob::where('status', 'completed')->count();
+        $data['rejected_jobs_count']           = \Auth::user()->type == 'operator' ? AppliedJob::where('accepted_by', \Auth::id())->where('status', 'reject')->count() : AppliedJob::where('status', 'reject')->count();
         return view('admin.dashboard', compact('data'));
     }
 

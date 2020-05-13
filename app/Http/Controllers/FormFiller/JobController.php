@@ -63,7 +63,8 @@ class JobController extends Controller
         	]
         );
         $users = User::where('type', 'admin')->orWhere('type', 'operator')->get();
-        Notification::send($users, new JobApplyNotification($create));
+        $msg = $job->slug == 'job' ? 'job.' : 'admission.';
+        Notification::send($users, new JobApplyNotification($create, $msg));
         return 'send';
     }
 
@@ -100,7 +101,9 @@ class JobController extends Controller
                 'transaction_id'=> $request->razorpay_payment_id
             ]
         );
-    	return 'Your payment is successfully done.';
+        $job  = Job::find($picked->job_id);
+        $type = $job->slug;
+    	return $type;
     }
 
     /**
@@ -124,14 +127,14 @@ class JobController extends Controller
     * @link
     */
     public function jobList(Request $request) {
-        if($request->status == 'ongoing') {
+        if($request->status == 'pending') {
             $data = AppliedJob::with(
                 [
                     'getJobDetail' => function($state) {
                         $state->with('getState');
                     }
                 ]
-            )->where('status', 'on_going')
+            )->where('status', 'pending')
             ->where('user_id', \Auth::id())
             ->get();
         } else if($request->status == 'completed') {
@@ -144,6 +147,16 @@ class JobController extends Controller
             )->where('status', 'completed')
             ->where('user_id', \Auth::id())
             ->get();
+        } else if($request->status == 'ongoing') {
+            $data = AppliedJob::with(
+                [
+                    'getJobDetail' => function($state) {
+                        $state->with('getState');
+                    }
+                ]
+            )->where('status', 'on_going')
+            ->where('user_id', \Auth::id())
+            ->get();;
         } else if($request->status == 'rejected') {
             $data = AppliedJob::with(
                 [

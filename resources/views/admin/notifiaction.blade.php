@@ -12,23 +12,47 @@
                     <ul>
                         @if(count($notifications) != 0)
                             @foreach ($notifications as $notification) 
-                            @if(!$notification->read_at)
-                                <li>
-                                    <p>{{ $notification->data['message'] }}</p>  
-                                    <span>5 mins ago</span>
-                                    <div class="notification-btn">
-                                        <a href="javascript:void(0);"><img src="{{ asset('/') }}public/dist/images/mail-blue-border-icon.svg" alt="Mail Icon" onclick="readNotification('{{$notification->id}}')" /></a>
-                                        <a href="javascript:void(0);"><img src="{{ asset('/') }}public/dist/images/delete-blue-icon.svg" alt="Delete Icon" onclick="deleteNotification('{{$notification->id}}')" /></a>
-                                    </div>
-                                </li>
+                            @if(\Auth::user()->type != 'admin')
+                                @if(!$notification->read_at)
+                                    <li style="background-color: lightgray;">
+                                        <p>{{ $notification->data['message'] }}</p>  
+                                        <span>5 mins ago</span>
+                                        <div class="notification-btn">
+                                            <a href="{{ url('admin/notification/read/') }}/{{ $notification->id }}/{{ $notification->data['data']['id'] }}"><img src="{{ asset('/') }}public/dist/images/mail-blue-border-icon.svg" alt="Mail Icon" onclick="readNotification('{{$notification->id}}')" /></a>
+                                            <a href="javascript:void(0);"><img src="{{ asset('/') }}public/dist/images/delete-blue-icon.svg" alt="Delete Icon" onclick="deleteNotification('{{$notification->id}}')" /></a>
+                                        </div>
+                                    </li>
+                                @else
+                                    <li>
+                                        <p>{{ $notification->data['message'] }}</p>
+                                        <span>5 mins ago</span>
+                                        <div class="notification-btn">
+                                            <a href="{{ url('admin/notification/read/') }}/{{ $notification->id }}/{{ $notification->data['data']['id'] }}"><img src="{{ asset('/') }}public/dist/images/mail-blue-border-icon.svg" alt="Mail Icon" onclick="readNotification('{{$notification->id}}')" /></a>
+                                            <a href="javascript:void(0);"><img src="{{ asset('/') }}public/dist/images/delete-blue-icon.svg" alt="Delete Icon" onclick="deleteNotification('{{$notification->id}}')" /></a>
+                                        </div>
+                                    </li>
+                                @endif
                             @else
-                                <li style="background-color: lightgray;">
-                                    <p>{{ $notification->data['message'] }}</p>
-                                    <span>5 mins ago</span>
-                                    <div class="notification-btn">
-                                        <a href="javascript:void(0);"><img src="{{ asset('/') }}public/dist/images/delete-blue-icon.svg" alt="Delete Icon" onclick="deleteNotification('{{$notification->id}}')" /></a>
-                                    </div>
-                                </li>
+                                @if(!$notification->read_at)
+                                    <li style="background-color: lightgray;">
+                                        <p>{{ $notification->data['message'] }}</p>  
+                                        <span>5 mins ago</span>
+                                        <div class="notification-btn">
+                                            <a href="{{ url('admin/notification/read/') }}/{{ $notification->id }}"><img src="{{ asset('/') }}public/dist/images/mail-blue-border-icon.svg" alt="Mail Icon" onclick="readNotification('{{$notification->id}}')" /></a>
+                                            <a href="javascript:void(0);"><img src="{{ asset('/') }}public/dist/images/delete-blue-icon.svg" alt="Delete Icon" onclick="deleteNotification('{{$notification->id}}')" /></a>
+                                        </div>
+                                    </li>
+                                @else
+                                    <li>
+                                        <p>{{ $notification->data['message'] }}</p>
+                                        <span>5 mins ago</span>
+                                        <div class="notification-btn">
+                                            <a href="{{ url('admin/notification/read/') }}/{{ $notification->id }}"><img src="{{ asset('/') }}public/dist/images/mail-blue-border-icon.svg" alt="Mail Icon" onclick="readNotification('{{$notification->id}}')" /></a>
+                                            <a href="javascript:void(0);"><img src="{{ asset('/') }}public/dist/images/delete-blue-icon.svg" alt="Delete Icon" onclick="deleteNotification('{{$notification->id}}')" /></a>
+                                        </div>
+                                    </li>
+                                @endif 
+
                             @endif
                             @endforeach
                         @else

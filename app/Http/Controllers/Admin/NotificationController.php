@@ -47,13 +47,44 @@ class NotificationController extends Controller
      * @license  PHP License 7.2.24
      * @link
      */
-    public function readNotification(Request $request)
+    public function readNotification($id, $job_id)
     {
-        Notification::where('id', $request->id)->update(
+        $picked = \Auth::user()->notifications()->where('id', $id)->first();
+        $picked->update(
             [
                 'read_at' => \Carbon\Carbon::now()->toDateTimeString()
             ]
         );
-       return 'Read Successfully.';
+        if($picked->data['type'] == 'user_confirmation' ||$picked->data['type'] == 'send_issue') {
+            return redirect('admin/manage/job/detail/'.$job_id);
+        } else if ($picked->data['type'] == 'apply_job') {
+            return redirect('admin/manage/job/view');
+        } else {
+            return redirect('admin/manage/job/view');
+        }
+    }
+
+    /**
+     * Notification Read By Admin
+     *
+     * @category Admin User Management
+     * @package  Admin User Management
+     * @author   Sachiln Kumar <sachin679710@gmail.com>
+     * @license  PHP License 7.2.24
+     * @link
+     */
+    public function readByAdmin($id)
+    {
+        $picked = \Auth::user()->notifications()->where('id', $id)->first();
+        $picked->update(
+            [
+                'read_at' => \Carbon\Carbon::now()->toDateTimeString()
+            ]
+        );
+        if($picked->data['type'] == 'apply_job') {
+            return redirect('admin/applied/job-detail/'.$picked->data['data']['id']);
+        } else {
+            return redirect()->back();
+        }
     }
 }

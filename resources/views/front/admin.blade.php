@@ -162,6 +162,28 @@
         #users-table_wrapper {
           background-color: #F1F1F1 !important;
         }
+        .notification {
+          color: white;
+          text-decoration: none;
+          padding: 15px 26px;
+          position: relative;
+          display: inline-block;
+          border-radius: 2px;
+        }
+
+        .notification:hover {
+          background: red;
+        }
+
+        .notification .badge {
+          position: absolute;
+          top: -10px;
+          right: -10px;
+          padding: 5px 10px;
+          border-radius: 50%;
+          background-color: red;
+          color: white;
+        }
   </style>
 </head>
 
@@ -185,9 +207,9 @@
                     <ul class="nav navbar-nav">
                         <!-- Notifications: style can be found in dropdown.less -->
                         <li class="dropdown notifications-menu">
-                            <a href="{{ url('admin/notification/list') }}">
-                                <i><img src="{{ asset('/') }}public/dist/images/bell-blue-icon.svg" alt="Notification Icon" /></i>
-                                <span class="label"></span>
+                            <a href="{{ url('admin/notification/list') }}" class="notification">
+                                <i><span><img src="{{ asset('/') }}public/dist/images/bell-blue-icon.svg" alt="Notification Icon" /></span></i>
+                                <span class="badge">{{ \Auth::user()->unreadnotifications()->count() }}</span>
                             </a>
                         </li>
                         <!-- User Account: style can be found in dropdown.less -->
@@ -264,6 +286,30 @@
                     <li class="{{ (request()->is('admin/jobs/list-view')) ? 'active' : '' }}">
                         <a href="{{ url('admin/jobs/list-view') }}"><span>Manage Jobs</span></a>
                     </li>  
+                    <li class="{{ (request()->is('admin/admission/list-view')) || (request()->is('admin/admission/create')) ? 'active' : '' }}">
+                        <a href="{{ url('admin/admission/list-view') }}"><span>Manage Admissions</span></a>
+                    </li>  
+                    <li class="{{ (request()->is('admin/applied/jobs')) ? 'active' : '' }}">
+                        <a href="{{ url('admin/applied/jobs') }}"><span>Manage Applied Request(s)</span></a>
+                    </li>  
+                    <li class="{{ (request()->is('form-filler/admit-card/list')) || (request()->is('form-filler/admit-card/add'))  ? 'active' : '' }}">
+                        <a href="{{ url('form-filler/admit-card/list') }}"><span>Manage Admit Card</span></a>
+                    </li>
+                    <li class="{{ (request()->is('form-filler/answer-key/list')) || (request()->is('form-filler/admit-card/add'))  ? 'active' : '' }}">
+                        <a href="{{ url('form-filler/answer-key/list') }}"><span>Manage Answer Keys</span></a>
+                    </li>
+                    <li class="{{ (request()->is('form-filler/results/list')) || (request()->is('form-filler/results/list'))  ? 'active' : '' }}">
+                        <a href="{{ url('form-filler/results/list') }}"><span>Manage Results</span></a>
+                    </li>
+                    <li class="{{ (request()->is('admin/manage/terms')) ? 'active' : '' }}">
+                        <a href="{{ url('admin/manage/terms') }}"><span>Manage Terms & Conditions</span></a>
+                    </li>
+                    <li class="{{ (request()->is('admin/notice/list-view')) ? 'active' : '' }}">
+                        <a href="{{ url('admin/notice/list-view') }}"><span>Manage Notices</span></a>
+                    </li>
+                    <li class="{{ (request()->is('admin/manage/privecy-policy')) ? 'active' : '' }}">
+                        <a href="{{ url('admin/manage/privecy-policy') }}"><span>Privacy policy</span></a>
+                    </li>
                     <li class="{{ (request()->is('admin/query/list')) ? 'active' : '' }}">
                         <a href="{{ url('admin/query/list') }}"><span>Support Section</span></a>
                     </li>
@@ -275,14 +321,8 @@
                     <li class="{{ (request()->is('admin/manage/job/own-list')) ? 'active' : '' }}">
                         <a href="{{ url('admin/manage/job/own-list') }}"><span>Manage Accepted Request(s)</span></a>
                     </li>
-                    <li class="{{ (request()->is('form-filler/admit-card/list')) || (request()->is('form-filler/admit-card/add'))  ? 'active' : '' }}">
-                        <a href="{{ url('form-filler/admit-card/list') }}"><span>Manage Admit Card</span></a>
-                    </li>
-                    <li class="{{ (request()->is('form-filler/answer-key/list')) || (request()->is('form-filler/admit-card/add'))  ? 'active' : '' }}">
-                        <a href="{{ url('form-filler/answer-key/list') }}"><span>Manage Answer Keys</span></a>
-                    </li>
-                    <li class="{{ (request()->is('form-filler/results/list')) || (request()->is('form-filler/results/list'))  ? 'active' : '' }}">
-                        <a href="{{ url('form-filler/results/list') }}"><span>Manage Results</span></a>
+                    <li class="{{ (request()->is('admin/query/list')) ? 'active' : '' }}">
+                        <a href="{{ url('admin/query/list') }}"><span>Support Section</span></a>
                     </li>
                     @endcan
                 </ul>

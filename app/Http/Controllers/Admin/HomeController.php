@@ -11,6 +11,7 @@ use App\Models\ContactUs;
 use App\Models\SocialLink;
 use App\Models\Testimonial;
 use Illuminate\Http\Request;
+use App\Models\TermCondition;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Concern\GlobalTrait;
 
@@ -743,6 +744,46 @@ class HomeController extends Controller
         else {
           return redirect()->back()->with('error', 'Invalid URL Formate.');
         }
+    }
+
+    public function termsData() {
+        $terms = TermCondition::where('slug', 'terms')->first();
+        return view('admin.manage_term', compact('terms'));
+    }
+
+    public function termsDataUpdate(Request $request) {
+        $request->validate(
+            [
+                 'content' => 'required'
+            ]
+        );
+        $picked = TermCondition::find($request->id);
+        $picked->update(
+            [
+                'content' => $request->content
+            ]
+        );
+        return redirect()->back()->with('success', 'Content Updated Successfully.');
+    }
+
+     public function privecyPolicy() {
+        $terms = TermCondition::where('slug', 'policy')->first();
+        return view('admin.manage_term', compact('terms'));
+    }
+
+    public function privecyPolicyUpdate(Request $request) {
+        $request->validate(
+            [
+                 'content' => 'required'
+            ]
+        );
+        $picked = TermCondition::find($request->id);
+        $picked->update(
+            [
+                'content' => $request->content
+            ]
+        );
+        return redirect()->back()->with('success', 'Content Updated Successfully.');
     }
 
 }

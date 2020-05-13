@@ -11,14 +11,16 @@ class JobApplyNotification extends Notification
 {
     use Queueable;
     protected $data;
+    protected $msg;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($data)
+    public function __construct($data, $msg)
     {
         $this->data = $data;
+        $this->msg  = $msg;
     }
 
     /**
@@ -40,7 +42,7 @@ class JobApplyNotification extends Notification
      */
     public function toArray($notifiable)
     {
-        $msg = \Auth::user()->name.' has just apply for a job';
+        $msg = \Auth::user()->name.' has just apply for a '.$this->msg;
         return [
             'message' => $msg,
             'data'    => $this->data,

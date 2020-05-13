@@ -31,6 +31,7 @@
 <div class="content">
 <div class="container-fluid">
   <div class="btn-group">
+    <button type="button" class="btn btn-info" onclick="changeStatus('pending')">Pending</button>
     <button type="button" class="btn btn-info" onclick="changeStatus('ongoing')">Under Process</button>
     <button type="button" class="btn btn-info" onclick="changeStatus('completed')">Completed</button>
     <button type="button" class="btn btn-info" onclick="changeStatus('rejected')">Rejected</button>
@@ -64,7 +65,7 @@
 </div>
 </div>
 <script type="text/javascript">
-  var status = 'ongoing';
+  var status = 'pending';
 	var datatable;
   $(document).ready(function() {
       datatable = $('#users-table').DataTable({

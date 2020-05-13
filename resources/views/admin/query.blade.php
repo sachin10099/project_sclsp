@@ -87,6 +87,10 @@
 
   function reply(id) {
     var message = $('#comment'+id).val();
+    if(message == '') {
+      swal("", 'Comment filed must be required.', 'warning');
+      return false;
+    }
     document.getElementById('loader').style.display = "block";
     $.ajax({
           method:'post',

@@ -24,7 +24,13 @@
 <!-- End Model -->
 
 <section class="site-section" style="margin-top: 100px;">
-<center><h3>Job Details</h3></center>
+<center><h3>
+  @if($data->slug == 'job')
+    Job Details
+  @else
+    Admission Details
+  @endif
+</h3></center>
 <div class="container">
 <div class="row">
   <div class="col-lg-8">
@@ -37,7 +43,13 @@
   		@endif
       	
       </figure>
-      <h3 class="h5 d-flex align-items-center mb-4 text-primary">Job Description</h3>
+      <h3 class="h5 d-flex align-items-center mb-4 text-primary">
+          @if($data->slug == 'job')
+            Job Description
+          @else
+            Admission Description
+          @endif
+      </h3>
       <p>{!! $data->job_desc !!}</p>
     </div>
 
@@ -45,13 +57,32 @@
   </div>
   <div class="col-lg-4">
     <div class="bg-light p-3 border rounded mb-4">
-      <h3 class="text-primary  mt-3 h5 pl-3 mb-3 ">Job Summary</h3>
+      <h3 class="text-primary  mt-3 h5 pl-3 mb-3 ">
+        @if($data->slug == 'job')
+          Job Description
+        @else
+          Admission Summery
+        @endif
+      </h3>
       <ul class="list-unstyled pl-3 mb-0">
         <li class="mb-2"><strong class="text-black">Published on:</strong> {{ date('d-m-Y', strtotime($data->job_published)) }}</li>
-        <li class="mb-2"><strong class="text-black">Vacancy:</strong> {{ $data->vacancy }}</li>
-        <li class="mb-2"><strong class="text-black">Employment Status:</strong> {{ $data->job_type }}</li>
+        <li class="mb-2"><strong class="text-black">
+           @if($data->slug == 'job')
+              Vacancy:
+            @else
+              Sheets:
+            @endif
+        </strong> {{ $data->vacancy }}</li>
+        <li class="mb-2"><strong class="text-black">
+          @if($data->slug == 'job')
+              Employment Status::
+            @else
+              Admission Status::
+            @endif
+          
+        </strong> {{ $data->job_type }}</li>
         <li class="mb-2"><strong class="text-black">State:</strong> {{ $data->getState['name'] }}</li>
-        <li class="mb-2"><strong class="text-black">Job Location:</strong> {{ $data->job_location }}</li>
+        <li class="mb-2"><strong class="text-black">Location:</strong> {{ $data->job_location }}</li>
         <li class="mb-2"><strong class="text-black">Gender:</strong> Any</li>
         <li class="mb-2"><strong class="text-black">Application Deadline:</strong> {{ date('d-m-Y', strtotime($data->job_deadline)) }}</li>
         <li class="mb-2"><strong class="text-primary">Application Fees</strong> 
